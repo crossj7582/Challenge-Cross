@@ -14,613 +14,488 @@
 
 body {
     margin: 0;
-    background:
-        radial-gradient(circle at center, #d8c9a7 0%, #b9aa88 100%);
-    color: #1d211f;
+    background: #d8ceb0;
+    color: #1d2222;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-button,
-input,
-select {
-    font-family: inherit;
+button {
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
 }
 
 .screen {
     display: none;
     min-height: 100vh;
+    padding: 35px;
 }
 
 .screen.active {
     display: block;
 }
 
-/* =========================================================
-   GENERAL
-========================================================= */
+/* =========================
+   OPENING
+========================= */
 
-.page {
-    width: min(1200px, 96%);
-    margin: 0 auto;
-    padding: 25px 0 50px;
+#opening {
+    text-align: center;
+    padding-top: 100px;
 }
+
+.military-title {
+    font-size: 58px;
+    font-weight: 900;
+    letter-spacing: 4px;
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    font-size: 22px;
+    letter-spacing: 2px;
+    margin-bottom: 60px;
+}
+
+.big-button {
+    background: #252b2b;
+    color: white;
+    border: 4px solid #171b1b;
+    padding: 22px 70px;
+    font-size: 28px;
+    font-weight: bold;
+    border-radius: 8px;
+}
+
+.big-button:hover {
+    background: #394141;
+}
+
+/* =========================
+   COMMANDER SETUP
+========================= */
 
 .panel {
-    background: #e9dfc5;
-    border: 3px solid #33382f;
-    box-shadow: 0 8px 20px rgba(0,0,0,.3);
-    padding: 28px;
-}
-
-.classified {
-    display: inline-block;
-    background: #8d241d;
-    color: #fff;
-    padding: 6px 12px;
-    font-weight: 900;
-    letter-spacing: 2px;
-    font-size: 13px;
-    margin-bottom: 12px;
-}
-
-h1,
-h2,
-h3 {
-    margin-top: 0;
+    max-width: 850px;
+    margin: 50px auto;
+    background: #e8dfc6;
+    border: 5px solid #292d2d;
+    padding: 40px;
+    box-shadow: 8px 8px 0 #8d856e;
 }
 
 h1 {
-    font-size: clamp(34px, 6vw, 72px);
-    line-height: .95;
-    letter-spacing: 2px;
+    font-size: 42px;
+    margin-top: 0;
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 28px;
 }
 
-p {
-    line-height: 1.55;
+label {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 20px;
 }
 
-.small {
-    font-size: 13px;
-    color: #555;
-}
-
-.mono {
-    font-family: "Courier New", monospace;
-}
-
-/* =========================================================
-   BUTTONS
-========================================================= */
-
-.btn {
-    border: 2px solid #222;
-    padding: 15px 22px;
-    font-size: 18px;
-    font-weight: 900;
-    cursor: pointer;
-    border-radius: 4px;
-    transition: .15s;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    filter: brightness(1.08);
-}
-
-.btn:active {
-    transform: translateY(1px);
-}
-
-.btn-primary {
-    background: #17394d;
-    color: #f4e7c5;
-    border-color: #b9954e;
-}
-
-.btn-gold {
-    background: #b9954e;
-    color: #151515;
-}
-
-.btn-dark {
-    background: #252c2d;
-    color: white;
-}
-
-.btn-red {
-    background: #8d241d;
-    color: white;
-}
-
-.btn-green {
-    background: #36583e;
-    color: white;
-}
-
-.btn-wide {
+input {
     width: 100%;
-    max-width: 550px;
+    padding: 15px;
+    margin-top: 8px;
+    font-size: 20px;
+    border: 3px solid #292d2d;
+    background: #f5f0df;
 }
 
-button:disabled {
-    opacity: .45;
-    cursor: not-allowed;
-    transform: none !important;
-}
-
-/* =========================================================
-   OPENING
-========================================================= */
-
-#opening .panel {
-    margin-top: 45px;
-}
-
-.hero {
+.center {
     text-align: center;
-    padding: 20px;
-    border-bottom: 4px double #33382f;
+}
+
+/* =========================
+   PASS SCREEN
+========================= */
+
+.pass-box {
+    max-width: 800px;
+    margin: 100px auto;
+    text-align: center;
+    background: #e8dfc6;
+    border: 6px solid #292d2d;
+    padding: 55px;
+    box-shadow: 10px 10px 0 #8d856e;
+}
+
+.pass-title {
+    font-size: 48px;
+    font-weight: 900;
     margin-bottom: 25px;
 }
 
-.hero .subtitle {
-    font-size: 18px;
-    letter-spacing: 3px;
-    font-weight: 900;
-}
-
-.brief-grid {
-    display: grid;
-    grid-template-columns: 1.5fr 1fr;
-    gap: 25px;
-}
-
-.brief-box {
-    border: 2px solid #625b4b;
-    background: #ded3b5;
-    padding: 22px;
+.pass-name {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 40px;
 }
 
 .warning {
-    border-left: 7px solid #8d241d;
-    background: #eee4ca;
-    padding: 15px;
-    margin: 20px 0;
-    font-weight: bold;
-}
-
-.command-rule {
     font-size: 18px;
-    font-weight: bold;
-    font-style: italic;
+    margin-bottom: 35px;
 }
 
-/* =========================================================
-   COMMANDER NAMES
-========================================================= */
+/* =========================
+   GAME HEADER
+========================= */
 
-.name-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 25px;
-    margin: 30px 0;
-}
-
-.name-card {
-    background: #ded3b5;
-    border: 2px solid #625b4b;
-    padding: 25px;
-}
-
-.name-card h3 {
-    font-size: 25px;
-}
-
-.name-card input {
-    width: 100%;
-    padding: 16px;
-    font-size: 20px;
-    border: 2px solid #555;
-    background: #f4ecd7;
-}
-
-.command-start {
-    text-align: center;
-    margin-top: 25px;
-}
-
-/* =========================================================
-   PASS SCREEN
-========================================================= */
-
-.pass-panel {
-    max-width: 850px;
-    margin: 100px auto;
-    text-align: center;
-}
-
-.pass-panel .big {
-    font-size: 65px;
-    font-weight: 900;
-    color: #17394d;
-}
-
-.pass-panel .commander-name {
-    font-size: 35px;
-    font-weight: 900;
-    margin: 20px 0;
-}
-
-.pass-instruction {
-    font-size: 22px;
-    margin: 25px 0;
-}
-
-/* =========================================================
-   BATTLE HEADER
-========================================================= */
-
-.battle-header {
-    background: #17272f;
-    color: #f4e7c5;
-    border-bottom: 5px solid #b9954e;
-    padding: 15px 20px;
-}
-
-.battle-header-inner {
-    width: min(1400px, 96%);
-    margin: auto;
+.game-header {
     display: flex;
     justify-content: space-between;
-    gap: 15px;
     align-items: center;
+    background: #252b2b;
+    color: white;
+    padding: 18px 25px;
+    border: 4px solid #151919;
 }
 
-.battle-title {
+.game-header h1 {
+    font-size: 28px;
+    margin: 0;
+}
+
+.round-number {
     font-size: 24px;
-    font-weight: 900;
+    font-weight: bold;
 }
 
-.round-display {
-    font-family: "Courier New", monospace;
-    font-size: 20px;
-    color: #e2bd65;
-}
-
-/* =========================================================
+/* =========================
    STATUS
-========================================================= */
+========================= */
 
 .status-grid {
-    width: min(1400px, 96%);
-    margin: 15px auto;
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
-    gap: 8px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin: 18px 0;
 }
 
-.status-box {
-    background: #ded3b5;
-    border: 2px solid #5c584b;
-    padding: 10px;
+.status-card {
+    background: #e8dfc6;
+    border: 3px solid #292d2d;
+    padding: 14px;
     text-align: center;
 }
 
-.status-label {
-    font-size: 11px;
+.status-card strong {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 7px;
+}
+
+.status-number {
+    font-size: 25px;
     font-weight: bold;
-    color: #555;
 }
 
-.status-value {
-    font-size: 22px;
-    font-weight: 900;
-}
-
-/* =========================================================
-   BATTLEFIELD
-========================================================= */
-
-.battle-layout {
-    width: min(1400px, 96%);
-    margin: 15px auto;
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    gap: 15px;
-}
-
-.map-panel {
-    background: #19282c;
-    border: 4px solid #4d5754;
-    padding: 12px;
-}
+/* =========================
+   MAP
+========================= */
 
 .map {
     position: relative;
-    height: 620px;
-    overflow: hidden;
-
-    background-color: #17343a;
-
-    background-image:
+    height: 330px;
+    background:
         linear-gradient(rgba(255,255,255,.06) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px);
-
-    background-size: 50px 50px;
-
-    border: 2px solid #89918b;
+        linear-gradient(90deg, rgba(255,255,255,.06) 1px, transparent 1px),
+        #687d76;
+    background-size: 40px 40px;
+    border: 5px solid #292d2d;
+    overflow: hidden;
 }
 
 .map-title {
-    color: #ddd;
-    font-family: "Courier New", monospace;
-    padding: 8px;
-    text-align: center;
+    position: absolute;
+    top: 12px;
+    left: 15px;
+    color: white;
+    font-weight: bold;
     letter-spacing: 2px;
 }
 
-.sector {
-    position: absolute;
-    color: rgba(255,255,255,.25);
-    font-family: monospace;
-    font-size: 12px;
-}
-
-.sector-a { left: 20px; top: 20px; }
-.sector-b { left: 50%; top: 20px; }
-.sector-c { right: 20px; top: 20px; }
-.sector-d { left: 20px; bottom: 20px; }
-.sector-e { left: 50%; bottom: 20px; }
-.sector-f { right: 20px; bottom: 20px; }
-
-/* =========================================================
-   SHIPS
-========================================================= */
-
 .ship {
     position: absolute;
-    min-width: 90px;
-    padding: 8px;
+    width: 80px;
+    height: 24px;
+    border-radius: 5px;
     text-align: center;
-    font-size: 11px;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    padding-top: 5px;
+    border: 2px solid #111;
+    transition: all .5s ease;
+}
+
+.your-fleet {
+    background: #263f4a;
+}
+
+.enemy-fleet {
+    background: #71302b;
+}
+
+#yourCarrier {
+    left: 18%;
+    top: 58%;
+}
+
+#enemyCarrier {
+    left: 67%;
+    top: 25%;
+}
+
+#yourEscort {
+    left: 27%;
+    top: 68%;
+}
+
+#enemyEscort {
+    left: 60%;
+    top: 34%;
+}
+
+.destroyed {
+    opacity: .2;
+    text-decoration: line-through;
+}
+
+/* =========================
+   ORDERS
+========================= */
+
+.orders-area {
+    max-width: 1000px;
+    margin: 25px auto;
+}
+
+.orders-title {
+    font-size: 34px;
     font-weight: 900;
-    border: 2px solid white;
-    border-radius: 3px;
-    cursor: pointer;
-    user-select: none;
-    transition: .25s;
-}
-
-.ship.us {
-    background: #315a69;
-    color: white;
-}
-
-.ship.enemy {
-    background: #7e2e2a;
-    color: white;
-}
-
-.ship.selected {
-    outline: 4px solid #e3c35f;
-    box-shadow: 0 0 18px #e3c35f;
-}
-
-.ship.destroyed {
-    display: none;
-}
-
-.ship.carrier {
-    min-width: 130px;
-    padding: 14px 8px;
-}
-
-.ship.light {
-    min-width: 75px;
-}
-
-/* =========================================================
-   CONTROL PANEL
-========================================================= */
-
-.control-panel {
-    background: #ded3b5;
-    border: 3px solid #4f4c42;
-    padding: 18px;
-}
-
-.control-section {
-    border-bottom: 2px solid #999;
-    padding-bottom: 18px;
+    letter-spacing: 1px;
     margin-bottom: 18px;
 }
 
-.control-section:last-child {
-    border-bottom: 0;
-}
-
-.control-section h3 {
-    font-size: 17px;
-    letter-spacing: 1px;
-}
-
-.action-grid {
+.order-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 8px;
+    gap: 16px;
 }
 
-.action-grid .btn {
-    font-size: 14px;
-    padding: 12px 8px;
-}
-
-/* =========================================================
-   FORMATIONS
-========================================================= */
-
-.formation-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 8px;
-}
-
-.formation {
-    padding: 12px;
-    border: 2px solid #555;
-    background: #eee4ca;
-    cursor: pointer;
-    font-weight: bold;
-}
-
-.formation:hover {
-    background: #c8b995;
-}
-
-.formation.selected {
-    background: #17394d;
+.order-button {
+    min-height: 82px;
+    background: #252b2b;
     color: white;
-}
-
-/* =========================================================
-   SORTIE COUNTERS
-========================================================= */
-
-.counter-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: 8px 0;
-}
-
-.counter {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.counter button {
-    width: 34px;
-    height: 34px;
-    font-size: 20px;
+    border: 4px solid #171b1b;
+    border-radius: 8px;
+    font-size: 25px;
     font-weight: bold;
-    cursor: pointer;
+    padding: 15px;
 }
 
-.counter-number {
-    min-width: 35px;
-    text-align: center;
-    font-weight: 900;
+.order-button:hover {
+    background: #394141;
 }
 
-/* =========================================================
-   REPORT
-========================================================= */
+.order-button.recon {
+    background: #365f43;
+}
 
-.report-panel {
-    width: min(1000px, 94%);
-    margin: 60px auto;
-    background: #e8ddc0;
-    border: 4px solid #2d3330;
-    box-shadow: 0 10px 30px rgba(0,0,0,.4);
+.order-button.attack {
+    background: #982821;
+}
+
+.order-button.selected {
+    outline: 6px solid #d49b32;
+}
+
+/* =========================
+   ORDER DESCRIPTION
+========================= */
+
+.order-info {
+    margin-top: 20px;
+    background: #eee5cc;
+    border: 4px solid #292d2d;
+    padding: 20px;
+    display: none;
+}
+
+.order-info.active {
+    display: block;
+}
+
+.order-info h2 {
+    margin-top: 0;
+}
+
+.transmit-button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 18px;
+    background: #a67620;
+    color: white;
+    border: 4px solid #5c4515;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+/* =========================
+   ROUND REPORT
+========================= */
+
+.report-container {
+    max-width: 1050px;
+    margin: 25px auto;
 }
 
 .report-header {
-    background: #151f24;
-    color: #e6c767;
+    background: #252b2b;
+    color: white;
+    border: 5px solid #171b1b;
     padding: 25px;
     text-align: center;
-    border-bottom: 5px solid #b9954e;
 }
 
 .report-header h1 {
     margin: 0;
-    font-size: 45px;
+    font-size: 42px;
 }
 
-.report-body {
-    padding: 30px;
-}
-
-.report-event {
-    background: #d8ccb0;
-    border-left: 7px solid #17394d;
-    padding: 15px;
-    margin-bottom: 12px;
-    font-family: "Courier New", monospace;
-}
-
-.battlefield-condition {
-    background: #202b2d;
-    color: #e7dfc6;
+.winner-banner {
+    margin: 20px 0;
+    background: #a67620;
+    color: white;
+    border: 4px solid #60430f;
     padding: 20px;
-    margin-top: 25px;
+    text-align: center;
+    font-size: 32px;
+    font-weight: bold;
 }
 
-.continue-area {
-    text-align: center;
+.score-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.score-card {
+    background: #eee5cc;
+    border: 5px solid #292d2d;
     padding: 25px;
 }
 
-/* =========================================================
-   FINAL
-========================================================= */
-
-.final-panel {
-    max-width: 900px;
-    margin: 80px auto;
-    text-align: center;
+.score-card.winner {
+    border-color: #a67620;
 }
 
-.winner {
-    font-size: 60px;
+.commander-name {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.score-number {
+    font-size: 64px;
     font-weight: 900;
-    color: #17394d;
+    margin: 10px 0;
 }
 
-/* =========================================================
-   RESPONSIVE
-========================================================= */
+.score-detail {
+    border-top: 2px solid #aaa;
+    padding: 10px 0;
+    font-size: 17px;
+}
 
-@media (max-width: 900px) {
+.result-section {
+    margin-top: 20px;
+    background: #eee5cc;
+    border: 4px solid #292d2d;
+    padding: 25px;
+}
 
-    .brief-grid,
-    .name-grid,
-    .battle-layout {
+.result-section h2 {
+    margin-top: 0;
+}
+
+.continue-button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 20px;
+    background: #252b2b;
+    color: white;
+    border: 4px solid #111;
+    font-size: 26px;
+    font-weight: bold;
+    border-radius: 6px;
+}
+
+/* =========================
+   FINAL
+========================= */
+
+.final-box {
+    max-width: 900px;
+    margin: 70px auto;
+    background: #eee5cc;
+    border: 6px solid #292d2d;
+    padding: 50px;
+    text-align: center;
+    box-shadow: 10px 10px 0 #8d856e;
+}
+
+.final-winner {
+    font-size: 52px;
+    font-weight: 900;
+    margin: 30px 0;
+}
+
+.final-score {
+    font-size: 30px;
+    margin: 15px;
+}
+
+.restart {
+    margin-top: 30px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width: 700px) {
+
+    .screen {
+        padding: 15px;
+    }
+
+    .military-title {
+        font-size: 38px;
+    }
+
+    .order-grid,
+    .score-grid,
+    .status-grid {
         grid-template-columns: 1fr;
     }
 
-    .status-grid {
-        grid-template-columns: repeat(3, 1fr);
+    .game-header {
+        display: block;
+        text-align: center;
     }
 
     .map {
-        height: 500px;
-    }
-}
-
-@media (max-width: 600px) {
-
-    .status-grid {
-        grid-template-columns: repeat(2, 1fr);
+        height: 280px;
     }
 
-    .action-grid,
-    .formation-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .map {
-        height: 420px;
-    }
-
-    .ship {
-        transform: scale(.8);
-    }
 }
 
 </style>
@@ -628,1771 +503,896 @@ button:disabled {
 
 <body>
 
-<!-- =========================================================
+<!-- =========================
      OPENING
-========================================================= -->
+========================= -->
 
 <section id="opening" class="screen active">
 
-<div class="page">
+    <div class="military-title">
+        PACIFIC CARRIER COMMAND
+    </div>
 
-<div class="panel">
+    <div class="subtitle">
+        WWII NAVAL TACTICAL SIMULATION • 1942
+    </div>
 
-<div class="hero">
-
-<div class="classified">
-UNITED STATES PACIFIC FLEET
-</div>
-
-<h1>
-WWII PACIFIC<br>
-CARRIER COMMAND
-</h1>
-
-<div class="subtitle">
-TACTICAL COMMAND SIMULATION • 1942
-</div>
-
-</div>
-
-<div class="brief-grid">
-
-<div class="brief-box">
-
-<h2>COMMAND BRIEF</h2>
-
-<p>
-January 1942.
-</p>
-
-<p>
-The United States has entered the Pacific War.
-Aircraft carriers are becoming the centerpiece of naval warfare.
-Your task force must operate aircraft, ships, reconnaissance,
-defense, maneuver, and strike operations as one fighting force.
-</p>
-
-<div class="warning">
-MISSION STANDARD
-<br><br>
-Protect the carrier.
-Preserve combat power.
-Use reconnaissance.
-Make decisions before the enemy makes them for you.
-</div>
-
-<p class="command-rule">
-This is a command simulation. Your decisions change the battlefield.
-Destroyed ships and aircraft remain destroyed.
-</p>
-
-</div>
-
-<div class="brief-box">
-
-<h2>MISSION FORMAT</h2>
-
-<p><b>15 ROUNDS</b></p>
-
-<p>
-Commander A acts first.
-</p>
-
-<p>
-The device is then passed to Commander B.
-</p>
-
-<p>
-Commander B sees the changed battlefield and responds.
-</p>
-
-<p>
-Only after both commanders act is the round resolved.
-</p>
-
-<p>
-The battle continues until one force loses its carrier
-or the 15-round campaign ends.
-</p>
-
-</div>
-
-</div>
-
-<br>
-
-<div style="text-align:center">
-
-<button
-    type="button"
-    id="beginGameButton"
-    class="btn btn-primary btn-wide"
->
-    BEGIN COMMAND
-</button>
-
-</div>
-
-</div>
-
-</div>
+    <button class="big-button" onclick="showSetup()">
+        BEGIN COMMAND
+    </button>
 
 </section>
 
 
-<!-- =========================================================
-     COMMANDER NAMES
-========================================================= -->
+<!-- =========================
+     COMMANDER SETUP
+========================= -->
 
-<section id="commanderNames" class="screen">
+<section id="setup" class="screen">
 
-<div class="page">
+    <div class="panel">
 
-<div class="panel">
+        <h1>COMMAND ASSIGNMENT</h1>
 
-<div class="hero">
+        <p>
+            Two commanders will face the same tactical situation.
+            Each commander will issue one order per round.
+        </p>
 
-<div class="classified">
-COMMAND STAFF ASSIGNMENT
-</div>
+        <label>COMMANDER A</label>
+        <input id="commanderA" placeholder="Enter name">
 
-<h2>
-ENTER COMMANDER NAMES
-</h2>
+        <label>COMMANDER B</label>
+        <input id="commanderB" placeholder="Enter name">
 
-<p>
-Two commanders will operate the same carrier task force.
-Each commander will make independent tactical decisions.
-</p>
+        <br><br>
 
-</div>
+        <button class="big-button" onclick="startGame()">
+            ASSUME COMMAND
+        </button>
 
-<div class="name-grid">
-
-<div class="name-card">
-
-<h3>
-COMMANDER A
-</h3>
-
-<p>
-First commander to take the watch.
-</p>
-
-<input
-    id="commanderA"
-    type="text"
-    maxlength="30"
-    autocomplete="off"
-    placeholder="Enter Commander A name"
->
-
-</div>
-
-<div class="name-card">
-
-<h3>
-COMMANDER B
-</h3>
-
-<p>
-Second commander to take the watch.
-</p>
-
-<input
-    id="commanderB"
-    type="text"
-    maxlength="30"
-    autocomplete="off"
-    placeholder="Enter Commander B name"
->
-
-</div>
-
-</div>
-
-<div class="command-start">
-
-<button
-    type="button"
-    id="assumeCommand"
-    class="btn btn-primary btn-wide"
->
-    ASSUME COMMAND
-</button>
-
-</div>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- =========================================================
-     PASS COMMAND
-========================================================= -->
+<!-- =========================
+     PASS SCREEN
+========================= -->
 
 <section id="passScreen" class="screen">
 
-<div class="page">
+    <div class="pass-box">
 
-<div class="panel pass-panel">
+        <div class="pass-title">
+            PASS THE COMMAND
+        </div>
 
-<div class="classified">
-FLAG BRIDGE
-</div>
+        <div class="pass-name" id="passName">
+            COMMANDER
+        </div>
 
-<div class="big">
-PASS THE COMMAND
-</div>
+        <div class="warning">
+            Make sure the previous commander cannot see this screen.
+            The next commander may now assume command.
+        </div>
 
-<div
-    id="passCommanderName"
-    class="commander-name"
->
-COMMANDER B
-</div>
+        <button class="big-button" onclick="enterBattle()">
+            ASSUME COMMAND
+        </button>
 
-<div class="pass-instruction">
-
-Commander A has completed the opening watch.
-
-<br><br>
-
-<strong>
-Pass the device to Commander B.
-</strong>
-
-<br><br>
-
-Commander B must assume the next watch before the battle continues.
-
-</div>
-
-<button
-    type="button"
-    id="passCommandButton"
-    class="btn btn-gold btn-wide"
->
-    COMMANDER B — ASSUME WATCH
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
-<!-- =========================================================
-     BATTLE SCREEN
-========================================================= -->
+<!-- =========================
+     BATTLE
+========================= -->
 
 <section id="battle" class="screen">
 
-<div class="battle-header">
-
-<div class="battle-header-inner">
-
-<div>
-
-<div class="battle-title">
-PACIFIC CARRIER TASK FORCE
-</div>
-
-<div class="small" style="color:#ccc">
-TACTICAL COMMAND BRIDGE • 1942
-</div>
-
-</div>
-
-<div
-    id="battleRoundDisplay"
-    class="round-display"
->
-ROUND 1 / 15
-</div>
-
-</div>
-
-</div>
-
-
-<div class="status-grid">
-
-<div class="status-box">
-<div class="status-label">COMMANDER</div>
-<div
-    id="currentCommander"
-    class="status-value"
->
-A
-</div>
-</div>
-
-<div class="status-box">
-<div class="status-label">CARRIER</div>
-<div
-    id="carrierStatus"
-    class="status-value"
->
-100%
-</div>
-</div>
-
-<div class="status-box">
-<div class="status-label">AIRCRAFT</div>
-<div
-    id="aircraftStatus"
-    class="status-value"
->
-48
-</div>
-</div>
-
-<div class="status-box">
-<div class="status-label">FUEL</div>
-<div
-    id="fuelStatus"
-    class="status-value"
->
-100%
-</div>
-</div>
-
-<div class="status-box">
-<div class="status-label">AMMUNITION</div>
-<div
-    id="ammoStatus"
-    class="status-value"
->
-100%
-</div>
-</div>
-
-<div class="status-box">
-<div class="status-label">INTELLIGENCE</div>
-<div
-    id="intelStatus"
-    class="status-value"
->
-50%
-</div>
-</div>
-
-</div>
-
-
-<div class="battle-layout">
-
-<!-- =====================================================
-     MAP
-===================================================== -->
-
-<div class="map-panel">
-
-<div class="map-title">
-TACTICAL SURFACE PLOT
-</div>
-
-<div
-    id="battleMap"
-    class="map"
->
-
-<div class="sector sector-a">GRID A</div>
-<div class="sector sector-b">GRID B</div>
-<div class="sector sector-c">GRID C</div>
-<div class="sector sector-d">GRID D</div>
-<div class="sector sector-e">GRID E</div>
-<div class="sector sector-f">GRID F</div>
-
-
-<!-- AMERICAN SHIPS -->
-
-<div
-    id="ship-CV"
-    class="ship us carrier"
-    style="left:18%;top:45%"
->
-CV<br>
-USS CARRIER
-</div>
-
-<div
-    id="ship-CVL"
-    class="ship us"
-    style="left:30%;top:28%"
->
-CVL<br>
-LIGHT CARRIER
-</div>
-
-<div
-    id="ship-BB"
-    class="ship us"
-    style="left:28%;top:65%"
->
-BB<br>
-FAST BB
-</div>
-
-<div
-    id="ship-CA1"
-    class="ship us"
-    style="left:42%;top:30%"
->
-CA-1<br>
-CRUISER
-</div>
-
-<div
-    id="ship-CA2"
-    class="ship us"
-    style="left:42%;top:55%"
->
-CA-2<br>
-CRUISER
-</div>
-
-<div
-    id="ship-CA3"
-    class="ship us"
-    style="left:38%;top:72%"
->
-CA-3<br>
-CRUISER
-</div>
-
-<div
-    id="ship-CL"
-    class="ship us light"
-    style="left:50%;top:20%"
->
-CL
-</div>
-
-<div
-    id="ship-DD1"
-    class="ship us light"
-    style="left:55%;top:34%"
->
-DD-1
-</div>
-
-<div
-    id="ship-DD2"
-    class="ship us light"
-    style="left:55%;top:50%"
->
-DD-2
-</div>
-
-<div
-    id="ship-DD3"
-    class="ship us light"
-    style="left:55%;top:65%"
->
-DD-3
-</div>
-
-<div
-    id="ship-DD4"
-    class="ship us light"
-    style="left:50%;top:80%"
->
-DD-4
-</div>
-
-
-<!-- OPPOSING FORCE -->
-
-<div
-    id="enemy-CV"
-    class="ship enemy carrier"
-    style="left:75%;top:38%"
->
-CV<br>
-OPPOSING CARRIER
-</div>
-
-<div
-    id="enemy-BB"
-    class="ship enemy"
-    style="left:70%;top:60%"
->
-BB<br>
-BATTLESHIP
-</div>
-
-<div
-    id="enemy-CA1"
-    class="ship enemy light"
-    style="left:82%;top:20%"
->
-CA
-</div>
-
-<div
-    id="enemy-CA2"
-    class="ship enemy light"
-    style="left:85%;top:70%"
->
-CA
-</div>
-
-<div
-    id="enemy-DD1"
-    class="ship enemy light"
-    style="left:65%;top:25%"
->
-DD
-</div>
-
-<div
-    id="enemy-DD2"
-    class="ship enemy light"
-    style="left:67%;top:80%"
->
-DD
-</div>
-
-</div>
-
-</div>
-
-
-<!-- =====================================================
-     CONTROLS
-===================================================== -->
-
-<div class="control-panel">
-
-<div class="control-section">
-
-<h3>
-TACTICAL ORDERS
-</h3>
-
-<div class="action-grid">
-
-<button
-    type="button"
-    class="btn btn-dark tactical-btn"
-    data-action="advance"
->
-ADVANCE
-</button>
-
-<button
-    type="button"
-    class="btn btn-dark tactical-btn"
-    data-action="open"
->
-OPEN DISTANCE
-</button>
-
-<button
-    type="button"
-    class="btn btn-dark tactical-btn"
-    data-action="north"
->
-MANEUVER NORTH
-</button>
-
-<button
-    type="button"
-    class="btn btn-dark tactical-btn"
-    data-action="south"
->
-MANEUVER SOUTH
-</button>
-
-<button
-    type="button"
-    class="btn btn-green tactical-btn"
-    data-action="recon"
->
-RECONNAISSANCE
-</button>
-
-<button
-    type="button"
-    class="btn btn-red tactical-btn"
-    data-action="surface"
->
-SURFACE ATTACK
-</button>
-
-</div>
-
-</div>
-
-
-<div class="control-section">
-
-<h3>
-DEFENSIVE FORMATION
-</h3>
-
-<div class="formation-grid">
-
-<button
-    type="button"
-    class="formation"
-    data-formation="close"
->
-CLOSE SCREEN
-</button>
-
-<button
-    type="button"
-    class="formation"
-    data-formation="diamond"
->
-DIAMOND
-</button>
-
-<button
-    type="button"
-    class="formation"
-    data-formation="forward"
->
-FORWARD SCREEN
-</button>
-
-<button
-    type="button"
-    class="formation"
-    data-formation="all"
->
-ALL-AROUND
-</button>
-
-</div>
-
-</div>
-
-
-<div class="control-section">
-
-<h3>
-AIR STRIKE PACKAGE
-</h3>
-
-<div class="counter-row">
-
-<strong>F4F WILDCAT</strong>
-
-<div class="counter">
-
-<button
-    type="button"
-    class="counter-btn"
-    data-type="f4f"
-    data-change="-1"
->
-−
-</button>
-
-<span
-    id="f4fCount"
-    class="counter-number"
->
-0
-</span>
-
-<button
-    type="button"
-    class="counter-btn"
-    data-type="f4f"
-    data-change="1"
->
-+
-</button>
-
-</div>
-
-</div>
-
-
-<div class="counter-row">
-
-<strong>SBD DAUNTLESS</strong>
-
-<div class="counter">
-
-<button
-    type="button"
-    class="counter-btn"
-    data-type="sbd"
-    data-change="-1"
->
-−
-</button>
-
-<span
-    id="sbdCount"
-    class="counter-number"
->
-0
-</span>
-
-<button
-    type="button"
-    class="counter-btn"
-    data-type="sbd"
-    data-change="1"
->
-+
-</button>
-
-</div>
-
-</div>
-
-
-<div class="counter-row">
-
-<strong>TBD DEVASTATOR</strong>
-
-<div class="counter">
-
-<button
-    type="button"
-    class="counter-btn"
-    data-type="tbd"
-    data-change="-1"
->
-−
-</button>
-
-<span
-    id="tbdCount"
-    class="counter-number"
->
-0
-</span>
-
-<button
-    type="button"
-    class="counter-btn"
-    data-type="tbd"
-    data-change="1"
->
-+
-</button>
-
-</div>
-
-</div>
-
-
-<button
-    type="button"
-    id="launchStrike"
-    class="btn btn-red btn-wide"
->
-LAUNCH SORTIE
-</button>
-
-</div>
-
-
-<div class="control-section">
-
-<h3>
-COMMANDER'S LOG
-</h3>
-
-<div
-    id="battleLog"
-    style="
-        height:160px;
-        overflow:auto;
-        background:#20292b;
-        color:#e5dec8;
-        padding:12px;
-        font-family:'Courier New',monospace;
-        font-size:12px;
-    "
->
-FLAG BRIDGE: Awaiting orders.
-</div>
-
-</div>
-
-
-<button
-    type="button"
-    id="finishTurn"
-    class="btn btn-primary btn-wide"
->
-TRANSMIT ORDERS
-</button>
-
-</div>
-
-</div>
+    <div class="game-header">
+
+        <h1>
+            PACIFIC CARRIER COMMAND
+        </h1>
+
+        <div class="round-number">
+            ROUND <span id="roundNumber">1</span> / 15
+        </div>
+
+    </div>
+
+    <div class="status-grid">
+
+        <div class="status-card">
+            <strong>YOUR CARRIER</strong>
+            <div class="status-number" id="yourCarrierHP">100%</div>
+        </div>
+
+        <div class="status-card">
+            <strong>ENEMY CARRIER</strong>
+            <div class="status-number" id="enemyCarrierHP">100%</div>
+        </div>
+
+        <div class="status-card">
+            <strong>YOUR AIRCRAFT</strong>
+            <div class="status-number" id="yourAircraft">48</div>
+        </div>
+
+        <div class="status-card">
+            <strong>ENEMY AIRCRAFT</strong>
+            <div class="status-number" id="enemyAircraft">48</div>
+        </div>
+
+    </div>
+
+
+    <div class="map">
+
+        <div class="map-title">
+            TACTICAL PLOT — 1942
+        </div>
+
+        <div id="yourCarrier" class="ship your-fleet">
+            YOUR CV
+        </div>
+
+        <div id="yourEscort" class="ship your-fleet">
+            ESCORT
+        </div>
+
+        <div id="enemyCarrier" class="ship enemy-fleet">
+            ENEMY CV
+        </div>
+
+        <div id="enemyEscort" class="ship enemy-fleet">
+            ESCORT
+        </div>
+
+    </div>
+
+
+    <div class="orders-area">
+
+        <div class="orders-title">
+            TACTICAL ORDERS
+        </div>
+
+        <div class="order-grid">
+
+            <button
+                class="order-button"
+                onclick="selectOrder('advance')">
+                ADVANCE
+            </button>
+
+            <button
+                class="order-button"
+                onclick="selectOrder('open')">
+                OPEN DISTANCE
+            </button>
+
+            <button
+                class="order-button"
+                onclick="selectOrder('north')">
+                MANEUVER NORTH
+            </button>
+
+            <button
+                class="order-button"
+                onclick="selectOrder('south')">
+                MANEUVER SOUTH
+            </button>
+
+            <button
+                class="order-button recon"
+                onclick="selectOrder('recon')">
+                RECONNAISSANCE
+            </button>
+
+            <button
+                class="order-button attack"
+                onclick="selectOrder('attack')">
+                SURFACE ATTACK
+            </button>
+
+        </div>
+
+
+        <div id="orderInfo" class="order-info">
+
+            <h2 id="selectedOrderTitle">
+                ORDER
+            </h2>
+
+            <p id="selectedOrderDescription">
+                Select an order.
+            </p>
+
+            <button
+                class="transmit-button"
+                onclick="transmitOrder()">
+                TRANSMIT ORDER
+            </button>
+
+        </div>
+
+    </div>
 
 </section>
 
 
-<!-- =========================================================
-     REPORT
-========================================================= -->
+<!-- =========================
+     ROUND REPORT
+========================= -->
 
 <section id="report" class="screen">
 
-<div class="report-panel">
+    <div class="report-container">
 
-<div class="report-header">
+        <div class="report-header">
 
-<div class="classified">
-PACIFIC FLEET • ACTION REPORT
-</div>
+            <h1>
+                ROUND <span id="reportRound">1</span>
+                — AFTER ACTION REPORT
+            </h1>
 
-<h1 id="reportTitle">
-ROUND 1
-</h1>
+        </div>
 
-</div>
 
-<div class="report-body">
+        <div id="winnerBanner" class="winner-banner">
+            ROUND WINNER
+        </div>
 
-<div id="reportEvents"></div>
 
-<div class="battlefield-condition">
+        <div class="score-grid">
 
-<h2>
-BATTLEFIELD CONDITION
-</h2>
+            <div id="scoreCardA" class="score-card">
 
-<div id="reportCondition">
-Assessing the task force...
-</div>
+                <div class="commander-name" id="reportNameA">
+                    COMMANDER A
+                </div>
 
-</div>
+                <div class="score-number" id="scoreA">
+                    0
+                </div>
 
-</div>
+                <div id="detailsA"></div>
 
-<div class="continue-area">
+            </div>
 
-<button
-    type="button"
-    id="continueRound"
-    class="btn btn-primary btn-wide"
->
-CONTINUE
-</button>
 
-</div>
+            <div id="scoreCardB" class="score-card">
 
-</div>
+                <div class="commander-name" id="reportNameB">
+                    COMMANDER B
+                </div>
+
+                <div class="score-number" id="scoreB">
+                    0
+                </div>
+
+                <div id="detailsB"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="result-section">
+
+            <h2>TACTICAL OUTCOME</h2>
+
+            <div id="battlefieldResult">
+                Battlefield results will appear here.
+            </div>
+
+        </div>
+
+
+        <div class="result-section">
+
+            <h2>FLEET CONDITION</h2>
+
+            <div id="fleetCondition">
+                Fleet condition.
+            </div>
+
+        </div>
+
+
+        <button
+            id="continueButton"
+            class="continue-button"
+            onclick="continueGame()">
+            CONTINUE TO NEXT ROUND
+        </button>
+
+    </div>
 
 </section>
 
 
-<!-- =========================================================
+<!-- =========================
      FINAL
-========================================================= -->
+========================= -->
 
 <section id="final" class="screen">
 
-<div class="page">
+    <div class="final-box">
 
-<div class="panel final-panel">
+        <h1>
+            CAMPAIGN COMPLETE
+        </h1>
 
-<div class="classified">
-PACIFIC FLEET • FINAL ACTION REPORT
-</div>
+        <div class="subtitle">
+            15 ROUNDS COMPLETE
+        </div>
 
-<h1>
-CAMPAIGN COMPLETE
-</h1>
+        <div class="final-winner" id="finalWinner">
+            COMMANDER
+        </div>
 
-<div
-    id="winnerDisplay"
-    class="winner"
->
-WINNER
-</div>
+        <div class="final-score" id="finalScoreA">
+            Commander A: 0
+        </div>
 
-<div id="finalMessage"></div>
+        <div class="final-score" id="finalScoreB">
+            Commander B: 0
+        </div>
 
-<br>
+        <p id="finalMessage"></p>
 
-<div id="finalStats"></div>
+        <button
+            class="big-button restart"
+            onclick="location.reload()">
+            NEW CAMPAIGN
+        </button>
 
-<br>
-
-<button
-    type="button"
-    id="restartGame"
-    class="btn btn-primary btn-wide"
->
-NEW COMMAND
-</button>
-
-</div>
-
-</div>
+    </div>
 
 </section>
 
 
 <script>
 
-/* =========================================================
-   IMPORTANT:
-   EVERYTHING BELOW IS SELF-CONTAINED.
-   NO EXTERNAL LIBRARIES.
-   NO EXTERNAL IMAGES.
-   NO INLINE DEPENDENCIES.
-========================================================= */
-
-
-/* =========================================================
+/* =====================================================
    GAME STATE
-========================================================= */
+===================================================== */
 
 const game = {
 
     round: 1,
 
-    maxRounds: 15,
-
     currentCommander: "A",
 
     commanderA: "",
-
     commanderB: "",
 
-    formation: "close",
+    selectedOrder: null,
 
-    selectedShip: null,
+    orders: {
+        A: null,
+        B: null
+    },
+
+    totalScore: {
+        A: 0,
+        B: 0
+    },
+
+    carrierHP: {
+        A: 100,
+        B: 100
+    },
 
     aircraft: {
-        f4f: 18,
-        sbd: 18,
-        tbd: 12
+        A: 48,
+        B: 48
     },
 
-    carrier: 100,
-
-    fuel: 100,
-
-    ammo: 100,
-
-    intelligence: 50,
-
-    ships: {
-
-        CV: 100,
-        CVL: 100,
-        BB: 100,
-        CA1: 100,
-        CA2: 100,
-        CA3: 100,
-        CL: 100,
-        DD1: 100,
-        DD2: 100,
-        DD3: 100,
-        DD4: 100
-
+    position: {
+        A: 25,
+        B: 75
     },
 
-    enemyShips: {
-
-        CV: 100,
-        BB: 100,
-        CA1: 100,
-        CA2: 100,
-        DD1: 100,
-        DD2: 100
-
-    },
-
-    strike: {
-        f4f: 0,
-        sbd: 0,
-        tbd: 0
-    },
-
-    actions: [],
-
-    log: []
+    roundResults: null
 
 };
 
 
-/* =========================================================
+/* =====================================================
+   ORDER INFORMATION
+===================================================== */
+
+const orderData = {
+
+    advance: {
+
+        title: "ADVANCE",
+
+        description:
+        "Move aggressively toward the enemy. Increases offensive pressure and may create an opportunity for a decisive attack, but exposes your carrier to greater danger.",
+
+        base: 7
+
+    },
+
+    open: {
+
+        title: "OPEN DISTANCE",
+
+        description:
+        "Increase separation from the enemy. Reduces the danger of incoming surface fire and gives your carrier more room to operate, but sacrifices offensive pressure.",
+
+        base: 6
+
+    },
+
+    north: {
+
+        title: "MANEUVER NORTH",
+
+        description:
+        "Shift the task force north to change the geometry of the engagement. A successful maneuver can create a flank or disrupt the enemy's plan.",
+
+        base: 7
+
+    },
+
+    south: {
+
+        title: "MANEUVER SOUTH",
+
+        description:
+        "Shift the task force south to change the geometry of the engagement. A successful maneuver can create a flank or disrupt the enemy's plan.",
+
+        base: 7
+
+    },
+
+    recon: {
+
+        title: "RECONNAISSANCE",
+
+        description:
+        "Launch reconnaissance aircraft to gather intelligence before committing major forces. Provides strong information and improves the next tactical decision.",
+
+        base: 8
+
+    },
+
+    attack: {
+
+        title: "SURFACE ATTACK",
+
+        description:
+        "Commit surface ships against the opposing task force. This creates immediate offensive pressure but exposes your own force to counterattack.",
+
+        base: 8
+
+    }
+
+};
+
+
+/* =====================================================
    SCREEN CONTROL
-========================================================= */
+===================================================== */
 
 function showScreen(id) {
 
     document.querySelectorAll(".screen").forEach(screen => {
+
         screen.classList.remove("active");
+
     });
 
-    const target = document.getElementById(id);
+    document.getElementById(id).classList.add("active");
 
-    if (!target) {
-
-        console.error("Screen not found:", id);
-
-        return false;
-    }
-
-    target.classList.add("active");
-
-    window.scrollTo({
-        top: 0,
-        behavior: "instant"
-    });
-
-    return true;
 }
 
 
-/* =========================================================
-   FIRST BUTTON
-   THIS IS THE CRITICAL FIX.
-========================================================= */
+/* =====================================================
+   STARTUP
+===================================================== */
 
-document
-.getElementById("beginGameButton")
-.addEventListener("click", function () {
+function showSetup() {
 
-    console.log("BEGIN COMMAND clicked");
+    showScreen("setup");
 
-    showScreen("commanderNames");
-
-});
+}
 
 
-/* =========================================================
-   COMMANDER NAME BUTTON
-   THIS IS THE OTHER CRITICAL FIX.
-========================================================= */
+function startGame() {
 
-document
-.getElementById("assumeCommand")
-.addEventListener("click", function () {
+    const a =
+        document.getElementById("commanderA").value.trim();
 
-    try {
+    const b =
+        document.getElementById("commanderB").value.trim();
 
-        const commanderA =
-            document
-            .getElementById("commanderA")
-            .value
-            .trim();
+    if (!a || !b) {
 
-        const commanderB =
-            document
-            .getElementById("commanderB")
-            .value
-            .trim();
+        alert("Enter both commander names.");
 
-
-        if (!commanderA) {
-
-            alert(
-                "COMMANDER A: Please enter a name before assuming command."
-            );
-
-            document
-            .getElementById("commanderA")
-            .focus();
-
-            return;
-        }
-
-
-        if (!commanderB) {
-
-            alert(
-                "COMMANDER B: Please enter a name before assuming command."
-            );
-
-            document
-            .getElementById("commanderB")
-            .focus();
-
-            return;
-        }
-
-
-        game.commanderA = commanderA;
-
-        game.commanderB = commanderB;
-
-        game.currentCommander = "A";
-
-        game.round = 1;
-
-
-        document
-        .getElementById("passCommanderName")
-        .textContent =
-            game.commanderB;
-
-
-        addLog(
-            "COMMAND STAFF ASSIGNED: " +
-            game.commanderA +
-            " / " +
-            game.commanderB
-        );
-
-
-        /*
-         * THIS IS THE SCREEN TRANSITION.
-         * It does not depend on any other game function.
-         */
-
-        const success =
-            showScreen("passScreen");
-
-
-        if (!success) {
-
-            alert(
-                "GAME ERROR: PASS SCREEN WAS NOT FOUND."
-            );
-
-            return;
-        }
-
-
-        console.log(
-            "Commander names accepted.",
-            game.commanderA,
-            game.commanderB
-        );
-
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert(
-            "COMMAND ERROR: " +
-            error.message
-        );
+        return;
 
     }
 
-});
+    game.commanderA = a;
+    game.commanderB = b;
 
-
-/* =========================================================
-   PASS COMMAND BUTTON
-========================================================= */
-
-document
-.getElementById("passCommandButton")
-.addEventListener("click", function () {
+    game.round = 1;
 
     game.currentCommander = "A";
 
-    updateBattleDisplay();
+    game.orders.A = null;
+    game.orders.B = null;
 
-    showScreen("battle");
+    game.totalScore.A = 0;
+    game.totalScore.B = 0;
 
-    addLog(
-        game.commanderA +
-        " has assumed command of the task force."
-    );
+    game.carrierHP.A = 100;
+    game.carrierHP.B = 100;
 
-});
+    game.aircraft.A = 48;
+    game.aircraft.B = 48;
 
+    updateBattleScreen();
 
-/* =========================================================
-   FORMATION BUTTONS
-========================================================= */
-
-document
-.querySelectorAll(".formation")
-.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        document
-        .querySelectorAll(".formation")
-        .forEach(b =>
-            b.classList.remove("selected")
-        );
-
-        this.classList.add("selected");
-
-        game.formation =
-            this.dataset.formation;
-
-        addLog(
-            "DEFENSIVE FORMATION SET: " +
-            this.textContent.trim()
-        );
-
-    });
-
-});
-
-
-/* =========================================================
-   TACTICAL BUTTONS
-========================================================= */
-
-document
-.querySelectorAll(".tactical-btn")
-.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        const action =
-            this.dataset.action;
-
-        game.actions.push(action);
-
-        addLog(
-            "ORDER: " +
-            this.textContent.trim()
-        );
-
-        if (action === "recon") {
-
-            game.intelligence =
-                Math.min(
-                    100,
-                    game.intelligence + 15
-                );
-
-            addLog(
-                "RECONNAISSANCE REPORT RECEIVED. INTELLIGENCE +15."
-            );
-
-        }
-
-        if (action === "advance") {
-
-            game.fuel =
-                Math.max(
-                    0,
-                    game.fuel - 4
-                );
-
-        }
-
-        if (action === "open") {
-
-            game.fuel =
-                Math.max(
-                    0,
-                    game.fuel - 3
-                );
-
-        }
-
-        updateBattleDisplay();
-
-    });
-
-});
-
-
-/* =========================================================
-   AIRCRAFT COUNTERS
-========================================================= */
-
-document
-.querySelectorAll(".counter-btn")
-.forEach(button => {
-
-    button.addEventListener("click", function () {
-
-        const type =
-            this.dataset.type;
-
-        const change =
-            Number(this.dataset.change);
-
-        const current =
-            game.strike[type];
-
-        const available =
-            game.aircraft[type];
-
-
-        let next =
-            current + change;
-
-
-        if (next < 0) {
-
-            next = 0;
-
-        }
-
-
-        if (next > available) {
-
-            next = available;
-
-        }
-
-
-        game.strike[type] = next;
-
-
-        updateStrikeDisplay();
-
-    });
-
-});
-
-
-/* =========================================================
-   STRIKE BUTTON
-========================================================= */
-
-document
-.getElementById("launchStrike")
-.addEventListener("click", function () {
-
-    const total =
-        game.strike.f4f +
-        game.strike.sbd +
-        game.strike.tbd;
-
-
-    if (total === 0) {
-
-        alert(
-            "Select aircraft for the sortie first."
-        );
-
-        return;
-    }
-
-
-    if (game.ammo <= 0) {
-
-        alert(
-            "Ammunition is exhausted."
-        );
-
-        return;
-    }
-
-
-    const fighters =
-        game.strike.f4f;
-
-    const bombers =
-        game.strike.sbd;
-
-    const torpedo =
-        game.strike.tbd;
-
-
-    /*
-     * Remove aircraft from operational strength.
-     * Aircraft returning safely will be restored during resolution.
-     */
-
-    game.aircraft.f4f -= fighters;
-
-    game.aircraft.sbd -= bombers;
-
-    game.aircraft.tbd -= torpedo;
-
-
-    let enemyDamage = 0;
-
-
-    /*
-     * SBDs are most effective against surface ships.
-     */
-
-    enemyDamage +=
-        bombers * 2;
-
-
-    /*
-     * TBDs are especially dangerous to carriers.
-     */
-
-    enemyDamage +=
-        torpedo * 3;
-
-
-    /*
-     * Fighters contribute to suppression.
-     */
-
-    enemyDamage +=
-        fighters * .4;
-
-
-    /*
-     * Intelligence improves strike effectiveness.
-     */
-
-    const intelBonus =
-        game.intelligence >= 70
-        ? 1.25
-        : 1;
-
-
-    enemyDamage *= intelBonus;
-
-
-    /*
-     * Target priority.
-     */
-
-    if (torpedo > 0) {
-
-        game.enemyShips.CV =
-            Math.max(
-                0,
-                game.enemyShips.CV -
-                Math.round(enemyDamage * .55)
-            );
-
-    }
-
-    else if (bombers > 0) {
-
-        game.enemyShips.BB =
-            Math.max(
-                0,
-                game.enemyShips.BB -
-                Math.round(enemyDamage * .45)
-            );
-
-    }
-
-
-    /*
-     * Enemy CAP / ships inflict losses.
-     */
-
-    let lossRate = .10;
-
-
-    if (game.formation === "close") {
-
-        lossRate -= .03;
-
-    }
-
-    if (game.formation === "diamond") {
-
-        lossRate -= .02;
-
-    }
-
-    if (game.formation === "forward") {
-
-        lossRate += .02;
-
-    }
-
-    if (game.formation === "all") {
-
-        lossRate -= .04;
-
-    }
-
-
-    if (game.intelligence >= 70) {
-
-        lossRate -= .02;
-
-    }
-
-
-    lossRate =
-        Math.max(.03, lossRate);
-
-
-    const attackingAircraft =
-        fighters +
-        bombers +
-        torpedo;
-
-
-    const losses =
-        Math.min(
-            attackingAircraft,
-            Math.round(
-                attackingAircraft *
-                lossRate
-            )
-        );
-
-
-    returnAircraftAfterStrike(
-        fighters,
-        bombers,
-        torpedo,
-        losses
-    );
-
-
-    game.ammo =
-        Math.max(
-            0,
-            game.ammo -
-            Math.round(total * .8)
-        );
-
-
-    addLog(
-        "SORTIE LAUNCHED: " +
-        fighters +
-        " F4F / " +
-        bombers +
-        " SBD / " +
-        torpedo +
-        " TBD."
-    );
-
-
-    addLog(
-        "ESTIMATED ENEMY DAMAGE: " +
-        Math.round(enemyDamage)
-    );
-
-
-    addLog(
-        "AIRCRAFT LOSSES: " +
-        losses
-    );
-
-
-    game.strike = {
-        f4f: 0,
-        sbd: 0,
-        tbd: 0
-    };
-
-
-    updateStrikeDisplay();
-
-    updateBattleDisplay();
-
-    removeDestroyedEnemyShips();
-
-});
-
-
-/* =========================================================
-   RETURN AIRCRAFT
-========================================================= */
-
-function returnAircraftAfterStrike(
-    fighters,
-    bombers,
-    torpedo,
-    totalLosses
-) {
-
-    let remaining =
-        totalLosses;
-
-
-    let fighterLoss =
-        Math.min(
-            fighters,
-            Math.floor(
-                remaining * .35
-            )
-        );
-
-    remaining -= fighterLoss;
-
-
-    let bomberLoss =
-        Math.min(
-            bombers,
-            Math.floor(
-                remaining * .45
-            )
-        );
-
-    remaining -= bomberLoss;
-
-
-    let torpedoLoss =
-        Math.min(
-            torpedo,
-            remaining
-        );
-
-
-    game.aircraft.f4f +=
-        fighters - fighterLoss;
-
-    game.aircraft.sbd +=
-        bombers - bomberLoss;
-
-    game.aircraft.tbd +=
-        torpedo - torpedoLoss;
-
-
-    addLog(
-        "AIRCRAFT RECOVERY COMPLETE."
-    );
+    showPassScreen();
 
 }
 
 
-/* =========================================================
-   TRANSMIT ORDERS
-========================================================= */
+/* =====================================================
+   PASS DEVICE
+===================================================== */
 
-document
-.getElementById("finishTurn")
-.addEventListener("click", function () {
+function showPassScreen() {
+
+    const name =
+        game.currentCommander === "A"
+        ? game.commanderA
+        : game.commanderB;
+
+    document.getElementById("passName").textContent =
+        name;
+
+    showScreen("passScreen");
+
+}
+
+
+function enterBattle() {
+
+    game.selectedOrder = null;
+
+    document.getElementById("orderInfo")
+        .classList.remove("active");
+
+    document.querySelectorAll(".order-button")
+        .forEach(button => {
+
+            button.classList.remove("selected");
+
+        });
+
+    updateBattleScreen();
+
+    showScreen("battle");
+
+}
+
+
+/* =====================================================
+   BATTLE SCREEN
+===================================================== */
+
+function updateBattleScreen() {
+
+    document.getElementById("roundNumber")
+        .textContent = game.round;
+
+    document.getElementById("yourCarrierHP")
+        .textContent =
+        game.carrierHP[game.currentCommander] + "%";
+
+    const enemy =
+        game.currentCommander === "A"
+        ? "B"
+        : "A";
+
+    document.getElementById("enemyCarrierHP")
+        .textContent =
+        game.carrierHP[enemy] + "%";
+
+    document.getElementById("yourAircraft")
+        .textContent =
+        game.aircraft[game.currentCommander];
+
+    document.getElementById("enemyAircraft")
+        .textContent =
+        game.aircraft[enemy];
+
+    updateMap();
+
+}
+
+
+/* =====================================================
+   MAP
+===================================================== */
+
+function updateMap() {
+
+    const yourCarrier =
+        document.getElementById("yourCarrier");
+
+    const enemyCarrier =
+        document.getElementById("enemyCarrier");
+
+    const yourEscort =
+        document.getElementById("yourEscort");
+
+    const enemyEscort =
+        document.getElementById("enemyEscort");
+
+
+    let aX = 18 + game.position.A * .35;
+
+    let bX = 52 + game.position.B * .35;
+
+    aX = Math.max(5, Math.min(78, aX));
+
+    bX = Math.max(15, Math.min(82, bX));
+
+
+    yourCarrier.style.left =
+        game.currentCommander === "A"
+        ? aX + "%"
+        : bX + "%";
+
+    enemyCarrier.style.left =
+        game.currentCommander === "A"
+        ? bX + "%"
+        : aX + "%";
+
+
+    yourEscort.style.left =
+        game.currentCommander === "A"
+        ? Math.max(3, aX - 5) + "%"
+        : Math.max(3, bX - 5) + "%";
+
+    enemyEscort.style.left =
+        game.currentCommander === "A"
+        ? Math.max(3, bX - 5) + "%"
+        : Math.max(3, aX - 5) + "%";
+
+
+    if (game.carrierHP.A <= 0) {
+
+        if (game.currentCommander === "A") {
+
+            yourCarrier.classList.add("destroyed");
+
+        } else {
+
+            enemyCarrier.classList.add("destroyed");
+
+        }
+
+    }
+
+
+    if (game.carrierHP.B <= 0) {
+
+        if (game.currentCommander === "B") {
+
+            yourCarrier.classList.add("destroyed");
+
+        } else {
+
+            enemyCarrier.classList.add("destroyed");
+
+        }
+
+    }
+
+}
+
+
+/* =====================================================
+   SELECT ORDER
+===================================================== */
+
+function selectOrder(order) {
+
+    game.selectedOrder = order;
+
+    const data = orderData[order];
+
+    document.getElementById("selectedOrderTitle")
+        .textContent = data.title;
+
+    document.getElementById("selectedOrderDescription")
+        .textContent = data.description;
+
+    document.getElementById("orderInfo")
+        .classList.add("active");
+
+
+    document.querySelectorAll(".order-button")
+        .forEach(button => {
+
+            button.classList.remove("selected");
+
+        });
+
+
+    event.currentTarget.classList.add("selected");
+
+}
+
+
+/* =====================================================
+   TRANSMIT ORDER
+===================================================== */
+
+function transmitOrder() {
+
+    if (!game.selectedOrder) {
+
+        alert("Select a tactical order first.");
+
+        return;
+
+    }
+
+
+    game.orders[game.currentCommander] =
+        game.selectedOrder;
+
+
+    /* Commander A transmits first */
 
     if (game.currentCommander === "A") {
 
-        /*
-         * Commander A is finished.
-         * Now pass the device to B.
-         */
-
         game.currentCommander = "B";
 
-        document
-        .getElementById("passCommanderName")
-        .textContent =
-            game.commanderB;
-
-        showScreen("passScreen");
+        showPassScreen();
 
         return;
+
     }
 
 
-    /*
-     * Commander B is finished.
-     * Now resolve the round.
-     */
+    /* Commander B has transmitted.
+       Resolve the complete round. */
 
     resolveRound();
 
-});
+}
 
 
-/* =========================================================
-   PASS BUTTON AFTER A
-========================================================= */
-
-document
-.getElementById("passCommandButton")
-.addEventListener("click", function () {
-
-    /*
-     * If the current round is waiting for Commander B,
-     * send B directly back into the battlefield.
-     */
-
-    if (game.currentCommander === "B") {
-
-        updateBattleDisplay();
-
-        showScreen("battle");
-
-        addLog(
-            game.commanderB +
-            " has assumed command."
-        );
-
-        return;
-    }
-
-
-    /*
-     * At the very beginning, Commander A enters battle.
-     */
-
-    game.currentCommander = "A";
-
-    updateBattleDisplay();
-
-    showScreen("battle");
-
-    addLog(
-        game.commanderA +
-        " has assumed command."
-    );
-
-});
-
-
-/* =========================================================
-   ROUND RESOLUTION
-========================================================= */
+/* =====================================================
+   RESOLVE ROUND
+===================================================== */
 
 function resolveRound() {
 
-    let events = [];
+    const orderA = game.orders.A;
+
+    const orderB = game.orders.B;
 
 
-    /*
-     * Surface combat.
-     */
+    let scoreA = orderData[orderA].base;
+
+    let scoreB = orderData[orderB].base;
+
+
+    let detailsA = [];
+    let detailsB = [];
+
+    let battlefield = [];
+
+
+    /* ---------------------------------------------
+       MATCHUP LOGIC
+    --------------------------------------------- */
+
+
+    if (orderA === "recon") {
+
+        scoreA += 3;
+
+        detailsA.push(
+            "Reconnaissance produced useful intelligence."
+        );
+
+    }
+
+
+    if (orderB === "recon") {
+
+        scoreB += 3;
+
+        detailsB.push(
+            "Reconnaissance produced useful intelligence."
+        );
+
+    }
+
+
+    /* Advance vs Open */
+
+    if (orderA === "advance" && orderB === "open") {
+
+        scoreA += 2;
+
+        scoreB += 2;
+
+        detailsA.push(
+            "Advance maintained offensive pressure."
+        );
+
+        detailsB.push(
+            "Open distance reduced exposure."
+        );
+
+    }
+
+    if (orderB === "advance" && orderA === "open") {
+
+        scoreB += 2;
+
+        scoreA += 2;
+
+        detailsB.push(
+            "Advance maintained offensive pressure."
+        );
+
+        detailsA.push(
+            "Open distance reduced exposure."
+        );
+
+    }
+
+
+    /* Maneuver vs maneuver */
 
     if (
-        game.actions.includes("surface")
+        (orderA === "north" || orderA === "south") &&
+        (orderB === "north" || orderB === "south")
     ) {
 
-        const targets =
-            Object.keys(game.enemyShips)
-            .filter(
-                key =>
-                    game.enemyShips[key] > 0
+        if (orderA !== orderB) {
+
+            scoreA += 3;
+            scoreB += 3;
+
+            detailsA.push(
+                "Cross-maneuver created a difficult tactical problem."
             );
 
+            detailsB.push(
+                "Cross-maneuver created a difficult tactical problem."
+            );
 
-        if (targets.length) {
+        } else {
 
-            const target =
-                targets[
-                    Math.floor(
-                        Math.random() *
-                        targets.length
-                    )
-                ];
+            scoreA += 1;
+            scoreB += 1;
 
+            detailsA.push(
+                "Both forces anticipated the same maneuver."
+            );
 
-            const damage =
-                Math.floor(
-                    8 +
-                    Math.random() * 10
-                );
-
-
-            game.enemyShips[target] =
-                Math.max(
-                    0,
-                    game.enemyShips[target] -
-                    damage
-                );
-
-
-            events.push(
-                "Surface action damaged opposing " +
-                target +
-                " by " +
-                damage +
-                "%."
+            detailsB.push(
+                "Both forces anticipated the same maneuver."
             );
 
         }
@@ -2400,259 +1400,524 @@ function resolveRound() {
     }
 
 
-    /*
-     * Enemy response.
-     */
+    /* Recon against attack */
 
-    const enemyStrength =
-        calculateEnemyStrength();
+    if (orderA === "recon" && orderB === "attack") {
 
+        scoreA += 4;
 
-    let defensiveLoss =
-        Math.round(
-            enemyStrength *
-            .08
+        detailsA.push(
+            "Recon detected the attacking force before it could achieve maximum effect."
         );
 
-
-    if (
-        game.formation === "close"
-    ) {
-
-        defensiveLoss -= 4;
-
-    }
-
-    if (
-        game.formation === "diamond"
-    ) {
-
-        defensiveLoss -= 3;
-
-    }
-
-    if (
-        game.formation === "all"
-    ) {
-
-        defensiveLoss -= 5;
+        detailsB.push(
+            "Surface attack was launched without complete intelligence."
+        );
 
     }
 
 
-    defensiveLoss =
-        Math.max(
-            0,
-            defensiveLoss
+    if (orderB === "recon" && orderA === "attack") {
+
+        scoreB += 4;
+
+        detailsB.push(
+            "Recon detected the attacking force before it could achieve maximum effect."
         );
 
-
-    game.carrier =
-        Math.max(
-            0,
-            game.carrier -
-            defensiveLoss
+        detailsA.push(
+            "Surface attack was launched without complete intelligence."
         );
 
+    }
 
-    if (defensiveLoss > 0) {
 
-        events.push(
-            "Enemy action inflicted approximately " +
-            defensiveLoss +
+    /* Attack against attack */
+
+    if (orderA === "attack" && orderB === "attack") {
+
+        scoreA += 2;
+        scoreB += 2;
+
+        detailsA.push(
+            "Both commanders committed surface forces."
+        );
+
+        detailsB.push(
+            "Both commanders committed surface forces."
+        );
+
+    }
+
+
+    /* ---------------------------------------------
+       MOVEMENT
+    --------------------------------------------- */
+
+    if (orderA === "advance") {
+
+        game.position.A += 8;
+
+    }
+
+    if (orderA === "open") {
+
+        game.position.A -= 8;
+
+    }
+
+    if (orderA === "north") {
+
+        game.position.A -= 4;
+
+    }
+
+    if (orderA === "south") {
+
+        game.position.A += 4;
+
+    }
+
+
+    if (orderB === "advance") {
+
+        game.position.B -= 8;
+
+    }
+
+    if (orderB === "open") {
+
+        game.position.B += 8;
+
+    }
+
+    if (orderB === "north") {
+
+        game.position.B -= 4;
+
+    }
+
+    if (orderB === "south") {
+
+        game.position.B += 4;
+
+    }
+
+
+    /* Keep positions reasonable */
+
+    game.position.A =
+        Math.max(5, Math.min(95, game.position.A));
+
+    game.position.B =
+        Math.max(5, Math.min(95, game.position.B));
+
+
+    /* ---------------------------------------------
+       SURFACE ATTACK
+    --------------------------------------------- */
+
+    let damageToB = 0;
+    let damageToA = 0;
+
+
+    if (orderA === "attack") {
+
+        damageToB =
+            Math.floor(Math.random() * 7) + 7;
+
+        if (orderB === "open") {
+
+            damageToB -= 4;
+
+            detailsA.push(
+                "Enemy maneuver reduced the effectiveness of the attack."
+            );
+
+        }
+
+        if (orderB === "recon") {
+
+            damageToB -= 3;
+
+        }
+
+        damageToB =
+            Math.max(2, damageToB);
+
+        game.carrierHP.B =
+            Math.max(0, game.carrierHP.B - damageToB);
+
+        game.aircraft.A =
+            Math.max(
+                0,
+                game.aircraft.A -
+                Math.floor(Math.random() * 4)
+            );
+
+        scoreA += damageToB;
+
+        battlefield.push(
+            game.commanderA +
+            " launched a surface attack and inflicted " +
+            damageToB +
             "% carrier damage."
         );
 
     }
-    else {
-
-        events.push(
-            "Defensive formation absorbed the enemy attack."
-        );
-
-    }
 
 
-    /*
-     * Fuel consumption.
-     */
+    if (orderB === "attack") {
 
-    game.fuel =
-        Math.max(
-            0,
-            game.fuel -
-            3
-        );
+        damageToA =
+            Math.floor(Math.random() * 7) + 7;
 
+        if (orderA === "open") {
 
-    /*
-     * Ammunition slowly decreases.
-     */
+            damageToA -= 4;
 
-    if (
-        game.actions.includes("surface") ||
-        game.actions.includes("advance")
-    ) {
-
-        game.ammo =
-            Math.max(
-                0,
-                game.ammo - 4
+            detailsB.push(
+                "Enemy maneuver reduced the effectiveness of the attack."
             );
-
-    }
-
-
-    /*
-     * Destroyed carrier condition.
-     */
-
-    if (game.carrier <= 0) {
-
-        showFinal(
-            game.commanderB,
-            "The carrier was lost during the campaign."
-        );
-
-        return;
-    }
-
-
-    /*
-     * Clear tactical orders.
-     */
-
-    game.actions = [];
-
-
-    /*
-     * Build report.
-     */
-
-    showRoundReport(events);
-
-}
-
-
-/* =========================================================
-   ENEMY STRENGTH
-========================================================= */
-
-function calculateEnemyStrength() {
-
-    let total = 0;
-
-    Object
-    .values(game.enemyShips)
-    .forEach(value => {
-
-        if (value > 0) {
-
-            total += value;
 
         }
 
-    });
+        if (orderA === "recon") {
+
+            damageToA -= 3;
+
+        }
+
+        damageToA =
+            Math.max(2, damageToA);
+
+        game.carrierHP.A =
+            Math.max(0, game.carrierHP.A - damageToA);
+
+        game.aircraft.B =
+            Math.max(
+                0,
+                game.aircraft.B -
+                Math.floor(Math.random() * 4)
+            );
+
+        scoreB += damageToA;
+
+        battlefield.push(
+            game.commanderB +
+            " launched a surface attack and inflicted " +
+            damageToA +
+            "% carrier damage."
+        );
+
+    }
 
 
-    return total / 10;
+    /* ---------------------------------------------
+       OPEN DISTANCE DEFENSE
+    --------------------------------------------- */
+
+    if (orderA === "open") {
+
+        game.aircraft.A =
+            Math.min(
+                48,
+                game.aircraft.A + 1
+            );
+
+        battlefield.push(
+            game.commanderA +
+            " increased separation and protected the task force."
+        );
+
+    }
+
+
+    if (orderB === "open") {
+
+        game.aircraft.B =
+            Math.min(
+                48,
+                game.aircraft.B + 1
+            );
+
+        battlefield.push(
+            game.commanderB +
+            " increased separation and protected the task force."
+        );
+
+    }
+
+
+    /* ---------------------------------------------
+       MANEUVER BONUS
+    --------------------------------------------- */
+
+    if (orderA === "north" || orderA === "south") {
+
+        scoreA += 2;
+
+        detailsA.push(
+            "Task force maneuver improved positioning."
+        );
+
+    }
+
+
+    if (orderB === "north" || orderB === "south") {
+
+        scoreB += 2;
+
+        detailsB.push(
+            "Task force maneuver improved positioning."
+        );
+
+    }
+
+
+    /* ---------------------------------------------
+       RECON BONUS
+    --------------------------------------------- */
+
+    if (orderA === "recon") {
+
+        game.aircraft.A =
+            Math.max(
+                0,
+                game.aircraft.A - 1
+            );
+
+        battlefield.push(
+            game.commanderA +
+            " launched reconnaissance aircraft and gained battlefield intelligence."
+        );
+
+    }
+
+
+    if (orderB === "recon") {
+
+        game.aircraft.B =
+            Math.max(
+                0,
+                game.aircraft.B - 1
+            );
+
+        battlefield.push(
+            game.commanderB +
+            " launched reconnaissance aircraft and gained battlefield intelligence."
+        );
+
+    }
+
+
+    /* ---------------------------------------------
+       DETERMINE WINNER
+    --------------------------------------------- */
+
+    let winner = "TIE";
+
+    if (scoreA > scoreB) {
+
+        winner = "A";
+
+        game.totalScore.A += scoreA;
+
+    }
+
+    else if (scoreB > scoreA) {
+
+        winner = "B";
+
+        game.totalScore.B += scoreB;
+
+    }
+
+    else {
+
+        game.totalScore.A += scoreA;
+        game.totalScore.B += scoreB;
+
+    }
+
+
+    /* ---------------------------------------------
+       STORE RESULTS
+    --------------------------------------------- */
+
+    game.roundResults = {
+
+        scoreA: scoreA,
+
+        scoreB: scoreB,
+
+        orderA: orderData[orderA].title,
+
+        orderB: orderData[orderB].title,
+
+        detailsA: detailsA,
+
+        detailsB: detailsB,
+
+        battlefield: battlefield,
+
+        winner: winner
+
+    };
+
+
+    showRoundReport();
 
 }
 
 
-/* =========================================================
-   REPORT
-========================================================= */
+/* =====================================================
+   ROUND REPORT
+===================================================== */
 
-function showRoundReport(events) {
+function showRoundReport() {
 
-    const reportEvents =
-        document.getElementById(
-            "reportEvents"
-        );
+    const r = game.roundResults;
 
 
-    reportEvents.innerHTML = "";
+    document.getElementById("reportRound")
+        .textContent = game.round;
 
 
-    events.forEach(event => {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "report-event";
-
-        div.textContent =
-            event;
-
-        reportEvents.appendChild(div);
-
-    });
-
-
-    if (!events.length) {
-
-        const div =
-            document.createElement("div");
-
-        div.className =
-            "report-event";
-
-        div.textContent =
-            "No major engagement reported during this watch.";
-
-        reportEvents.appendChild(div);
-
-    }
-
-
-    document
-    .getElementById("reportTitle")
-    .textContent =
-        "ROUND " +
-        game.round +
-        " — AFTER ACTION REPORT";
-
-
-    let condition =
-        "CARRIER: " +
-        game.carrier +
-        "% | " +
-        "AIRCRAFT: " +
-        totalAircraft() +
-        " | " +
-        "FUEL: " +
-        game.fuel +
-        "% | " +
-        "AMMUNITION: " +
-        game.ammo +
-        "%";
-
-
-    document
-    .getElementById("reportCondition")
-    .textContent =
-        condition;
-
-
-    if (
-        game.round >=
-        game.maxRounds
-    ) {
-
-        document
-        .getElementById("continueRound")
+    document.getElementById("reportNameA")
         .textContent =
-            "VIEW FINAL RESULT";
+        game.commanderA +
+        " — " +
+        r.orderA;
+
+
+    document.getElementById("reportNameB")
+        .textContent =
+        game.commanderB +
+        " — " +
+        r.orderB;
+
+
+    document.getElementById("scoreA")
+        .textContent = r.scoreA;
+
+
+    document.getElementById("scoreB")
+        .textContent = r.scoreB;
+
+
+    document.getElementById("scoreCardA")
+        .classList.remove("winner");
+
+
+    document.getElementById("scoreCardB")
+        .classList.remove("winner");
+
+
+    let bannerText = "";
+
+
+    if (r.winner === "A") {
+
+        bannerText =
+            "ROUND WINNER: " +
+            game.commanderA;
+
+        document.getElementById("scoreCardA")
+            .classList.add("winner");
 
     }
+
+    else if (r.winner === "B") {
+
+        bannerText =
+            "ROUND WINNER: " +
+            game.commanderB;
+
+        document.getElementById("scoreCardB")
+            .classList.add("winner");
+
+    }
+
     else {
 
-        document
-        .getElementById("continueRound")
-        .textContent =
-            "CONTINUE TO NEXT ROUND";
+        bannerText =
+            "ROUND RESULT: TACTICAL DRAW";
+
+    }
+
+
+    document.getElementById("winnerBanner")
+        .textContent = bannerText;
+
+
+    document.getElementById("detailsA")
+        .innerHTML =
+        "<div class='score-detail'><strong>TACTICAL ASSESSMENT</strong></div>" +
+        r.detailsA.map(x =>
+            "<div class='score-detail'>✓ " + x + "</div>"
+        ).join("");
+
+
+    document.getElementById("detailsB")
+        .innerHTML =
+        "<div class='score-detail'><strong>TACTICAL ASSESSMENT</strong></div>" +
+        r.detailsB.map(x =>
+            "<div class='score-detail'>✓ " + x + "</div>"
+        ).join("");
+
+
+    let battlefieldText = "";
+
+    if (r.battlefield.length === 0) {
+
+        battlefieldText =
+            "No major surface engagement occurred this round. Both task forces repositioned and prepared for the next phase.";
+
+    } else {
+
+        battlefieldText =
+            r.battlefield
+            .map(x => "<p>• " + x + "</p>")
+            .join("");
+
+    }
+
+
+    document.getElementById("battlefieldResult")
+        .innerHTML = battlefieldText;
+
+
+    document.getElementById("fleetCondition")
+        .innerHTML =
+        "<strong>" +
+        game.commanderA +
+        ":</strong> Carrier " +
+        game.carrierHP.A +
+        "% — Aircraft " +
+        game.aircraft.A +
+        "<br><br>" +
+
+        "<strong>" +
+        game.commanderB +
+        ":</strong> Carrier " +
+        game.carrierHP.B +
+        "% — Aircraft " +
+        game.aircraft.B;
+
+
+    if (game.round >= 15) {
+
+        document.getElementById("continueButton")
+            .textContent =
+            "END CAMPAIGN";
+
+    } else {
+
+        document.getElementById("continueButton")
+            .textContent =
+            "CONTINUE TO ROUND " +
+            (game.round + 1);
 
     }
 
@@ -2662,405 +1927,103 @@ function showRoundReport(events) {
 }
 
 
-/* =========================================================
-   CONTINUE REPORT
-========================================================= */
+/* =====================================================
+   CONTINUE
+===================================================== */
 
-document
-.getElementById("continueRound")
-.addEventListener("click", function () {
+function continueGame() {
 
-    if (
-        game.round >=
-        game.maxRounds
-    ) {
+    if (game.round >= 15) {
 
-        finishCampaign();
+        showFinal();
 
         return;
+
     }
 
 
     game.round++;
 
-    /*
-     * Alternate opening commander each round.
-     */
+    game.orders.A = null;
+    game.orders.B = null;
 
-    game.currentCommander =
-        game.round % 2 === 0
-        ? "B"
-        : "A";
+    game.currentCommander = "A";
 
+    game.selectedOrder = null;
 
-    game.actions = [];
-
-
-    game.strike = {
-        f4f: 0,
-        sbd: 0,
-        tbd: 0
-    };
-
-
-    updateStrikeDisplay();
-
-    updateBattleDisplay();
-
-    showScreen("battle");
-
-
-    addLog(
-        "ROUND " +
-        game.round +
-        " COMMENCING."
-    );
-
-
-});
-
-
-/* =========================================================
-   AIRCRAFT TOTAL
-========================================================= */
-
-function totalAircraft() {
-
-    return (
-        game.aircraft.f4f +
-        game.aircraft.sbd +
-        game.aircraft.tbd
-    );
+    showPassScreen();
 
 }
 
 
-/* =========================================================
-   UPDATE BATTLE DISPLAY
-========================================================= */
+/* =====================================================
+   FINAL
+===================================================== */
 
-function updateBattleDisplay() {
-
-    document
-    .getElementById("battleRoundDisplay")
-    .textContent =
-        "ROUND " +
-        game.round +
-        " / " +
-        game.maxRounds;
-
-
-    document
-    .getElementById("currentCommander")
-    .textContent =
-        game.currentCommander === "A"
-        ? game.commanderA
-        : game.commanderB;
-
-
-    document
-    .getElementById("carrierStatus")
-    .textContent =
-        Math.round(game.carrier) +
-        "%";
-
-
-    document
-    .getElementById("aircraftStatus")
-    .textContent =
-        totalAircraft();
-
-
-    document
-    .getElementById("fuelStatus")
-    .textContent =
-        Math.round(game.fuel) +
-        "%";
-
-
-    document
-    .getElementById("ammoStatus")
-    .textContent =
-        Math.round(game.ammo) +
-        "%";
-
-
-    document
-    .getElementById("intelStatus")
-    .textContent =
-        Math.round(game.intelligence) +
-        "%";
-
-}
-
-
-/* =========================================================
-   STRIKE DISPLAY
-========================================================= */
-
-function updateStrikeDisplay() {
-
-    document
-    .getElementById("f4fCount")
-    .textContent =
-        game.strike.f4f;
-
-
-    document
-    .getElementById("sbdCount")
-    .textContent =
-        game.strike.sbd;
-
-
-    document
-    .getElementById("tbdCount")
-    .textContent =
-        game.strike.tbd;
-
-}
-
-
-/* =========================================================
-   LOG
-========================================================= */
-
-function addLog(message) {
-
-    game.log.push(message);
-
-
-    const box =
-        document.getElementById(
-            "battleLog"
-        );
-
-
-    if (!box) {
-
-        return;
-
-    }
-
-
-    const line =
-        document.createElement("div");
-
-
-    line.textContent =
-        ">> " +
-        message;
-
-
-    box.prepend(line);
-
-}
-
-
-/* =========================================================
-   REMOVE DESTROYED ENEMY SHIPS
-========================================================= */
-
-function removeDestroyedEnemyShips() {
-
-    Object.keys(
-        game.enemyShips
-    ).forEach(key => {
-
-        if (
-            game.enemyShips[key] <= 0
-        ) {
-
-            const element =
-                document.getElementById(
-                    "enemy-" + key
-                );
-
-
-            if (element) {
-
-                element.classList.add(
-                    "destroyed"
-                );
-
-            }
-
-
-            addLog(
-                "ENEMY " +
-                key +
-                " DESTROYED — REMOVED FROM BATTLEFIELD."
-            );
-
-        }
-
-    });
-
-}
-
-
-/* =========================================================
-   FINAL CAMPAIGN
-========================================================= */
-
-function finishCampaign() {
-
-    const friendlyScore =
-        game.carrier +
-        totalAircraft() +
-        game.fuel +
-        game.ammo;
-
-
-    const enemyScore =
-        Object
-        .values(game.enemyShips)
-        .reduce(
-            (sum, value) =>
-                sum + value,
-            0
-        );
-
+function showFinal() {
 
     let winner;
 
+    if (game.totalScore.A > game.totalScore.B) {
 
-    if (
-        game.carrier <= 0
-    ) {
-
-        winner =
-            game.commanderB;
+        winner = game.commanderA;
 
     }
 
-    else if (
-        enemyScore <= 150
-    ) {
+    else if (game.totalScore.B > game.totalScore.A) {
 
-        winner =
-            game.commanderA;
+        winner = game.commanderB;
 
     }
 
-    else if (
-        friendlyScore >=
-        enemyScore
-    ) {
-
-        winner =
-            game.commanderA;
-
-    }
     else {
 
-        winner =
-            game.commanderB;
+        winner = "TACTICAL DRAW";
 
     }
 
 
-    showFinal(
-        winner,
-        "The 15-round carrier campaign has ended."
-    );
-
-}
+    document.getElementById("finalWinner")
+        .textContent = winner;
 
 
-/* =========================================================
-   FINAL SCREEN
-========================================================= */
-
-function showFinal(
-    winner,
-    message
-) {
-
-    document
-    .getElementById("winnerDisplay")
-    .textContent =
-        winner +
-        " — COMMAND RETAINED";
+    document.getElementById("finalScoreA")
+        .textContent =
+        game.commanderA +
+        ": " +
+        game.totalScore.A +
+        " campaign points";
 
 
-    document
-    .getElementById("finalMessage")
-    .innerHTML =
-        "<p style='font-size:22px'>" +
-        message +
-        "</p>" +
-        "<p>The surviving commander retains operational command of the carrier task force.</p>";
+    document.getElementById("finalScoreB")
+        .textContent =
+        game.commanderB +
+        ": " +
+        game.totalScore.B +
+        " campaign points";
 
 
-    document
-    .getElementById("finalStats")
-    .innerHTML =
+    if (winner === "TACTICAL DRAW") {
 
-        "<strong>FINAL CARRIER CONDITION:</strong> " +
-        Math.round(game.carrier) +
-        "%<br><br>" +
+        document.getElementById("finalMessage")
+            .textContent =
+            "After fifteen rounds, neither commander established a decisive advantage.";
 
-        "<strong>OPERATIONAL AIRCRAFT:</strong> " +
-        totalAircraft() +
-        "<br><br>" +
+    }
 
-        "<strong>FUEL:</strong> " +
-        Math.round(game.fuel) +
-        "%<br><br>" +
+    else {
 
-        "<strong>AMMUNITION:</strong> " +
-        Math.round(game.ammo) +
-        "%";
+        document.getElementById("finalMessage")
+            .textContent =
+            winner +
+            " demonstrated the stronger overall tactical performance across the campaign.";
+
+    }
 
 
     showScreen("final");
 
 }
-
-
-/* =========================================================
-   RESET
-========================================================= */
-
-document
-.getElementById("restartGame")
-.addEventListener("click", function () {
-
-    location.reload();
-
-});
-
-
-/* =========================================================
-   INITIALIZE
-========================================================= */
-
-document
-.querySelectorAll(".formation")
-.forEach(button => {
-
-    if (
-        button.dataset.formation ===
-        "close"
-    ) {
-
-        button.classList.add(
-            "selected"
-        );
-
-    }
-
-});
-
-
-updateStrikeDisplay();
-
-updateBattleDisplay();
-
-
-console.log(
-    "WWII PACIFIC CARRIER COMMAND READY."
-);
 
 </script>
 
