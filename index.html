@@ -6,4337 +6,3090 @@
 <title>Pacific Theatre War Game</title>
 
 <style>
-/* =========================================================
-   PACIFIC THEATRE WAR GAME
-   TWO PLAYER CARRIER STRIKE GROUP VS. CARRIER STRIKE GROUP
-   ========================================================= */
-
-* {
-    box-sizing: border-box;
+:root{
+  --paper:#e8dfc9;
+  --paper2:#d8ccb0;
+  --ink:#182018;
+  --green:#26382b;
+  --green2:#314936;
+  --red:#8b241c;
+  --gold:#b28a3c;
+  --blue:#244e63;
+  --water:#183d4d;
+  --water2:#22566a;
+  --white:#f4f0df;
+  --muted:#b9b49e;
+  --shadow:rgba(0,0,0,.45);
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    color: #eee7d4;
-    font-family: Georgia, "Times New Roman", serif;
-    background:
-        linear-gradient(rgba(34,32,27,.91), rgba(34,32,27,.91)),
-        repeating-linear-gradient(
-            0deg,
-            #756d5b 0px,
-            #756d5b 2px,
-            #686050 3px,
-            #686050 5px
-        );
+*{
+  box-sizing:border-box;
 }
 
-button {
-    font-family: Georgia, "Times New Roman", serif;
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 20% 10%,rgba(255,255,255,.06),transparent 25%),
+    linear-gradient(135deg,#18251b,#0d160f);
+  color:var(--white);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
 }
 
-.hidden {
-    display: none !important;
+button{
+  font-family:inherit;
 }
 
-.header {
-    background: #24231f;
-    border-bottom: 4px solid #b8a77c;
-    padding: 14px 20px;
-    text-align: center;
-    box-shadow: 0 4px 12px #000;
+.app{
+  max-width:1500px;
+  margin:auto;
+  min-height:100vh;
 }
 
-.header h1 {
-    margin: 0;
-    font-size: clamp(25px, 4vw, 48px);
-    letter-spacing: 5px;
-    text-transform: uppercase;
+/* =========================
+   HEADER
+========================= */
+
+header{
+  background:
+    linear-gradient(rgba(28,39,29,.96),rgba(16,25,18,.96));
+  border-bottom:4px solid var(--gold);
+  padding:18px 25px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:20px;
+  box-shadow:0 4px 15px #000;
 }
 
-.subtitle {
-    margin-top: 5px;
-    color: #c8b98d;
-    letter-spacing: 3px;
-    font-size: 13px;
+.titleBlock h1{
+  margin:0;
+  font-family:Georgia,serif;
+  letter-spacing:3px;
+  font-size:28px;
 }
 
-.screen {
-    max-width: 1450px;
-    margin: auto;
-    padding: 20px;
+.titleBlock p{
+  margin:5px 0 0;
+  color:#c6bfa5;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
 }
 
-.document {
-    position: relative;
-    padding: 28px;
-    color: #29271f;
-    background:
-        linear-gradient(rgba(224,214,188,.97), rgba(211,201,172,.97));
-    border: 2px solid #39352b;
-    box-shadow:
-        0 8px 25px #000,
-        inset 0 0 50px rgba(90,75,45,.12);
+.classified{
+  border:2px solid var(--red);
+  color:#e6a59f;
+  padding:7px 13px;
+  font-weight:bold;
+  letter-spacing:2px;
+  transform:rotate(-2deg);
 }
 
-.document::before {
-    content: "U.S. NAVAL OPERATIONS — PACIFIC";
-    position: absolute;
-    top: 8px;
-    right: 15px;
-    color: #6e6250;
-    font-family: monospace;
-    font-size: 10px;
-    opacity: .7;
+/* =========================
+   SCREENS
+========================= */
+
+.screen{
+  display:none;
+  padding:25px;
 }
 
-.stamp {
-    display: inline-block;
-    margin-bottom: 12px;
-    padding: 5px 10px;
-    color: #7d2923;
-    border: 3px solid #7d2923;
-    font-family: monospace;
-    font-weight: bold;
-    letter-spacing: 2px;
-    transform: rotate(-3deg);
+.screen.active{
+  display:block;
 }
 
-.title-block {
-    padding: 45px 20px;
-    text-align: center;
+/* =========================
+   BRIEFING
+========================= */
+
+.folder{
+  background:
+    linear-gradient(rgba(232,223,201,.96),rgba(215,204,176,.96));
+  color:var(--ink);
+  border:3px solid #514a37;
+  box-shadow:0 8px 30px #000;
+  padding:35px;
+  position:relative;
 }
 
-.title-block h1 {
-    margin: 5px;
-    font-size: clamp(38px, 7vw, 78px);
-    letter-spacing: 8px;
+.folder:before{
+  content:"PACIFIC FLEET COMMAND";
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:10px;
+  letter-spacing:2px;
+  color:#6d634d;
 }
 
-.title-block h2 {
-    color: #75623d;
-    letter-spacing: 5px;
+.folder h2{
+  font-family:Georgia,serif;
+  font-size:42px;
+  margin:10px 0;
+  text-transform:uppercase;
 }
 
-.eyebrow {
-    color: #75694e;
-    font-family: monospace;
-    letter-spacing: 4px;
+.folder h3{
+  border-bottom:2px solid #59513d;
+  padding-bottom:8px;
 }
 
-.briefing {
-    max-width: 950px;
-    margin: 20px auto;
-    text-align: left;
-    line-height: 1.65;
+.briefingGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:25px;
 }
 
-.typewriter {
-    font-family: "Courier New", monospace;
+.briefingBox{
+  border:1px solid #6b624c;
+  padding:18px;
+  background:rgba(255,255,255,.12);
 }
 
-h2 {
-    margin: 5px 0 15px;
-    font-size: clamp(25px, 4vw, 42px);
+.briefingBox strong{
+  color:#6f211b;
 }
 
-h3 {
-    margin-top: 8px;
+.bigButton{
+  background:var(--green);
+  color:white;
+  border:2px solid var(--gold);
+  padding:16px 28px;
+  font-size:18px;
+  font-weight:bold;
+  cursor:pointer;
+  letter-spacing:1px;
+  margin-top:20px;
 }
 
-.start-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    flex-wrap: wrap;
+.bigButton:hover{
+  background:#3b5740;
 }
 
-.btn {
-    padding: 12px 20px;
-    color: #eee7d4;
-    background: #403c30;
-    border: 2px solid #a99869;
-    box-shadow: 0 3px 7px #000;
-    cursor: pointer;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: .15s;
+/* =========================
+   GAME TOP BAR
+========================= */
+
+.gameTop{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:12px;
+  margin-bottom:15px;
 }
 
-.btn:hover {
-    background: #665d47;
-    transform: translateY(-2px);
+.statBox{
+  background:#1b281d;
+  border:1px solid #65705d;
+  padding:12px;
 }
 
-.btn.primary {
-    background: #263d2b;
-    border-color: #8eae83;
+.statBox .label{
+  color:#a9a58e;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:1px;
 }
 
-.btn.danger {
-    background: #512923;
-    border-color: #bd776b;
+.statBox .value{
+  font-size:24px;
+  font-weight:bold;
+  margin-top:4px;
 }
 
-.btn.large {
-    padding: 15px 30px;
-    font-size: 18px;
+.scoreA{
+  color:#e7c96d;
 }
 
-/* =========================================================
-   COMMAND HEADER
-   ========================================================= */
-
-.command-header {
-    display: grid;
-    grid-template-columns: 1fr auto 1fr;
-    gap: 12px;
-    align-items: stretch;
-    margin-bottom: 15px;
+.scoreB{
+  color:#9ec5d8;
 }
 
-.player-card {
-    padding: 12px;
-    background: #2b2922;
-    border: 2px solid #887950;
+/* =========================
+   COMMAND BOARD
+========================= */
+
+.commandBoard{
+  display:grid;
+  grid-template-columns:1fr 1.7fr 1fr;
+  gap:15px;
 }
 
-.player-card.player1 {
-    border-left: 6px solid #788f9f;
+.commanderPanel{
+  background:#1a251b;
+  border:2px solid #4f604f;
+  padding:15px;
+  min-height:500px;
 }
 
-.player-card.player2 {
-    border-right: 6px solid #9b6359;
+.commanderPanel h3{
+  margin-top:0;
+  border-bottom:1px solid #64715e;
+  padding-bottom:10px;
 }
 
-.player-name {
-    font-size: 20px;
-    font-weight: bold;
+.playerA{
+  border-color:#b28a3c;
 }
 
-.score {
-    font-family: monospace;
-    font-size: 30px;
+.playerB{
+  border-color:#527b91;
 }
 
-.round-box {
-    padding: 10px 25px;
-    text-align: center;
-    background: #181713;
-    border: 2px solid #a99869;
+.resource{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid #364438;
+  padding:8px 0;
 }
 
-.round-number {
-    font-size: 30px;
-    font-weight: bold;
+.mapPanel{
+  background:#111b20;
+  border:2px solid #58665e;
+  padding:8px;
 }
 
-/* =========================================================
-   RESOURCES
-   ========================================================= */
-
-.resources {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 7px;
-    margin-top: 10px;
+.mapTitle{
+  display:flex;
+  justify-content:space-between;
+  padding:7px 10px;
+  background:#19271d;
+  font-size:12px;
+  letter-spacing:1px;
 }
 
-.resource {
-    padding: 6px;
-    background: #171612;
-    border: 1px solid #625a47;
+#pacificMap{
+  width:100%;
+  display:block;
+  background:#173f4f;
 }
 
-.resource-name {
-    color: #bbb096;
-    font-size: 10px;
-    text-transform: uppercase;
+/* =========================
+   MISSION PANEL
+========================= */
+
+.mission{
+  margin-top:15px;
+  background:
+    linear-gradient(rgba(232,223,201,.97),rgba(215,204,176,.97));
+  color:#1c241d;
+  border:3px solid #564e3a;
+  padding:22px;
+  box-shadow:0 8px 25px #000;
 }
 
-.resource-value {
-    font-family: monospace;
-    font-size: 17px;
+.missionHeader{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:2px solid #655d48;
+  padding-bottom:10px;
+  margin-bottom:15px;
 }
 
-.bar {
-    height: 6px;
-    margin-top: 4px;
-    background: #3a372e;
+.roundBadge{
+  background:#26382b;
+  color:white;
+  padding:7px 12px;
+  font-weight:bold;
 }
 
-.bar-fill {
-    height: 100%;
-    background: #879b70;
+.mission h2{
+  margin:5px 0;
+  font-family:Georgia,serif;
 }
 
-/* =========================================================
-   BATTLE GRID
-   ========================================================= */
-
-.battle-grid {
-    display: grid;
-    grid-template-columns: 1fr 1.7fr 1fr;
-    gap: 14px;
+.historical{
+  font-size:12px;
+  color:#635b47;
+  font-style:italic;
+  margin-bottom:15px;
 }
 
-.command-side {
-    padding: 15px;
-    background: #292720;
-    border: 2px solid #665d48;
+.question{
+  font-size:20px;
+  line-height:1.4;
+  font-weight:bold;
+  margin:15px 0 20px;
 }
 
-.command-side h3 {
-    padding-bottom: 8px;
-    border-bottom: 1px solid #766c54;
+/* =========================
+   OPTIONS
+========================= */
+
+.options{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.map-area {
-    position: relative;
-    min-height: 450px;
-    overflow: hidden;
-    background:
-        linear-gradient(rgba(47,66,64,.8), rgba(31,45,43,.9)),
-        repeating-linear-gradient(
-            45deg,
-            transparent 0,
-            transparent 30px,
-            rgba(180,170,120,.06) 31px,
-            rgba(180,170,120,.06) 32px
-        );
-    border: 3px solid #8d815d;
+.option{
+  border:2px solid #81775d;
+  background:#eee7d5;
+  color:#1b241c;
+  padding:16px;
+  cursor:pointer;
+  text-align:left;
+  min-height:90px;
+  transition:.15s;
 }
 
-.map-title {
-    position: absolute;
-    top: 12px;
-    left: 15px;
-    z-index: 2;
-    color: #d0c7a9;
-    font-family: monospace;
-    font-size: 12px;
-    letter-spacing: 2px;
+.option:hover{
+  background:#ddd3ba;
+  transform:translateY(-2px);
 }
 
-.grid-lines {
-    position: absolute;
-    inset: 0;
-    background:
-        linear-gradient(
-            to right,
-            transparent 49.7%,
-            rgba(220,210,170,.25) 50%,
-            transparent 50.3%
-        ),
-        linear-gradient(
-            to bottom,
-            transparent 49.7%,
-            rgba(220,210,170,.25) 50%,
-            transparent 50.3%
-        );
+.option.selected{
+  border-color:#8b241c;
+  background:#ead0c8;
 }
 
-.map-label {
-    position: absolute;
-    color: #d0c7a9;
-    font-family: monospace;
-    opacity: .7;
+.option .letter{
+  display:inline-block;
+  width:28px;
+  height:28px;
+  line-height:28px;
+  text-align:center;
+  background:#26382b;
+  color:white;
+  margin-right:8px;
+  font-weight:bold;
 }
 
-.island {
-    position: absolute;
-    padding: 6px 10px;
-    color: #211f19;
-    background: #746d52;
-    border: 2px solid #9b8d67;
-    font-family: monospace;
-    font-size: 11px;
-    transform: rotate(-4deg);
+/* =========================
+   ORDER CHALLENGE
+========================= */
+
+.orderList{
+  display:grid;
+  gap:8px;
 }
 
-.carrier {
-    position: absolute;
-    z-index: 3;
-    color: #ddd4b8;
-    font-size: 38px;
-    filter: grayscale(1);
-    text-shadow: 2px 2px #000;
+.orderItem{
+  padding:13px;
+  border:2px solid #77705b;
+  background:#eee7d5;
+  cursor:pointer;
+  color:#20251f;
+  font-weight:bold;
 }
 
-.carrier.enemy {
-    transform: rotate(180deg);
+.orderItem.selected{
+  background:#d7c99e;
+  border-color:#8b241c;
 }
 
-/* =========================================================
-   SCENARIO
-   ========================================================= */
-
-.scenario {
-    margin-top: 15px;
-    padding: 22px;
-    color: #29271f;
-    background: #dcd3b9;
-    border: 3px solid #403b2e;
-    box-shadow: 0 5px 15px #000;
+.orderNumbers{
+  margin-top:15px;
+  font-weight:bold;
 }
 
-.scenario-number {
-    color: #705f3c;
-    font-family: monospace;
-    letter-spacing: 2px;
+/* =========================
+   AIRCRAFT
+========================= */
+
+.aircraftGrid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
 }
 
-.scenario-title {
-    margin: 7px 0;
-    font-size: clamp(24px, 4vw, 38px);
+.aircraftCard{
+  border:2px solid #81775d;
+  background:#eee7d5;
+  padding:15px;
+  cursor:pointer;
+  color:#1d251f;
+  text-align:center;
 }
 
-.historical-note {
-    margin: 15px 0;
-    padding: 10px 14px;
-    background: rgba(91,76,48,.12);
-    border-left: 5px solid #776442;
-    font-size: 14px;
+.aircraftCard:hover{
+  background:#ddd3ba;
 }
 
-.options {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 12px;
-    margin-top: 18px;
+.aircraftCard.selected{
+  border-color:#8b241c;
+  background:#ead0c8;
 }
 
-.option {
-    min-height: 125px;
-    padding: 16px;
-    color: #26241f;
-    background: #f0e8d0;
-    border: 2px solid #76694f;
-    cursor: pointer;
-    text-align: left;
-    transition: .15s;
+.aircraftCode{
+  font-size:25px;
+  font-weight:bold;
 }
 
-.option:hover {
-    background: #fff8e3;
-    border-color: #403b2e;
-    transform: translateY(-2px);
+.aircraftRole{
+  font-size:11px;
+  margin-top:5px;
 }
 
-.option.selected {
-    background: #d6e0ce;
-    border: 4px solid #263d2b;
+/* =========================
+   FORMATIONS
+========================= */
+
+.formationGrid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
 }
 
-.option-title {
-    margin-bottom: 7px;
-    font-size: 18px;
-    font-weight: bold;
+.formation{
+  border:2px solid #81775d;
+  background:#eee7d5;
+  padding:14px;
+  color:#20251f;
+  cursor:pointer;
 }
 
-/* =========================================================
+.formation:hover{
+  background:#ddd3ba;
+}
+
+.formation.selected{
+  border-color:#8b241c;
+  background:#ead0c8;
+}
+
+.formation strong{
+  font-size:18px;
+}
+
+.formation small{
+  display:block;
+  margin-top:7px;
+}
+
+/* =========================
+   CARRIER DIAGRAM
+========================= */
+
+.carrierDiagram{
+  background:#20251f;
+  padding:15px;
+  border:2px solid #70684e;
+}
+
+.deck{
+  height:270px;
+  background:#777b70;
+  border:5px solid #343b35;
+  position:relative;
+  overflow:hidden;
+}
+
+.deckLine{
+  position:absolute;
+  top:15px;
+  bottom:15px;
+  width:3px;
+  background:#d8d2b8;
+  left:50%;
+}
+
+.deckMark{
+  position:absolute;
+  border:2px dashed #ded7bd;
+}
+
+.hotspot{
+  position:absolute;
+  border:2px solid #e4c75d;
+  background:rgba(25,48,34,.9);
+  color:white;
+  padding:6px 9px;
+  font-size:11px;
+  cursor:pointer;
+}
+
+.hotspot:hover{
+  background:#435d47;
+}
+
+.carrierLabel{
+  text-align:center;
+  color:#ddd5ba;
+  font-size:11px;
+  margin-top:8px;
+}
+
+/* =========================
    RESULT
-   ========================================================= */
+========================= */
 
-.result {
-    margin-top: 18px;
-    padding: 20px;
-    background: #27251f;
-    border: 2px solid #a99869;
+.resultBox{
+  display:none;
+  margin-top:20px;
+  border:3px solid #4d593f;
+  background:#ddd3b8;
+  padding:20px;
 }
 
-.result-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 15px;
+.resultBox.show{
+  display:block;
 }
 
-.result-card {
-    padding: 15px;
-    border: 1px solid #665d48;
+.resultGood{
+  color:#21482b;
 }
 
-.result-card.good {
-    border-color: #7f9d71;
+.resultBad{
+  color:#7b211b;
 }
 
-.result-card.bad {
-    border-color: #9c625a;
+.resultTitle{
+  font-family:Georgia,serif;
+  font-size:28px;
+  margin-bottom:10px;
 }
 
-/* =========================================================
-   TOURNAMENT
-   ========================================================= */
+/* =========================
+   TURN OVER
+========================= */
 
-.bracket {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 10px;
-    overflow-x: auto;
+.turnover{
+  display:none;
+  text-align:center;
+  padding:45px 20px;
+  background:#17231a;
+  border:2px solid var(--gold);
+  margin-top:20px;
 }
 
-.bracket-round {
-    min-width: 220px;
+.turnover.show{
+  display:block;
 }
 
-.bracket-match {
-    margin: 15px 0;
-    padding: 12px;
-    background: #2b2922;
-    border: 1px solid #766c54;
+.turnover h2{
+  font-family:Georgia,serif;
+  font-size:34px;
 }
 
-.winner {
-    color: #a9c39b;
-    font-weight: bold;
+.classifiedLarge{
+  font-size:14px;
+  letter-spacing:5px;
+  color:#c15a51;
 }
 
-.loser {
-    color: #b47c72;
+/* =========================
+   FINAL
+========================= */
+
+.finalCard{
+  text-align:center;
+  padding:45px;
+  background:
+    linear-gradient(rgba(232,223,201,.97),rgba(215,204,176,.97));
+  color:#1b241d;
+  border:4px solid #514a37;
+  box-shadow:0 8px 30px #000;
 }
 
-.footer {
-    padding: 20px;
-    color: #9f967f;
-    font-family: monospace;
-    font-size: 11px;
-    text-align: center;
+.finalCard h1{
+  font-family:Georgia,serif;
+  font-size:48px;
 }
 
-.warning {
-    padding: 12px;
-    margin: 15px 0;
-    background: #514229;
-    border: 2px solid #9b8450;
-    color: #f0e6c9;
+.winner{
+  font-size:35px;
+  color:#7a211a;
+  font-weight:bold;
+  margin:20px;
 }
 
-@media(max-width: 950px) {
-
-    .battle-grid {
-        grid-template-columns: 1fr;
-    }
-
-    .command-header {
-        grid-template-columns: 1fr;
-    }
-
-    .resources {
-        grid-template-columns: repeat(3, 1fr);
-    }
+.tournamentHistory{
+  margin-top:25px;
+  text-align:left;
+  border-top:2px solid #625a45;
+  padding-top:15px;
 }
 
-@media(max-width: 650px) {
+/* =========================
+   RESPONSIVE
+========================= */
 
-    .options {
-        grid-template-columns: 1fr;
-    }
+@media(max-width:1000px){
+  .commandBoard{
+    grid-template-columns:1fr;
+  }
 
-    .resources {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .commanderPanel{
+    min-height:auto;
+  }
 
-    .document {
-        padding: 18px;
-    }
+  .briefingGrid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:700px){
+  .options,
+  .formationGrid{
+    grid-template-columns:1fr;
+  }
+
+  .aircraftGrid{
+    grid-template-columns:1fr 1fr;
+  }
+
+  .gameTop{
+    grid-template-columns:1fr;
+  }
+
+  .folder h2{
+    font-size:30px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<header class="header">
-    <h1>Pacific Theatre War Game</h1>
+<div class="app">
 
-    <div class="subtitle">
-        CARRIER STRIKE GROUP VS. CARRIER STRIKE GROUP
-    </div>
+<header>
+  <div class="titleBlock">
+    <h1>PACIFIC THEATRE WAR GAME</h1>
+    <p>Carrier Strike Commander Certification • WWII Pacific Fleet Command</p>
+  </div>
+  <div class="classified">CLASSIFIED</div>
 </header>
 
-
 <!-- =========================================================
-     START SCREEN
-     ========================================================= -->
+     BRIEFING SCREEN
+========================================================= -->
 
-<section id="startScreen" class="screen">
+<section id="briefingScreen" class="screen active">
 
-    <div class="document title-block">
+  <div class="folder">
 
-        <div class="stamp">
-            TOP SECRET — PACIFIC FLEET
-        </div>
+    <h2>Fleet Command Briefing</h2>
 
-        <div class="eyebrow">
-            OFFICER COMMAND TRAINING DIVISION
-        </div>
+    <div class="briefingGrid">
 
-        <h1>
-            PACIFIC<br>THEATRE
-        </h1>
-
-        <h2>
-            WAR GAME
-        </h2>
-
-        <p class="typewriter">
-            CARRIER STRIKE GROUP COMMAND SIMULATION
-        </p>
-
-        <div class="briefing">
-
-            <h3>
-                MISSION BRIEFING
-            </h3>
-
-            <p>
-                Two commanders will face ten rounds of tactical
-                decisions based upon the realities of carrier warfare
-                in the Pacific during World War II.
-            </p>
-
-            <p>
-                Your objective is not simply to destroy the enemy.
-                You must manage aircraft, intelligence, carrier
-                readiness, reconnaissance, fuel and operational
-                objectives.
-            </p>
-
-            <p>
-                Every decision changes the conditions of later rounds.
-                A commander who wins one engagement may lose the battle
-                through poor resource management.
-            </p>
-
-            <div class="warning">
-
-                <strong>ANTI-REPEAT SYSTEM:</strong>
-
-                Every scenario has a unique identification number.
-                A scenario cannot appear twice during the same battle.
-                When a battle ends, the ten scenarios used in that
-                battle are locked out of the next battle.
-                
-                The game therefore creates a different tactical
-                sequence for the next matchup whenever enough unused
-                scenarios are available.
-
-            </div>
-
-        </div>
-
-        <div class="start-buttons">
-
-            <button
-                class="btn primary large"
-                onclick="startNewTournament()">
-
-                BEGIN TOURNAMENT
-
-            </button>
-
-            <button
-                class="btn large"
-                onclick="showRules()">
-
-                COMMANDER'S RULES
-
-            </button>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================================
-     RULES SCREEN
-     ========================================================= -->
-
-<section id="rulesScreen" class="screen hidden">
-
-    <div class="document">
-
-        <div class="stamp">
-            FIELD MANUAL
-        </div>
-
-        <h2>
-            COMMANDER'S RULES
-        </h2>
-
-        <h3>
-            1. TWO COMMANDERS
-        </h3>
-
+      <div class="briefingBox">
+        <h3>YOUR MISSION</h3>
         <p>
-            Two students use one computer. Commander A makes a decision
-            first. The computer then hides that decision and passes
-            command to Commander B.
-        </p>
-
-        <h3>
-            2. TEN ROUNDS
-        </h3>
-
-        <p>
-            Each battle lasts exactly ten rounds.
-        </p>
-
-        <h3>
-            3. EVERY ROUND MATTERS
-        </h3>
-
-        <p>
-            Decisions can change aircraft, intelligence, readiness,
-            fuel, mission progress and victory points.
-        </p>
-
-        <h3>
-            4. NO REPEATS
-        </h3>
-
-        <p>
-            A scenario can only be used once during a battle.
+          You are a U.S. Navy carrier strike commander in training.
+          You will command a carrier task force through a series of
+          ten operational challenges.
         </p>
 
         <p>
-            When the battle ends, its scenarios are stored in memory.
-            The next battle excludes those scenarios.
+          Your success depends on your ability to apply your
+          <strong>command notes</strong>, not simply guess.
         </p>
 
-        <h3>
-            5. THREE WAYS TO WIN
-        </h3>
+        <p>
+          Every decision can gain or lose Victory Points,
+          aircraft, readiness, fuel, and intelligence.
+        </p>
+      </div>
+
+      <div class="briefingBox">
+        <h3>TOURNAMENT RULE</h3>
+        <p>
+          This is a head-to-head tournament.
+        </p>
+
+        <p>
+          <strong>Commander A</strong> and
+          <strong>Commander B</strong> will each make decisions
+          for ten rounds.
+        </p>
+
+        <p>
+          The winner advances.
+          The defeated commander is eliminated.
+        </p>
+
+        <p>
+          <strong>
+            A scenario used in an earlier tournament battle will
+            not be intentionally reused while unused scenarios remain.
+          </strong>
+        </p>
+      </div>
+
+      <div class="briefingBox">
+        <h3>YOUR COMMAND MANUAL</h3>
 
         <ul>
-
-            <li>
-                <strong>Fleet Victory:</strong>
-                Gain victory points through successful attacks.
-            </li>
-
-            <li>
-                <strong>Mission Victory:</strong>
-                Complete operational objectives.
-            </li>
-
-            <li>
-                <strong>Command Victory:</strong>
-                Preserve aircraft, readiness and intelligence.
-            </li>
-
+          <li>Carrier anatomy</li>
+          <li>Strike sequence</li>
+          <li>Aircraft employment</li>
+          <li>Reconnaissance</li>
+          <li>Carrier formations</li>
+          <li>Target selection</li>
+          <li>CAP / fighter defense</li>
+          <li>Flight-deck operations</li>
+          <li>Recovery procedures</li>
+          <li>Pacific geography</li>
         </ul>
 
-        <h3>
-            6. THE NEXT MATCH
-        </h3>
+        <p>
+          <strong>Your notes are your command manual.</strong>
+        </p>
+      </div>
+
+      <div class="briefingBox">
+        <h3>SCORING</h3>
+
+        <p>Each commander begins each battle with:</p>
+
+        <ul>
+          <li>10 Victory Points</li>
+          <li>100 Aircraft Readiness</li>
+          <li>100 Fuel</li>
+          <li>100 Intelligence</li>
+        </ul>
 
         <p>
-            The winner advances to face another commander.
-            The previous battle's scenarios remain locked out.
+          Correct command decisions improve your force.
+          Poor decisions can reduce your resources.
         </p>
-
-        <button
-            class="btn primary"
-            onclick="backToStart()">
-
-            RETURN TO BRIEFING
-
-        </button>
+      </div>
 
     </div>
 
-</section>
+    <button class="bigButton" onclick="startTournament()">
+      COMMENCE CARRIER COMMAND TRAINING
+    </button>
 
+  </div>
+
+</section>
 
 <!-- =========================================================
      GAME SCREEN
-     ========================================================= -->
+========================================================= -->
 
-<section id="gameScreen" class="screen hidden">
+<section id="gameScreen" class="screen">
 
-    <div class="command-header">
+  <div class="gameTop">
 
-        <div class="player-card player1">
+    <div class="statBox">
+      <div class="label">Tournament Battle</div>
+      <div class="value" id="battleNumber">1</div>
+    </div>
 
-            <div class="player-name">
-                COMMANDER A
-            </div>
+    <div class="statBox">
+      <div class="label">Round</div>
+      <div class="value" id="roundNumber">1 / 10</div>
+    </div>
 
-            <div class="score">
-                <span id="scoreA">0</span> VP
-            </div>
+    <div class="statBox">
+      <div class="label">Commander</div>
+      <div class="value" id="activeCommander">A</div>
+    </div>
 
-            <div
-                class="resources"
-                id="resourcesA">
-            </div>
+  </div>
 
-        </div>
+  <div class="commandBoard">
 
+    <!-- PLAYER A -->
 
-        <div class="round-box">
+    <div class="commanderPanel playerA">
 
-            <div>
-                ROUND
-            </div>
+      <h3>COMMANDER A</h3>
 
-            <div class="round-number">
-                <span id="roundNumber">1</span>/10
-            </div>
+      <div class="resource">
+        <span>Victory Points</span>
+        <strong id="scoreA" class="scoreA">10</strong>
+      </div>
 
-            <div style="font-size:11px;">
-                BATTLE
-                <span id="battleNumber">1</span>
-            </div>
+      <div class="resource">
+        <span>Aircraft</span>
+        <strong id="aircraftA">100</strong>
+      </div>
 
-        </div>
+      <div class="resource">
+        <span>Readiness</span>
+        <strong id="readinessA">100</strong>
+      </div>
 
+      <div class="resource">
+        <span>Fuel</span>
+        <strong id="fuelA">100</strong>
+      </div>
 
-        <div class="player-card player2">
+      <div class="resource">
+        <span>Intelligence</span>
+        <strong id="intelA">100</strong>
+      </div>
 
-            <div class="player-name">
-                COMMANDER B
-            </div>
+      <div class="resource">
+        <span>Mission</span>
+        <strong id="missionA">100</strong>
+      </div>
 
-            <div class="score">
-                <span id="scoreB">0</span> VP
-            </div>
-
-            <div
-                class="resources"
-                id="resourcesB">
-            </div>
-
-        </div>
+      <p style="margin-top:25px;color:#bcb69f;font-size:12px;">
+        COMMANDER A makes the first decision each round.
+      </p>
 
     </div>
 
+    <!-- CENTER -->
 
-    <div class="battle-grid">
+    <div>
 
-        <div class="command-side">
+      <div class="mapPanel">
 
-            <h3>
-                COMMANDER A
-            </h3>
-
-            <p>
-                U.S. CARRIER TASK FORCE
-            </p>
-
-            <p class="typewriter">
-                COMMAND STATUS
-            </p>
-
-            <div id="statusA"></div>
-
+        <div class="mapTitle">
+          <span>PACIFIC OPERATIONS CHART</span>
+          <span id="mapFormation">TASK FORCE FORMATION: SCREEN</span>
         </div>
 
+        <svg id="pacificMap"
+             viewBox="0 0 1000 600"
+             xmlns="http://www.w3.org/2000/svg">
 
-        <div class="map-area">
+          <!-- OCEAN -->
 
-            <div class="map-title">
-                PACIFIC OPERATIONS — TACTICAL PLOT
-            </div>
+          <rect x="0" y="0" width="1000" height="600" fill="#173f4f"/>
 
-            <div class="grid-lines"></div>
+          <!-- GRID -->
 
-            <div
-                class="map-label"
-                style="top:15%;left:8%;">
-                10° N
-            </div>
+          <g stroke="#527181" stroke-width="1" opacity=".45">
 
-            <div
-                class="map-label"
-                style="top:50%;left:8%;">
-                0°
-            </div>
+            <line x1="0" y1="100" x2="1000" y2="100"/>
+            <line x1="0" y1="200" x2="1000" y2="200"/>
+            <line x1="0" y1="300" x2="1000" y2="300"/>
+            <line x1="0" y1="400" x2="1000" y2="400"/>
+            <line x1="0" y1="500" x2="1000" y2="500"/>
 
-            <div
-                class="map-label"
-                style="top:82%;left:8%;">
-                10° S
-            </div>
+            <line x1="100" y1="0" x2="100" y2="600"/>
+            <line x1="200" y1="0" x2="200" y2="600"/>
+            <line x1="300" y1="0" x2="300" y2="600"/>
+            <line x1="400" y1="0" x2="400" y2="600"/>
+            <line x1="500" y1="0" x2="500" y2="600"/>
+            <line x1="600" y1="0" x2="600" y2="600"/>
+            <line x1="700" y1="0" x2="700" y2="600"/>
+            <line x1="800" y1="0" x2="800" y2="600"/>
+            <line x1="900" y1="0" x2="900" y2="600"/>
 
-            <div
-                class="island"
-                style="top:22%;left:24%;">
-                MIDWAY
-            </div>
+          </g>
 
-            <div
-                class="island"
-                style="top:66%;left:67%;">
-                GUADALCANAL
-            </div>
+          <!-- APPROXIMATE PACIFIC LAND MASSES -->
 
-            <div
-                class="island"
-                style="top:38%;left:74%;">
-                PHILIPPINES
-            </div>
+          <g fill="#8b8a69" stroke="#b5ae83" stroke-width="2">
 
-            <div
-                class="island"
-                style="top:72%;left:28%;">
-                SOLOMONS
-            </div>
+            <!-- Japan -->
 
-            <div
-                class="carrier"
-                style="top:47%;left:29%;">
-                ⚓
-            </div>
+            <path d="
+              M850 75
+              L875 62
+              L900 75
+              L890 95
+              L870 102
+              L850 92
+              Z"/>
 
-            <div
-                class="carrier enemy"
-                style="top:34%;left:61%;">
-                ⚓
-            </div>
+            <!-- Philippines -->
 
-        </div>
+            <path d="
+              M765 230
+              L780 215
+              L790 230
+              L782 250
+              L760 258
+              L750 245
+              Z"/>
 
+            <!-- New Guinea -->
 
-        <div class="command-side">
+            <path d="
+              M660 430
+              L735 405
+              L775 425
+              L760 450
+              L700 462
+              L655 450
+              Z"/>
 
-            <h3>
-                COMMANDER B
-            </h3>
+            <!-- Australia -->
 
-            <p>
-                IMPERIAL JAPANESE CARRIER FORCE
-            </p>
+            <path d="
+              M500 480
+              L560 450
+              L650 460
+              L700 510
+              L680 565
+              L550 570
+              L475 530
+              Z"/>
 
-            <p class="typewriter">
-                COMMAND STATUS
-            </p>
+          </g>
 
-            <div id="statusB"></div>
+          <!-- ISLANDS -->
 
-        </div>
+          <g fill="#bdb789" stroke="#dfd5a3">
+
+            <circle cx="650" cy="315" r="6"/>
+            <circle cx="700" cy="280" r="5"/>
+            <circle cx="725" cy="250" r="5"/>
+            <circle cx="600" cy="380" r="5"/>
+
+            <!-- Hawaii -->
+
+            <circle cx="270" cy="335" r="7"/>
+            <circle cx="285" cy="340" r="5"/>
+
+            <!-- Midway -->
+
+            <circle cx="180" cy="275" r="5"/>
+
+            <!-- Wake -->
+
+            <circle cx="550" cy="230" r="5"/>
+
+          </g>
+
+          <!-- LOCATION LABELS -->
+
+          <g fill="#eee6c9"
+             font-family="Arial"
+             font-size="13"
+             font-weight="bold">
+
+            <text x="820" y="55">JAPAN</text>
+            <text x="745" y="275">PHILIPPINES</text>
+            <text x="620" y="470">NEW GUINEA</text>
+            <text x="535" y="550">AUSTRALIA</text>
+
+            <text x="250" y="320">HAWAII</text>
+            <text x="145" y="260">MIDWAY</text>
+            <text x="535" y="215">WAKE</text>
+
+            <text x="680" y="300">MARSHALLS</text>
+            <text x="720" y="225">MARIANAS</text>
+            <text x="570" y="370">SOLOMONS</text>
+
+          </g>
+
+          <!-- THEATER LABEL -->
+
+          <text x="30"
+                y="35"
+                fill="#d7cfaa"
+                font-size="16"
+                font-weight="bold">
+            U.S. PACIFIC FLEET OPERATIONS AREA
+          </text>
+
+          <!-- TASK FORCE A -->
+
+          <g id="taskForceA"></g>
+
+          <!-- TASK FORCE B -->
+
+          <g id="taskForceB"></g>
+
+        </svg>
+
+      </div>
+
+      <div id="missionContainer"></div>
+
+      <div id="turnover" class="turnover">
+
+        <div class="classifiedLarge">CLASSIFIED COMMAND TRANSFER</div>
+
+        <h2 id="turnoverTitle">COMMANDER A HAS COMPLETED THE DECISION</h2>
+
+        <p>
+          Do not reveal your decision.
+        </p>
+
+        <button class="bigButton"
+                onclick="passCommand()">
+          PASS COMMAND TO NEXT COMMANDER
+        </button>
+
+      </div>
 
     </div>
 
+    <!-- PLAYER B -->
 
-    <div id="scenarioContainer"></div>
+    <div class="commanderPanel playerB">
+
+      <h3>COMMANDER B</h3>
+
+      <div class="resource">
+        <span>Victory Points</span>
+        <strong id="scoreB" class="scoreB">10</strong>
+      </div>
+
+      <div class="resource">
+        <span>Aircraft</span>
+        <strong id="aircraftB">100</strong>
+      </div>
+
+      <div class="resource">
+        <span>Readiness</span>
+        <strong id="readinessB">100</strong>
+      </div>
+
+      <div class="resource">
+        <span>Fuel</span>
+        <strong id="fuelB">100</strong>
+      </div>
+
+      <div class="resource">
+        <span>Intelligence</span>
+        <strong id="intelB">100</strong>
+      </div>
+
+      <div class="resource">
+        <span>Mission</span>
+        <strong id="missionB">100</strong>
+      </div>
+
+      <p style="margin-top:25px;color:#bcb69f;font-size:12px;">
+        Commander B receives the same operational problem but must
+        make an independent command decision.
+      </p>
+
+    </div>
+
+  </div>
 
 </section>
-
 
 <!-- =========================================================
      FINAL SCREEN
-     ========================================================= -->
+========================================================= -->
 
-<section id="finalScreen" class="screen hidden">
+<section id="finalScreen" class="screen">
 
-    <div class="document">
+  <div class="finalCard">
 
-        <div class="stamp">
-            AFTER ACTION REPORT
-        </div>
+    <div class="classifiedLarge">
+      UNITED STATES PACIFIC FLEET
+    </div>
 
-        <h2 id="finalTitle">
-            BATTLE COMPLETE
-        </h2>
+    <h1 id="finalTitle">BATTLE COMPLETE</h1>
 
-        <div id="finalResults"></div>
+    <div id="winnerText" class="winner"></div>
 
-        <hr>
+    <div id="finalScores"></div>
 
-        <h3>
-            HISTORICAL COMMAND REVIEW
-        </h3>
+    <div class="tournamentHistory">
 
-        <p>
-            Pacific carrier warfare required commanders to balance
-            reconnaissance, aircraft availability, defensive fighters,
-            offensive strikes, carrier positioning, logistics and
-            operational objectives.
-        </p>
+      <h3>TOURNAMENT RECORD</h3>
 
-        <p>
-            A commander could win a tactical exchange and still place
-            the carrier force in danger by exhausting aircraft or
-            neglecting defense.
-        </p>
-
-        <h3>
-            SCENARIOS USED THIS BATTLE
-        </h3>
-
-        <div id="usedScenarioList"></div>
-
-        <br>
-
-        <button
-            class="btn primary large"
-            onclick="beginNextBattle()">
-
-            NEXT BATTLE
-
-        </button>
-
-        <button
-            class="btn large"
-            onclick="showTournament()">
-
-            VIEW TOURNAMENT
-
-        </button>
+      <div id="historyList"></div>
 
     </div>
 
-</section>
-
-
-<!-- =========================================================
-     TOURNAMENT SCREEN
-     ========================================================= -->
-
-<section id="tournamentScreen" class="screen hidden">
-
-    <div class="document">
-
-        <div class="stamp">
-            PACIFIC FLEET CHAMPIONSHIP
-        </div>
-
-        <h2>
-            COMMANDER TOURNAMENT
-        </h2>
-
-        <div id="tournamentContent"></div>
-
-        <br>
-
-        <button
-            class="btn primary large"
+    <button class="bigButton"
             onclick="beginNextBattle()">
+      BEGIN NEXT TOURNAMENT BATTLE
+    </button>
 
-            NEW MATCH
-
-        </button>
-
-        <button
-            class="btn"
-            onclick="resetTournament()">
-
-            RESET TOURNAMENT
-
-        </button>
-
-    </div>
+  </div>
 
 </section>
-
-
-<footer class="footer">
-    PACIFIC THEATRE WAR GAME — CLASSROOM COMMAND SIMULATION
-</footer>
 
 
 <script>
 
-/* =========================================================
+/* ============================================================
+   PACIFIC THEATRE WAR GAME
+   TWO PLAYER / TEN ROUND / TOURNAMENT VERSION
+
+   IMPORTANT:
+   - Scenario IDs are permanent.
+   - Used scenarios are recorded.
+   - Previous battles are protected.
+   - Tournament history is preserved.
+   - The game prefers never-before-used scenarios.
+   - Each battle contains exactly 10 rounds.
+============================================================ */
+
+
+/* ============================================================
+   GAME STATE
+============================================================ */
+
+let battleNumber = 1;
+let round = 1;
+
+let activeCommander = "A";
+
+let currentScenario = null;
+
+let commanderAChoice = null;
+let commanderBChoice = null;
+
+let usedThisBattle = [];
+let previousBattleScenarios = [];
+let tournamentScenarioHistory = [];
+
+let tournamentHistory = [];
+
+let phase = "A";
+
+
+const players = {
+
+  A:{
+    score:10,
+    aircraft:100,
+    intel:100,
+    readiness:100,
+    fuel:100,
+    mission:100
+  },
+
+  B:{
+    score:10,
+    aircraft:100,
+    intel:100,
+    readiness:100,
+    fuel:100,
+    mission:100
+  }
+
+};
+
+
+/* ============================================================
    SCENARIO DATABASE
-   =========================================================
+============================================================ */
 
-   Every scenario has a UNIQUE ID.
+/*
+  IMPORTANT:
 
-   The game does not use the title to determine repetition.
+  Every scenario has a UNIQUE ID.
 
-   The ID is what the anti-repeat system tracks.
+  This is what prevents tournament repetition.
 
-   There are deliberately more than 20 scenarios so that
-   consecutive ten-round matches can use substantially
-   different situations.
-   ========================================================= */
+  There are multiple versions of each challenge type so that
+  the tournament can continue using different problems.
+*/
+
 
 const SCENARIOS = [
 
-/* =========================================================
-   1
-   ========================================================= */
+/* ============================================================
+   CARRIER ANATOMY
+============================================================ */
 
 {
-    id:"midway-search",
-    title:"FIND THE ENEMY FLEET",
-    type:"INTELLIGENCE",
-    historical:"Midway — June 1942",
-
-    description:
-    "Reconnaissance reports indicate that an enemy carrier force may be approaching. Search aircraft are limited.",
-
-    options:[
-
-        {
-            title:"WIDE SEARCH",
-            text:"Spread reconnaissance aircraft across a broad search pattern.",
-            a:{intel:12,aircraft:-4,score:7},
-            b:{intel:12,aircraft:-4,score:7}
-        },
-
-        {
-            title:"CONCENTRATED SEARCH",
-            text:"Concentrate aircraft along the most likely approach.",
-            a:{intel:18,aircraft:-3,score:10},
-            b:{intel:18,aircraft:-3,score:10}
-        },
-
-        {
-            title:"PRESERVE AIRCRAFT",
-            text:"Use minimal reconnaissance and preserve aircraft for combat.",
-            a:{intel:-8,aircraft:5,score:-2},
-            b:{intel:-8,aircraft:5,score:-2}
-        },
-
-        {
-            title:"MULTIPLE SECTORS",
-            text:"Use several small search groups to reduce the chance of missing the enemy.",
-            a:{intel:8,aircraft:-5,score:5},
-            b:{intel:8,aircraft:-5,score:5}
-        }
-
-    ]
+ id:"CARRIER-DECK-01",
+ category:"carrierParts",
+ title:"KNOW YOUR CARRIER",
+ historical:"Carrier operations depended upon precise knowledge of the flight deck.",
+ question:"Which area is primarily used for aircraft recovery?",
+ answer:"arresting gear",
+ options:[
+  {text:"Arresting gear / landing area",correct:true,score:3},
+  {text:"Island bridge",correct:false,score:-2},
+  {text:"Hangar elevator",correct:false,score:-2},
+  {text:"Forward ammunition magazine",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   2
-   ========================================================= */
-
 {
-    id:"coral-sea-strike",
-    title:"BUILD THE STRIKE",
-    type:"AIR STRIKE",
-    historical:"Battle of the Coral Sea — May 1942",
-
-    description:
-    "Enemy carriers have been located. You have a limited number of aircraft available for the first strike.",
-
-    options:[
-
-        {
-            title:"HEAVY DIVE-BOMBER STRIKE",
-            text:"Commit the majority of dive bombers against the carrier.",
-            a:{aircraft:-12,score:15,readiness:-8},
-            b:{aircraft:-12,score:15,readiness:-8}
-        },
-
-        {
-            title:"BALANCED STRIKE",
-            text:"Combine fighters, dive bombers and torpedo bombers.",
-            a:{aircraft:-9,score:11,readiness:-4},
-            b:{aircraft:-9,score:11,readiness:-4}
-        },
-
-        {
-            title:"TORPEDO ATTACK",
-            text:"Commit a concentrated low-level attack against the carrier.",
-            a:{aircraft:-10,score:13,readiness:-6},
-            b:{aircraft:-10,score:13,readiness:-6}
-        },
-
-        {
-            title:"LIMITED STRIKE",
-            text:"Launch a smaller strike while keeping a larger reserve.",
-            a:{aircraft:-5,score:6,readiness:3},
-            b:{aircraft:-5,score:6,readiness:3}
-        }
-
-    ]
+ id:"CARRIER-DECK-02",
+ category:"carrierParts",
+ title:"FLIGHT DECK CONTROL",
+ historical:"The flight deck was an active operating area where aircraft had to be spotted and moved efficiently.",
+ question:"Where would aircraft normally be staged and positioned before launch?",
+ answer:"flight deck spotting areas",
+ options:[
+  {text:"Flight deck spotting area",correct:true,score:3},
+  {text:"Ship's galley",correct:false,score:-2},
+  {text:"Engine room",correct:false,score:-2},
+  {text:"Radio room",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   3
-   ========================================================= */
-
 {
-    id:"cap-defense",
-    title:"PROTECT THE CARRIER",
-    type:"DEFENSE",
-    historical:"Early Pacific Carrier Warfare",
-
-    description:
-    "Radar and reconnaissance suggest enemy aircraft may be approaching. How much of your fighter force will remain on combat air patrol?",
-
-    options:[
-
-        {
-            title:"MAXIMUM CAP",
-            text:"Keep a large fighter screen over the carrier.",
-            a:{aircraft:-3,readiness:10,score:8},
-            b:{aircraft:-3,readiness:10,score:8}
-        },
-
-        {
-            title:"BALANCED CAP",
-            text:"Maintain a moderate defensive fighter force.",
-            a:{aircraft:-2,readiness:5,score:6},
-            b:{aircraft:-2,readiness:5,score:6}
-        },
-
-        {
-            title:"MINIMUM CAP",
-            text:"Commit most fighters to offensive operations.",
-            a:{aircraft:2,readiness:-8,score:9},
-            b:{aircraft:2,readiness:-8,score:9}
-        },
-
-        {
-            title:"ROTATING CAP",
-            text:"Cycle fighters between defense and reserve.",
-            a:{aircraft:-1,readiness:7,score:7},
-            b:{aircraft:-1,readiness:7,score:7}
-        }
-
-    ]
+ id:"CARRIER-DECK-03",
+ category:"carrierParts",
+ title:"HANGAR DECK",
+ historical:"The hangar deck provided an enclosed working area for carrier aircraft.",
+ question:"Which location is most appropriate for aircraft maintenance and preparation below the flight deck?",
+ answer:"hangar deck",
+ options:[
+  {text:"Hangar deck",correct:true,score:3},
+  {text:"Bridge wing",correct:false,score:-2},
+  {text:"Outer destroyer screen",correct:false,score:-2},
+  {text:"Forward gun director",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   4
-   ========================================================= */
+/* ============================================================
+   STRIKE ORDER
+============================================================ */
 
 {
-    id:"damage-control",
-    title:"CARRIER UNDER ATTACK",
-    type:"DAMAGE CONTROL",
-    historical:"Pacific Carrier Warfare",
-
-    description:
-    "Bomb damage has caused fires and disrupted flight operations. Damage-control teams can concentrate on only one major problem.",
-
-    options:[
-
-        {
-            title:"FLIGHT DECK",
-            text:"Restore the ability to launch and recover aircraft.",
-            a:{readiness:15,score:9},
-            b:{readiness:15,score:9}
-        },
-
-        {
-            title:"ENGINEERING",
-            text:"Protect propulsion and maintain maneuverability.",
-            a:{readiness:8,score:7},
-            b:{readiness:8,score:7}
-        },
-
-        {
-            title:"FIRE CONTROL",
-            text:"Concentrate on containing fires before they spread.",
-            a:{readiness:12,score:10},
-            b:{readiness:12,score:10}
-        },
-
-        {
-            title:"AIRCRAFT SYSTEMS",
-            text:"Prioritize aircraft elevators and aviation fuel systems.",
-            a:{readiness:10,score:8},
-            b:{readiness:10,score:8}
-        }
-
-    ]
+ id:"STRIKE-ORDER-01",
+ category:"strikeOrder",
+ title:"BUILD THE STRIKE",
+ historical:"Carrier aviation required coordinated preparation before aircraft were sent against an enemy force.",
+ question:"Select the correct operational sequence for launching a carrier strike.",
+ order:[
+  "Confirm intelligence and target",
+  "Assign mission and aircraft",
+  "Arm and prepare aircraft",
+  "Spot aircraft on flight deck",
+  "Turn carrier into the wind",
+  "Launch aircraft",
+  "Strike force assembles and proceeds to target"
+ ]
 },
 
-
-/* =========================================================
-   5
-   ========================================================= */
-
 {
-    id:"night-contact",
-    title:"UNKNOWN CONTACT",
-    type:"RADAR",
-    historical:"Pacific Night Operations",
-
-    description:
-    "A radar contact appears on the tactical plot. Range and bearing are known, but the identity of the force is uncertain.",
-
-    options:[
-
-        {
-            title:"CLOSE THE RANGE",
-            text:"Move toward the contact to identify it.",
-            a:{intel:10,readiness:-8,score:10},
-            b:{intel:10,readiness:-8,score:10}
-        },
-
-        {
-            title:"MAINTAIN COURSE",
-            text:"Hold position and gather additional information.",
-            a:{intel:14,score:8},
-            b:{intel:14,score:8}
-        },
-
-        {
-            title:"TURN AWAY",
-            text:"Avoid exposing the carrier group until the contact is identified.",
-            a:{intel:-4,readiness:8,score:4},
-            b:{intel:-4,readiness:8,score:4}
-        },
-
-        {
-            title:"LAUNCH RECON",
-            text:"Send a limited reconnaissance element to identify the contact.",
-            a:{intel:16,aircraft:-3,score:11},
-            b:{intel:16,aircraft:-3,score:11}
-        }
-
-    ]
+ id:"STRIKE-ORDER-02",
+ category:"strikeOrder",
+ title:"RETURN TO THE CARRIER",
+ historical:"Recovery was a major carrier operation and required careful coordination.",
+ question:"After the strike force completes its attack, which sequence is most appropriate?",
+ order:[
+  "Withdraw from target area",
+  "Establish recovery plan",
+  "Carrier turns into the wind",
+  "Recover aircraft",
+  "Move recovered aircraft clear of landing area"
+ ]
 },
 
-
-/* =========================================================
-   6
-   ========================================================= */
-
 {
-    id:"guadalcanal-protection",
-    title:"PROTECT THE TRANSPORTS",
-    type:"MISSION",
-    historical:"Guadalcanal — 1942",
-
-    description:
-    "Your primary mission is not simply to destroy the enemy. A transport force must reach the objective.",
-
-    options:[
-
-        {
-            title:"SCREEN THE TRANSPORTS",
-            text:"Position your carrier force to maximize protection.",
-            a:{readiness:8,score:14},
-            b:{readiness:8,score:14}
-        },
-
-        {
-            title:"HUNT THE ENEMY",
-            text:"Move aggressively toward the enemy carrier force.",
-            a:{readiness:-8,score:16},
-            b:{readiness:-8,score:16}
-        },
-
-        {
-            title:"SPLIT THE FORCE",
-            text:"Divide the force between the transports and offensive search.",
-            a:{intel:7,readiness:-5,score:12},
-            b:{intel:7,readiness:-5,score:12}
-        },
-
-        {
-            title:"HOLD RESERVE",
-            text:"Keep a reserve carrier group ready to react.",
-            a:{readiness:10,score:10},
-            b:{readiness:10,score:10}
-        }
-
-    ]
+ id:"STRIKE-ORDER-03",
+ category:"strikeOrder",
+ title:"FROM INTELLIGENCE TO STRIKE",
+ historical:"Carrier commanders had to translate reconnaissance information into an executable mission.",
+ question:"Put the command process in the correct order.",
+ order:[
+  "Receive reconnaissance report",
+  "Evaluate enemy position",
+  "Select mission objective",
+  "Assign aircraft and weapons",
+  "Launch strike",
+  "Assess results"
+ ]
 },
 
-
-/* =========================================================
-   7
-   ========================================================= */
+/* ============================================================
+   AIRCRAFT EMPLOYMENT
+============================================================ */
 
 {
-    id:"pilot-shortage",
-    title:"THE PILOT PROBLEM",
-    type:"LOGISTICS",
-    historical:"Pacific War — 1942–1944",
-
-    description:
-    "Your operational aircraft numbers are falling. Training and replacement capacity is limited.",
-
-    options:[
-
-        {
-            title:"MAXIMUM OPERATIONS",
-            text:"Continue flying missions despite increasing losses.",
-            a:{aircraft:-10,score:13},
-            b:{aircraft:-10,score:13}
-        },
-
-        {
-            title:"PRESERVE VETERANS",
-            text:"Reduce operational tempo to preserve experienced crews.",
-            a:{aircraft:4,score:5,intel:5},
-            b:{aircraft:4,score:5,intel:5}
-        },
-
-        {
-            title:"REORGANIZE AIR GROUP",
-            text:"Rebalance aircraft between fighters and strike aircraft.",
-            a:{aircraft:2,readiness:7,score:8},
-            b:{aircraft:2,readiness:7,score:8}
-        },
-
-        {
-            title:"EMERGENCY REPLACEMENTS",
-            text:"Accept less experienced crews to maintain sortie rates.",
-            a:{aircraft:7,readiness:-8,score:9},
-            b:{aircraft:7,readiness:-8,score:9}
-        }
-
-    ]
+ id:"AIRCRAFT-1942-01",
+ category:"aircraft",
+ title:"THE 1942 AIR GROUP",
+ year:1942,
+ historical:"Early-war U.S. carrier air groups relied heavily on the F4F Wildcat, SBD Dauntless and TBD Devastator.",
+ question:"You are commanding a carrier in early 1942. Which aircraft is best suited for fighter protection and interception?",
+ aircraft:[
+  {name:"F4F Wildcat",role:"Fighter / CAP / escort",correct:true},
+  {name:"SBD Dauntless",role:"Dive bomber",correct:false},
+  {name:"TBD Devastator",role:"Torpedo bomber",correct:false},
+  {name:"PBY Catalina",role:"Long-range patrol",correct:false}
+ ]
 },
 
-
-/* =========================================================
-   8
-   ========================================================= */
-
 {
-    id:"carrier-position",
-    title:"TURN INTO THE WIND",
-    type:"NAVIGATION",
-    historical:"Carrier Flight Operations",
-
-    description:
-    "Aircraft are ready for launch. Wind direction and enemy position require a difficult decision.",
-
-    options:[
-
-        {
-            title:"TURN INTO WIND",
-            text:"Make the maneuver necessary for maximum flight-deck operations.",
-            a:{readiness:12,score:10},
-            b:{readiness:12,score:10}
-        },
-
-        {
-            title:"MAINTAIN COURSE",
-            text:"Preserve tactical position and delay launch.",
-            a:{intel:6,readiness:-3,score:5},
-            b:{intel:6,readiness:-3,score:5}
-        },
-
-        {
-            title:"CHANGE COURSE AGGRESSIVELY",
-            text:"Trade tactical positioning for immediate launch opportunity.",
-            a:{readiness:8,score:12},
-            b:{readiness:8,score:12}
-        },
-
-        {
-            title:"DELAY LAUNCH",
-            text:"Wait for a more favorable tactical position.",
-            a:{readiness:5,aircraft:2,score:4},
-            b:{readiness:5,aircraft:2,score:4}
-        }
-
-    ]
+ id:"AIRCRAFT-1942-02",
+ category:"aircraft",
+ title:"DIVE BOMBER",
+ year:1942,
+ historical:"The SBD Dauntless was a major U.S. Navy dive bomber during the early Pacific war.",
+ question:"Which aircraft is best suited for a precision dive-bombing attack against ships?",
+ aircraft:[
+  {name:"F4F Wildcat",role:"Fighter",correct:false},
+  {name:"SBD Dauntless",role:"Dive bomber",correct:true},
+  {name:"TBD Devastator",role:"Torpedo bomber",correct:false},
+  {name:"PBY Catalina",role:"Patrol aircraft",correct:false}
+ ]
 },
 
-
-/* =========================================================
-   9
-   ========================================================= */
-
 {
-    id:"counterattack",
-    title:"THE COUNTERSTRIKE",
-    type:"COUNTERATTACK",
-    historical:"Midway / Coral Sea Carrier Warfare",
-
-    description:
-    "Enemy aircraft are returning to their carrier. Decide whether to immediately launch another strike or preserve your force.",
-
-    options:[
-
-        {
-            title:"IMMEDIATE STRIKE",
-            text:"Launch before the enemy can fully recover its aircraft.",
-            a:{aircraft:-10,score:16,readiness:-9},
-            b:{aircraft:-10,score:16,readiness:-9}
-        },
-
-        {
-            title:"REARM AND WAIT",
-            text:"Preserve aircraft while preparing the next coordinated strike.",
-            a:{aircraft:-2,readiness:9,score:8},
-            b:{aircraft:-2,readiness:9,score:8}
-        },
-
-        {
-            title:"RECON FIRST",
-            text:"Confirm the enemy's position before committing the strike.",
-            a:{intel:15,aircraft:-4,score:10},
-            b:{intel:15,aircraft:-4,score:10}
-        },
-
-        {
-            title:"DEFENSIVE POSTURE",
-            text:"Prepare for the enemy's counterattack instead.",
-            a:{readiness:14,score:7},
-            b:{readiness:14,score:7}
-        }
-
-    ]
+ id:"AIRCRAFT-1942-03",
+ category:"aircraft",
+ title:"TORPEDO ATTACK",
+ year:1942,
+ historical:"The TBD Devastator was a carrier-based torpedo bomber during the early Pacific war.",
+ question:"Which aircraft should be selected for a low-level torpedo attack in an early-1942 scenario?",
+ aircraft:[
+  {name:"F4F Wildcat",role:"Fighter",correct:false},
+  {name:"SBD Dauntless",role:"Dive bomber",correct:false},
+  {name:"TBD Devastator",role:"Torpedo bomber",correct:true},
+  {name:"PBY Catalina",role:"Patrol aircraft",correct:false}
+ ]
 },
 
-
-/* =========================================================
-   10
-   ========================================================= */
-
 {
-    id:"philippine-sea",
-    title:"THE GREAT CARRIER BATTLE",
-    type:"FLEET ACTION",
-    historical:"Battle of the Philippine Sea — June 1944",
-
-    description:
-    "A large enemy carrier force is detected. Your aircraft must operate over a considerable distance.",
-
-    options:[
-
-        {
-            title:"LONG-RANGE STRIKE",
-            text:"Commit aircraft despite the difficult return flight.",
-            a:{aircraft:-12,score:18,readiness:-10},
-            b:{aircraft:-12,score:18,readiness:-10}
-        },
-
-        {
-            title:"CLOSE THE DISTANCE",
-            text:"Maneuver before launching the main strike.",
-            a:{readiness:-5,intel:10,score:13},
-            b:{readiness:-5,intel:10,score:13}
-        },
-
-        {
-            title:"DEFENSIVE FIGHTER SCREEN",
-            text:"Use fighters to defeat incoming enemy aircraft.",
-            a:{aircraft:-5,readiness:12,score:12},
-            b:{aircraft:-5,readiness:12,score:12}
-        },
-
-        {
-            title:"PRESERVE THE FORCE",
-            text:"Avoid excessive losses and maintain combat power.",
-            a:{aircraft:5,readiness:8,score:7},
-            b:{aircraft:5,readiness:8,score:7}
-        }
-
-    ]
+ id:"AIRCRAFT-1943-01",
+ category:"aircraft",
+ title:"THE HELLcat ARRIVES",
+ year:1943,
+ historical:"The F6F Hellcat became a major U.S. Navy carrier fighter beginning in 1943.",
+ question:"Your carrier is operating in 1943. Which aircraft is best suited for CAP and fighter escort?",
+ aircraft:[
+  {name:"F6F Hellcat",role:"Fighter / CAP / escort",correct:true},
+  {name:"SBD Dauntless",role:"Dive bomber",correct:false},
+  {name:"TBD Devastator",role:"Early-war torpedo bomber",correct:false},
+  {name:"PBY Catalina",role:"Patrol aircraft",correct:false}
+ ]
 },
 
-
-/* =========================================================
-   11
-   ========================================================= */
-
 {
-    id:"leyte-deception",
-    title:"THE DECEPTION",
-    type:"INTELLIGENCE",
-    historical:"Leyte Gulf — October 1944",
-
-    description:
-    "Reports indicate that a powerful enemy force may be attempting to draw your carrier force away from the invasion area.",
-
-    options:[
-
-        {
-            title:"PURSUE THE DECOY",
-            text:"Move toward the reported enemy carriers.",
-            a:{intel:-5,readiness:-10,score:14},
-            b:{intel:-5,readiness:-10,score:14}
-        },
-
-        {
-            title:"PROTECT THE INVASION FORCE",
-            text:"Maintain the primary mission and hold position.",
-            a:{readiness:12,score:15},
-            b:{readiness:12,score:15}
-        },
-
-        {
-            title:"SPLIT THE FORCE",
-            text:"Send part of the force toward the reported carriers.",
-            a:{intel:8,readiness:-7,score:12},
-            b:{intel:8,readiness:-7,score:12}
-        },
-
-        {
-            title:"VERIFY FIRST",
-            text:"Demand additional reconnaissance before committing.",
-            a:{intel:15,score:10},
-            b:{intel:15,score:10}
-        }
-
-    ]
+ id:"AIRCRAFT-1943-02",
+ category:"aircraft",
+ title:"THE AVENGER",
+ year:1943,
+ historical:"The TBF/TBM Avenger became an important U.S. carrier torpedo and strike aircraft.",
+ question:"Which aircraft should carry the primary torpedo attack in a later Pacific operation?",
+ aircraft:[
+  {name:"F6F Hellcat",role:"Fighter",correct:false},
+  {name:"SBD Dauntless",role:"Dive bomber",correct:false},
+  {name:"TBF/TBM Avenger",role:"Torpedo / strike",correct:true},
+  {name:"PBY Catalina",role:"Patrol",correct:false}
+ ]
 },
 
-
-/* =========================================================
-   12
-   ========================================================= */
-
 {
-    id:"torpedo-defense",
-    title:"TORPEDO ALARM",
-    type:"DEFENSE",
-    historical:"Pacific Carrier Warfare",
-
-    description:
-    "Torpedo bombers have been detected approaching at low altitude. Your fighter defense must respond immediately.",
-
-    options:[
-
-        {
-            title:"INTERCEPT",
-            text:"Commit fighters directly against the torpedo bombers.",
-            a:{aircraft:-6,readiness:13,score:14},
-            b:{aircraft:-6,readiness:13,score:14}
-        },
-
-        {
-            title:"EVASIVE MANEUVER",
-            text:"Turn the carrier force to reduce the torpedo threat.",
-            a:{readiness:10,score:10},
-            b:{readiness:10,score:10}
-        },
-
-        {
-            title:"COMBINED DEFENSE",
-            text:"Use fighters and destroyer screening together.",
-            a:{aircraft:-4,readiness:12,score:13},
-            b:{aircraft:-4,readiness:12,score:13}
-        },
-
-        {
-            title:"MAINTAIN COURSE",
-            text:"Avoid disrupting current flight operations.",
-            a:{readiness:-7,score:7},
-            b:{readiness:-7,score:7}
-        }
-
-    ]
+ id:"AIRCRAFT-1944-01",
+ category:"aircraft",
+ title:"LATE WAR STRIKE",
+ year:1944,
+ historical:"By 1944, the U.S. carrier air arm included Hellcats, Avengers and SB2C Helldivers.",
+ question:"Which aircraft is designed primarily as a carrier-based dive bomber in this late-war scenario?",
+ aircraft:[
+  {name:"F6F Hellcat",role:"Fighter",correct:false},
+  {name:"TBF/TBM Avenger",role:"Torpedo / strike",correct:false},
+  {name:"SB2C Helldiver",role:"Dive bomber",correct:true},
+  {name:"PBY Catalina",role:"Patrol",correct:false}
+ ]
 },
 
-
-/* =========================================================
-   13
-   ========================================================= */
+/* ============================================================
+   FORMATIONS
+============================================================ */
 
 {
-    id:"aircraft-on-deck",
-    title:"AIRCRAFT ON DECK",
-    type:"OPPORTUNITY",
-    historical:"Midway — June 1942",
-
-    description:
-    "Reconnaissance indicates that the enemy may have aircraft on its carrier deck. The opportunity is fleeting.",
-
-    options:[
-
-        {
-            title:"STRIKE NOW",
-            text:"Commit aircraft immediately.",
-            a:{aircraft:-11,score:20,readiness:-8},
-            b:{aircraft:-11,score:20,readiness:-8}
-        },
-
-        {
-            title:"CONFIRM TARGET",
-            text:"Obtain another reconnaissance report before attacking.",
-            a:{intel:12,aircraft:-3,score:9},
-            b:{intel:12,aircraft:-3,score:9}
-        },
-
-        {
-            title:"SMALL STRIKE",
-            text:"Send a limited force to test the enemy defense.",
-            a:{aircraft:-5,score:11,readiness:-2},
-            b:{aircraft:-5,score:11,readiness:-2}
-        },
-
-        {
-            title:"HOLD FIRE",
-            text:"Preserve the strike group for a more certain opportunity.",
-            a:{aircraft:4,readiness:5,score:4},
-            b:{aircraft:4,readiness:5,score:4}
-        }
-
-    ]
+ id:"FORMATION-01",
+ category:"formation",
+ title:"THE CLOSE SCREEN",
+ historical:"Carrier forces depended on escorts to provide protection against surface and air threats.",
+ question:"Which formation best represents a close defensive screen when the carrier is under a significant air threat?",
+ formations:[
+  {
+   name:"Close Defensive Screen",
+   description:"Carrier central; cruisers nearby; destroyers form a relatively tight outer screen.",
+   correct:true
+  },
+  {
+   name:"Extended Scouting Line",
+   description:"Destroyers spread widely away from the carrier.",
+   correct:false
+  },
+  {
+   name:"Single Column",
+   description:"All ships arranged in one long line.",
+   correct:false
+  },
+  {
+   name:"Detached Surface Group",
+   description:"Most escorts move far away from the carrier.",
+   correct:false
+  }
+ ]
 },
 
-
-/* =========================================================
-   14
-   ========================================================= */
-
 {
-    id:"destroyer-screen",
-    title:"BREAK THE SCREEN",
-    type:"SURFACE ACTION",
-    historical:"Carrier Task Force Operations",
-
-    description:
-    "Enemy destroyers are protecting the carrier force. Your strike group must decide how to approach the screen.",
-
-    options:[
-
-        {
-            title:"ATTACK THE SCREEN",
-            text:"Use aircraft against the destroyers.",
-            a:{aircraft:-7,score:11,readiness:4},
-            b:{aircraft:-7,score:11,readiness:4}
-        },
-
-        {
-            title:"BYPASS THE SCREEN",
-            text:"Concentrate directly on the carriers.",
-            a:{aircraft:-6,score:15,readiness:-6},
-            b:{aircraft:-6,score:15,readiness:-6}
-        },
-
-        {
-            title:"USE CRUISER SUPPORT",
-            text:"Coordinate surface ships with aircraft.",
-            a:{readiness:-4,score:12},
-            b:{readiness:-4,score:12}
-        },
-
-        {
-            title:"WAIT",
-            text:"Allow reconnaissance to clarify the enemy formation.",
-            a:{intel:10,score:6,readiness:4},
-            b:{intel:10,score:6,readiness:4}
-        }
-
-    ]
+ id:"FORMATION-02",
+ category:"formation",
+ title:"TRANSIT FORMATION",
+ historical:"Task forces had to balance maneuverability, protection and station keeping while moving across the Pacific.",
+ question:"Which formation is most appropriate for an organized transit when the immediate threat is uncertain?",
+ formations:[
+  {
+   name:"Screened Transit",
+   description:"Carrier group maintains organized movement with escorts screening the formation.",
+   correct:true
+  },
+  {
+   name:"Scattered Ships",
+   description:"Ships move independently across the ocean.",
+   correct:false
+  },
+  {
+   name:"Single Ship Column",
+   description:"Every ship follows directly behind the carrier.",
+   correct:false
+  },
+  {
+   name:"Detached Carrier",
+   description:"The carrier travels far ahead of its escorts.",
+   correct:false
+  }
+ ]
 },
 
-
-/* =========================================================
-   15
-   ========================================================= */
-
 {
-    id:"final-command",
-    title:"THE FINAL COMMAND",
-    type:"COMMAND DECISION",
-    historical:"Pacific Carrier Warfare",
-
-    description:
-    "Both carrier forces are damaged. The enemy remains dangerous. Your final decision may determine whether you preserve the fleet or risk everything for victory.",
-
-    options:[
-
-        {
-            title:"ALL-IN STRIKE",
-            text:"Commit nearly every available aircraft.",
-            a:{aircraft:-15,readiness:-15,score:25},
-            b:{aircraft:-15,readiness:-15,score:25}
-        },
-
-        {
-            title:"CONTROLLED ATTACK",
-            text:"Launch a limited strike while preserving reserves.",
-            a:{aircraft:-7,readiness:5,score:17},
-            b:{aircraft:-7,readiness:5,score:17}
-        },
-
-        {
-            title:"DEFEND THE FORCE",
-            text:"Preserve your remaining carriers and aircraft.",
-            a:{aircraft:5,readiness:15,score:10},
-            b:{aircraft:5,readiness:15,score:10}
-        },
-
-        {
-            title:"MISSION FIRST",
-            text:"Ignore the enemy carrier and complete the operational objective.",
-            a:{readiness:7,intel:5,score:22},
-            b:{readiness:7,intel:5,score:22}
-        }
-
-    ]
+ id:"FORMATION-03",
+ category:"formation",
+ title:"SCOUTING SCREEN",
+ historical:"Search and reconnaissance were critical to finding enemy forces before they found you.",
+ question:"Which formation best supports an extended reconnaissance screen?",
+ formations:[
+  {
+   name:"Layered Search Screen",
+   description:"Selected escorts and reconnaissance assets extend outward while the carrier remains protected.",
+   correct:true
+  },
+  {
+   name:"Maximum Concentration",
+   description:"Every escort remains immediately beside the carrier.",
+   correct:false
+  },
+  {
+   name:"Single File",
+   description:"Ships form one line directly behind the carrier.",
+   correct:false
+  },
+  {
+   name:"No Screen",
+   description:"The carrier operates without supporting escorts.",
+   correct:false
+  }
+ ]
 },
 
-
-/* =========================================================
-   16
-   ========================================================= */
+/* ============================================================
+   RECONNAISSANCE
+============================================================ */
 
 {
-    id:"search-sector",
-    title:"SELECT THE SEARCH SECTOR",
-    type:"RECONNAISSANCE",
-    historical:"Carrier Reconnaissance — Pacific 1942",
-
-    description:
-    "A reconnaissance report places an enemy force somewhere northwest of your position. Aircraft are insufficient to search every sector.",
-
-    options:[
-
-        {
-            title:"NORTHWEST",
-            text:"Search the sector most directly supported by the report.",
-            a:{intel:16,aircraft:-5,score:11},
-            b:{intel:16,aircraft:-5,score:11}
-        },
-
-        {
-            title:"WEST",
-            text:"Search farther west in case the enemy has changed course.",
-            a:{intel:10,aircraft:-4,score:8},
-            b:{intel:10,aircraft:-4,score:8}
-        },
-
-        {
-            title:"NORTH",
-            text:"Search the northern approach to guard against a flanking movement.",
-            a:{intel:8,aircraft:-4,score:7},
-            b:{intel:8,aircraft:-4,score:7}
-        },
-
-        {
-            title:"SPLIT SEARCH",
-            text:"Divide the available aircraft between two likely sectors.",
-            a:{intel:13,aircraft:-7,score:10},
-            b:{intel:13,aircraft:-7,score:10}
-        }
-
-    ]
+ id:"RECON-01",
+ category:"recon",
+ title:"SEARCH THE PACIFIC",
+ historical:"Early warning was essential to carrier warfare.",
+ question:"Reconnaissance reports place a possible Japanese force 150–200 miles northwest of your task force. Which action is most appropriate?",
+ options:[
+  {text:"Launch a coordinated search toward the reported bearing while retaining defensive fighters.",correct:true,score:4},
+  {text:"Send every available aircraft toward the report and leave the carrier without fighter protection.",correct:false,score:-4},
+  {text:"Ignore the report until the enemy is visually confirmed.",correct:false,score:-3},
+  {text:"Move the carrier directly toward the suspected force before searching.",correct:false,score:-3}
+ ]
 },
 
-
-/* =========================================================
-   17
-   ========================================================= */
-
 {
-    id:"fighter-reserve",
-    title:"KEEP A RESERVE",
-    type:"AIR DEFENSE",
-    historical:"Carrier Air Group Operations",
-
-    description:
-    "Your strike aircraft are preparing for launch. The enemy may still have aircraft capable of attacking your carrier.",
-
-    options:[
-
-        {
-            title:"LARGE RESERVE",
-            text:"Keep a substantial fighter reserve on the carrier.",
-            a:{aircraft:-2,readiness:12,score:7},
-            b:{aircraft:-2,readiness:12,score:7}
-        },
-
-        {
-            title:"SMALL RESERVE",
-            text:"Keep only a limited fighter force available.",
-            a:{aircraft:1,readiness:5,score:9},
-            b:{aircraft:1,readiness:5,score:9}
-        },
-
-        {
-            title:"NO RESERVE",
-            text:"Commit nearly every fighter to the offensive.",
-            a:{aircraft:3,readiness:-12,score:14},
-            b:{aircraft:3,readiness:-12,score:14}
-        },
-
-        {
-            title:"ROTATE FIGHTERS",
-            text:"Maintain a reserve by cycling aircraft between missions.",
-            a:{aircraft:-1,readiness:9,score:10},
-            b:{aircraft:-1,readiness:9,score:10}
-        }
-
-    ]
+ id:"RECON-02",
+ category:"recon",
+ title:"LIMITED AIRCRAFT",
+ historical:"Carrier commanders often had to balance reconnaissance against combat aircraft requirements.",
+ question:"You have limited aircraft available. What is the strongest command decision?",
+ options:[
+  {text:"Use enough reconnaissance aircraft to locate the enemy while preserving a fighter reserve.",correct:true,score:4},
+  {text:"Use every aircraft for reconnaissance and leave none for defense.",correct:false,score:-4},
+  {text:"Use only fighters for reconnaissance regardless of mission.",correct:false,score:-2},
+  {text:"Wait for a second report before launching anything.",correct:false,score:-3}
+ ]
 },
 
-
-/* =========================================================
-   18
-   ========================================================= */
+/* ============================================================
+   TARGETING
+============================================================ */
 
 {
-    id:"weather-front",
-    title:"WEATHER FRONT",
-    type:"NAVIGATION",
-    historical:"Pacific Weather Conditions",
-
-    description:
-    "A weather front is moving between the carrier groups. Visibility is deteriorating and aircraft operations are becoming more difficult.",
-
-    options:[
-
-        {
-            title:"PRESS THROUGH",
-            text:"Continue operations before the weather becomes worse.",
-            a:{aircraft:-7,score:13,readiness:-5},
-            b:{aircraft:-7,score:13,readiness:-5}
-        },
-
-        {
-            title:"WAIT",
-            text:"Delay major operations until visibility improves.",
-            a:{readiness:8,intel:7,score:6},
-            b:{readiness:8,intel:7,score:6}
-        },
-
-        {
-            title:"REPOSITION",
-            text:"Move the carrier group around the weather front.",
-            a:{fuel:-7,intel:10,score:9},
-            b:{fuel:-7,intel:10,score:9}
-        },
-
-        {
-            title:"LIMITED RECON",
-            text:"Use a small reconnaissance element while preserving the main force.",
-            a:{aircraft:-3,intel:13,score:8},
-            b:{aircraft:-3,intel:13,score:8}
-        }
-
-    ]
+ id:"TARGET-01",
+ category:"target",
+ title:"THE PRIMARY TARGET",
+ historical:"Carrier aircraft were limited resources. Target selection mattered.",
+ question:"Enemy carriers have been located. Several cruisers and destroyers are also present. What should normally receive priority?",
+ options:[
+  {text:"Enemy aircraft carriers and their ability to generate air power.",correct:true,score:4},
+  {text:"The outer destroyer screen before the carriers.",correct:false,score:-3},
+  {text:"A distant transport before the combat force.",correct:false,score:-3},
+  {text:"A random cruiser selected because it is closest.",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   19
-   ========================================================= */
-
 {
-    id:"fuel-crisis",
-    title:"FUEL CALCULATION",
-    type:"LOGISTICS",
-    historical:"Extended Pacific Operations",
-
-    description:
-    "The carrier group has been operating for days. Fuel reserves are falling while the enemy remains active.",
-
-    options:[
-
-        {
-            title:"CONTINUE OPERATIONS",
-            text:"Accept the fuel risk and maintain the current tempo.",
-            a:{fuel:-15,score:14},
-            b:{fuel:-15,score:14}
-        },
-
-        {
-            title:"REDUCE SPEED",
-            text:"Conserve fuel and reduce unnecessary movement.",
-            a:{fuel:-5,readiness:5,score:7},
-            b:{fuel:-5,readiness:5,score:7}
-        },
-
-        {
-            title:"WITHDRAW TEMPORARILY",
-            text:"Move toward a safer position and preserve fuel.",
-            a:{fuel:12,score:4,readiness:8},
-            b:{fuel:12,score:4,readiness:8}
-        },
-
-        {
-            title:"REPLENISH",
-            text:"Prioritize a refueling operation before the next major action.",
-            a:{fuel:18,readiness:-3,score:6},
-            b:{fuel:18,readiness:-3,score:6}
-        }
-
-    ]
+ id:"TARGET-02",
+ category:"target",
+ title:"SURFACE THREAT",
+ historical:"Carrier commanders had to respond to different tactical threats.",
+ question:"An enemy surface force is closing rapidly while its carriers are outside immediate strike range. What is the strongest immediate priority?",
+ options:[
+  {text:"Use available strike aircraft against the most dangerous surface threat while maintaining fighter protection.",correct:true,score:4},
+  {text:"Send every fighter against the ships.",correct:false,score:-3},
+  {text:"Ignore the surface force because carriers are always the only target.",correct:false,score:-3},
+  {text:"Send reconnaissance aircraft into the attack without changing the defensive posture.",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   20
-   ========================================================= */
+/* ============================================================
+   CAP
+============================================================ */
 
 {
-    id:"submarine-warning",
-    title:"SUBMARINE CONTACT",
-    type:"ANTI-SUBMARINE",
-    historical:"Pacific Fleet Submarine Warfare",
-
-    description:
-    "A submarine contact has been reported near the carrier force. Destroyers can investigate, but doing so may pull them away from the carrier screen.",
-
-    options:[
-
-        {
-            title:"ATTACK CONTACT",
-            text:"Send destroyers to investigate and attack the submarine.",
-            a:{readiness:8,score:11},
-            b:{readiness:8,score:11}
-        },
-
-        {
-            title:"MAINTAIN SCREEN",
-            text:"Keep destroyers around the carrier force.",
-            a:{readiness:12,score:8},
-            b:{readiness:12,score:8}
-        },
-
-        {
-            title:"EVASIVE COURSE",
-            text:"Change course to reduce the submarine's firing opportunity.",
-            a:{fuel:-5,readiness:10,score:9},
-            b:{fuel:-5,readiness:10,score:9}
-        },
-
-        {
-            title:"AIR RECON",
-            text:"Use aircraft to investigate without weakening the surface screen.",
-            a:{aircraft:-3,intel:12,score:10},
-            b:{aircraft:-3,intel:12,score:10}
-        }
-
-    ]
+ id:"CAP-01",
+ category:"cap",
+ title:"FIGHTER COVER",
+ historical:"Carrier fighter protection was critical against enemy reconnaissance and strike aircraft.",
+ question:"Enemy aircraft are approaching. What is the best use of your fighter reserve?",
+ options:[
+  {text:"Launch fighters to intercept while retaining enough aircraft to continue carrier defense.",correct:true,score:4},
+  {text:"Send all fighters after the first contact and leave the carrier undefended.",correct:false,score:-4},
+  {text:"Send dive bombers to intercept the enemy fighters.",correct:false,score:-3},
+  {text:"Recall the entire strike group immediately without assessing the threat.",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   21
-   ========================================================= */
-
 {
-    id:"damaged-elevator",
-    title:"AIRCRAFT ELEVATOR FAILURE",
-    type:"DAMAGE CONTROL",
-    historical:"Carrier Damage Control",
-
-    description:
-    "An aircraft elevator has been damaged. Aircraft remain aboard the carrier but cannot be moved efficiently to the flight deck.",
-
-    options:[
-
-        {
-            title:"REPAIR ELEVATOR",
-            text:"Concentrate repair crews on restoring aircraft movement.",
-            a:{readiness:14,score:10},
-            b:{readiness:14,score:10}
-        },
-
-        {
-            title:"USE REMAINING ELEVATOR",
-            text:"Continue operations using the functioning elevator.",
-            a:{readiness:-3,score:9},
-            b:{readiness:-3,score:9}
-        },
-
-        {
-            title:"REDUCE SORTIE RATE",
-            text:"Slow flight operations to avoid creating a dangerous bottleneck.",
-            a:{aircraft:4,readiness:8,score:6},
-            b:{aircraft:4,readiness:8,score:6}
-        },
-
-        {
-            title:"EMERGENCY DECK OPERATIONS",
-            text:"Attempt to maintain a high tempo despite the damage.",
-            a:{aircraft:-5,readiness:-8,score:13},
-            b:{aircraft:-5,readiness:-8,score:13}
-        }
-
-    ]
+ id:"CAP-02",
+ category:"cap",
+ title:"THE RESERVE",
+ historical:"A commander had to avoid committing every fighter to a single contact.",
+ question:"Your first fighter section is already airborne. A second enemy formation is reported. What should you consider?",
+ options:[
+  {text:"Maintain a reserve or launch additional fighters based on the threat while preserving carrier defense.",correct:true,score:4},
+  {text:"Immediately launch every remaining fighter regardless of the threat.",correct:false,score:-3},
+  {text:"Land the first section before responding.",correct:false,score:-3},
+  {text:"Replace fighters with torpedo bombers for interception.",correct:false,score:-4}
+ ]
 },
 
-
-/* =========================================================
-   22
-   ========================================================= */
+/* ============================================================
+   FLIGHT DECK
+============================================================ */
 
 {
-    id:"radio-silence",
-    title:"RADIO SILENCE",
-    type:"COMMUNICATIONS",
-    historical:"Pacific Fleet Communications",
-
-    description:
-    "Communications with one reconnaissance element have been lost. The aircraft's last report placed the enemy somewhere east of its previous position.",
-
-    options:[
-
-        {
-            title:"ASSUME LAST POSITION",
-            text:"Continue operations based on the last confirmed report.",
-            a:{intel:-3,score:9},
-            b:{intel:-3,score:9}
-        },
-
-        {
-            title:"SEARCH FOR AIRCRAFT",
-            text:"Divert resources to locate the missing reconnaissance element.",
-            a:{aircraft:-4,intel:10,score:7},
-            b:{aircraft:-4,intel:10,score:7}
-        },
-
-        {
-            title:"RECONSTRUCT THE PICTURE",
-            text:"Combine older reports to estimate the enemy's likely movement.",
-            a:{intel:15,score:10},
-            b:{intel:15,score:10}
-        },
-
-        {
-            title:"CHANGE PLAN",
-            text:"Assume the intelligence is unreliable and alter the operation.",
-            a:{intel:5,readiness:8,score:8},
-            b:{intel:5,readiness:8,score:8}
-        }
-
-    ]
+ id:"FLIGHT-DECK-01",
+ category:"flightDeck",
+ title:"THE WIND",
+ historical:"Carrier aircraft required the ship to operate into the wind for effective flight operations.",
+ question:"Why does the carrier turn into the wind before major flight operations?",
+ options:[
+  {text:"To increase relative wind over the flight deck and improve aircraft launch/recovery conditions.",correct:true,score:4},
+  {text:"To hide the carrier from radar.",correct:false,score:-2},
+  {text:"To reduce the ship's speed to zero.",correct:false,score:-2},
+  {text:"To allow destroyers to refuel the aircraft.",correct:false,score:-3}
+ ]
 },
 
-
-/* =========================================================
-   23
-   ========================================================= */
-
 {
-    id:"cruiser-bombardment",
-    title:"SURFACE BOMBARDMENT",
-    type:"SURFACE ACTION",
-    historical:"Guadalcanal Naval Campaign",
-
-    description:
-    "Enemy surface ships may be moving toward an island objective. Your cruisers can intervene, but exposing them may create additional risk.",
-
-    options:[
-
-        {
-            title:"SEND CRUISERS",
-            text:"Commit cruisers to disrupt the enemy surface force.",
-            a:{readiness:-5,score:15},
-            b:{readiness:-5,score:15}
-        },
-
-        {
-            title:"AIR STRIKE",
-            text:"Use carrier aircraft rather than exposing surface ships.",
-            a:{aircraft:-7,score:14},
-            b:{aircraft:-7,score:14}
-        },
-
-        {
-            title:"HOLD POSITION",
-            text:"Protect the carrier force and wait for better intelligence.",
-            a:{intel:10,readiness:8,score:7},
-            b:{intel:10,readiness:8,score:7}
-        },
-
-        {
-            title:"COMBINED FORCE",
-            text:"Coordinate cruisers, destroyers and aircraft.",
-            a:{aircraft:-4,readiness:-4,score:17},
-            b:{aircraft:-4,readiness:-4,score:17}
-        }
-
-    ]
+ id:"FLIGHT-DECK-02",
+ category:"flightDeck",
+ title:"FLIGHT DECK CRISIS",
+ historical:"A damaged aircraft could obstruct carrier flight operations.",
+ question:"A damaged aircraft is blocking the landing area while more aircraft are approaching. What is the immediate operational priority?",
+ options:[
+  {text:"Clear the landing area and coordinate the recovery of incoming aircraft.",correct:true,score:4},
+  {text:"Leave the aircraft where it is until all aircraft have landed.",correct:false,score:-4},
+  {text:"Move every aircraft on the deck simultaneously.",correct:false,score:-2},
+  {text:"Launch additional aircraft before clearing the recovery area.",correct:false,score:-3}
+ ]
 },
 
-
-/* =========================================================
-   24
-   ========================================================= */
+/* ============================================================
+   RECOVERY
+============================================================ */
 
 {
-    id:"island-objective",
-    title:"HOLD THE ISLAND",
-    type:"MISSION",
-    historical:"Pacific Island Campaigns",
-
-    description:
-    "Your carrier group has been ordered to support an island objective. Destroying enemy ships is secondary to maintaining control of the operational area.",
-
-    options:[
-
-        {
-            title:"DIRECT SUPPORT",
-            text:"Keep aircraft focused on supporting the island objective.",
-            a:{aircraft:-5,mission:15,score:14},
-            b:{aircraft:-5,mission:15,score:14}
-        },
-
-        {
-            title:"HUNT CARRIERS",
-            text:"Shift attention toward enemy naval forces.",
-            a:{mission:-5,aircraft:-8,score:18},
-            b:{mission:-5,aircraft:-8,score:18}
-        },
-
-        {
-            title:"PROTECT SUPPLY LINE",
-            text:"Use aircraft and surface ships to keep supplies moving.",
-            a:{mission:12,readiness:7,score:12},
-            b:{mission:12,readiness:7,score:12}
-        },
-
-        {
-            title:"RESERVE STRIKE",
-            text:"Keep aircraft ready for the most important moment.",
-            a:{mission:7,aircraft:3,readiness:9,score:10},
-            b:{mission:7,aircraft:3,readiness:9,score:10}
-        }
-
-    ]
+ id:"RECOVERY-01",
+ category:"recovery",
+ title:"BRING THEM HOME",
+ historical:"Carrier recovery operations demanded coordination between ship, air group and pilots.",
+ question:"Your strike group is returning. What should the carrier prioritize before recovery?",
+ options:[
+  {text:"Prepare and clear the flight deck, establish recovery conditions and turn into the wind.",correct:true,score:4},
+  {text:"Keep the carrier broadside to the wind.",correct:false,score:-3},
+  {text:"Begin launching a second strike immediately.",correct:false,score:-3},
+  {text:"Move the carrier's escorts directly across the landing area.",correct:false,score:-4}
+ ]
 },
 
-
-/* =========================================================
-   25
-   ========================================================= */
-
 {
-    id:"carrier-withdrawal",
-    title:"BREAK CONTACT",
-    type:"COMMAND DECISION",
-    historical:"Pacific Carrier Warfare",
-
-    description:
-    "Your carrier has taken damage and enemy reconnaissance is closing. You must decide whether to remain in the battle.",
-
-    options:[
-
-        {
-            title:"REMAIN",
-            text:"Stay in the area and continue fighting.",
-            a:{readiness:-12,score:18},
-            b:{readiness:-12,score:18}
-        },
-
-        {
-            title:"WITHDRAW",
-            text:"Preserve the carrier and move away from the enemy.",
-            a:{fuel:-8,readiness:15,score:9},
-            b:{fuel:-8,readiness:15,score:9}
-        },
-
-        {
-            title:"COVERED WITHDRAWAL",
-            text:"Use fighters and destroyers to cover the withdrawal.",
-            a:{aircraft:-5,readiness:9,score:13},
-            b:{aircraft:-5,readiness:9,score:13}
-        },
-
-        {
-            title:"DECOY MANEUVER",
-            text:"Use part of the force to draw enemy attention away from the carrier.",
-            a:{readiness:-5,intel:7,score:15},
-            b:{readiness:-5,intel:7,score:15}
-        }
-
-    ]
+ id:"RECOVERY-02",
+ category:"recovery",
+ title:"DAMAGED AIRCRAFT",
+ historical:"Aircraft returning damaged created additional risks during recovery.",
+ question:"Several aircraft are returning with battle damage. What should the commander emphasize?",
+ options:[
+  {text:"Prioritize safe recovery and prepare the deck for damaged aircraft.",correct:true,score:4},
+  {text:"Require every damaged aircraft to make another combat pass.",correct:false,score:-4},
+  {text:"Launch additional aircraft before allowing damaged aircraft to recover.",correct:false,score:-3},
+  {text:"Ignore aircraft fuel state and recover only undamaged aircraft.",correct:false,score:-4}
+ ]
 },
 
-
-/* =========================================================
-   26
-   ========================================================= */
+/* ============================================================
+   PACIFIC GEOGRAPHY
+============================================================ */
 
 {
-    id:"carrier-strike-cycle",
-    title:"THE CARRIER STRIKE CYCLE",
-    type:"FLIGHT OPERATIONS",
-    historical:"Pacific Carrier Flight Operations",
-
-    description:
-    "Your carrier must launch, recover, refuel and rearm aircraft. Poor timing can create congestion and leave the carrier vulnerable.",
-
-    options:[
-
-        {
-            title:"MAXIMUM TEMPO",
-            text:"Keep launching aircraft with minimal pauses.",
-            a:{aircraft:-8,score:15,readiness:-7},
-            b:{aircraft:-8,score:15,readiness:-7}
-        },
-
-        {
-            title:"CONTROLLED CYCLE",
-            text:"Synchronize launch, recovery and rearming.",
-            a:{readiness:10,score:12},
-            b:{readiness:10,score:12}
-        },
-
-        {
-            title:"RECOVERY FIRST",
-            text:"Prioritize bringing returning aircraft safely aboard.",
-            a:{aircraft:3,readiness:13,score:8},
-            b:{aircraft:3,readiness:13,score:8}
-        },
-
-        {
-            title:"LAUNCH FIRST",
-            text:"Prioritize getting the next strike airborne.",
-            a:{aircraft:-5,readiness:-3,score:14},
-            b:{aircraft:-5,readiness:-3,score:14}
-        }
-
-    ]
+ id:"GEO-01",
+ category:"geography",
+ title:"MIDWAY",
+ historical:"The Battle of Midway occurred in June 1942 in the central Pacific.",
+ question:"Which location is geographically associated with the June 1942 carrier battle?",
+ options:[
+  {text:"Midway",correct:true,score:3},
+  {text:"Guadalcanal",correct:false,score:-2},
+  {text:"Leyte",correct:false,score:-2},
+  {text:"New Guinea",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   27
-   ========================================================= */
-
 {
-    id:"fighter-intercept",
-    title:"INTERCEPT THE RAID",
-    type:"AIR DEFENSE",
-    historical:"Carrier Air Defense",
-
-    description:
-    "Enemy aircraft are approaching your task force. You have limited fighters available for interception.",
-
-    options:[
-
-        {
-            title:"EARLY INTERCEPT",
-            text:"Send fighters out before the enemy reaches the carrier.",
-            a:{aircraft:-6,readiness:15,score:15},
-            b:{aircraft:-6,readiness:15,score:15}
-        },
-
-        {
-            title:"CLOSE DEFENSE",
-            text:"Keep fighters near the carrier until the threat is closer.",
-            a:{aircraft:-3,readiness:11,score:11},
-            b:{aircraft:-3,readiness:11,score:11}
-        },
-
-        {
-            title:"SPLIT INTERCEPT",
-            text:"Divide fighters between multiple approaching groups.",
-            a:{aircraft:-5,intel:7,score:12},
-            b:{aircraft:-5,intel:7,score:12}
-        },
-
-        {
-            title:"PRESERVE FIGHTERS",
-            text:"Hold some fighters back for a later counterattack.",
-            a:{aircraft:1,readiness:-5,score:8},
-            b:{aircraft:1,readiness:-5,score:8}
-        }
-
-    ]
+ id:"GEO-02",
+ category:"geography",
+ title:"GUADALCANAL",
+ historical:"The Guadalcanal campaign began in August 1942.",
+ question:"Which island is associated with the major 1942–43 Solomon Islands campaign?",
+ options:[
+  {text:"Guadalcanal",correct:true,score:3},
+  {text:"Midway",correct:false,score:-2},
+  {text:"Wake",correct:false,score:-2},
+  {text:"Iwo Jima",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   28
-   ========================================================= */
-
 {
-    id:"decoy-report",
-    title:"CONFLICTING REPORTS",
-    type:"INTELLIGENCE",
-    historical:"Pacific Naval Intelligence",
-
-    description:
-    "Two reconnaissance reports disagree about the enemy's location. One report is older but more reliable; the other is newer but uncertain.",
-
-    options:[
-
-        {
-            title:"TRUST RELIABLE REPORT",
-            text:"Use the older but more trustworthy intelligence.",
-            a:{intel:12,score:10},
-            b:{intel:12,score:10}
-        },
-
-        {
-            title:"TRUST NEW REPORT",
-            text:"Act immediately on the latest information.",
-            a:{intel:-5,score:15},
-            b:{intel:-5,score:15}
-        },
-
-        {
-            title:"SEND CONFIRMATION",
-            text:"Use another reconnaissance mission to resolve the disagreement.",
-            a:{aircraft:-4,intel:16,score:11},
-            b:{aircraft:-4,intel:16,score:11}
-        },
-
-        {
-            title:"SPLIT THE SEARCH",
-            text:"Search both reported locations.",
-            a:{aircraft:-8,intel:11,score:12},
-            b:{aircraft:-8,intel:11,score:12}
-        }
-
-    ]
+ id:"GEO-03",
+ category:"geography",
+ title:"MARIANAS",
+ historical:"The Marianas became a major base area for U.S. operations in 1944.",
+ question:"Which location was central to the 1944 carrier campaign that included the Philippine Sea?",
+ options:[
+  {text:"Marianas",correct:true,score:3},
+  {text:"Hawaii",correct:false,score:-2},
+  {text:"Aleutians",correct:false,score:-2},
+  {text:"Coral Sea",correct:false,score:-2}
+ ]
 },
 
-
-/* =========================================================
-   29
-   ========================================================= */
+/* ============================================================
+   COMMAND DECISIONS
+============================================================ */
 
 {
-    id:"damaged-radar",
-    title:"RADAR FAILURE",
-    type:"DAMAGE CONTROL",
-    historical:"Carrier Radar Operations",
-
-    description:
-    "Your primary radar system is damaged. Repairing it requires time and resources, but operating without it increases uncertainty.",
-
-    options:[
-
-        {
-            title:"REPAIR RADAR",
-            text:"Prioritize restoring early warning capability.",
-            a:{readiness:13,intel:14,score:10},
-            b:{readiness:13,intel:14,score:10}
-        },
-
-        {
-            title:"USE VISUAL LOOKOUTS",
-            text:"Continue operations using shipboard observers.",
-            a:{intel:-7,readiness:7,score:7},
-            b:{intel:-7,readiness:7,score:7}
-        },
-
-        {
-            title:"USE AIRBORNE RECON",
-            text:"Increase reconnaissance to compensate for the radar failure.",
-            a:{aircraft:-4,intel:15,score:11},
-            b:{aircraft:-4,intel:15,score:11}
-        },
-
-        {
-            title:"WITHDRAW",
-            text:"Reduce exposure until radar capability is restored.",
-            a:{fuel:-7,readiness:12,score:6},
-            b:{fuel:-7,readiness:12,score:6}
-        }
-
-    ]
+ id:"COMMAND-01",
+ category:"command",
+ title:"THE BALANCE",
+ historical:"Carrier warfare required commanders to balance offensive power against defensive requirements.",
+ question:"You have a valuable strike force ready, but enemy aircraft may be approaching. Which decision best balances risk?",
+ options:[
+  {text:"Launch the strike while retaining an appropriate fighter reserve for carrier defense.",correct:true,score:4},
+  {text:"Commit every available aircraft to the strike.",correct:false,score:-4},
+  {text:"Keep every aircraft on deck until the enemy is confirmed.",correct:false,score:-3},
+  {text:"Use reconnaissance aircraft as the primary defensive fighter force.",correct:false,score:-3}
+ ]
 },
 
-
-/* =========================================================
-   30
-   ========================================================= */
+{
+ id:"COMMAND-02",
+ category:"command",
+ title:"THE SECOND CONTACT",
+ historical:"Multiple enemy contacts could force rapid reprioritization.",
+ question:"Your reconnaissance aircraft reports a second enemy formation while your first strike is preparing. What should you do?",
+ options:[
+  {text:"Reassess the threat, preserve carrier defense, and adjust the strike if necessary.",correct:true,score:4},
+  {text:"Ignore the second report because the first mission has already been planned.",correct:false,score:-3},
+  {text:"Send every aircraft toward the second contact.",correct:false,score:-4},
+  {text:"Recall all reconnaissance aircraft immediately without transmitting the report.",correct:false,score:-3}
+ ]
+},
 
 {
-    id:"final-gamble",
-    title:"THE COMMANDER'S GAMBLE",
-    type:"FINAL DECISION",
-    historical:"Pacific Carrier Warfare",
-
-    description:
-    "The enemy has suffered losses, but your own carrier force is damaged. You have one opportunity to make a decisive move.",
-
-    options:[
-
-        {
-            title:"COMMIT EVERYTHING",
-            text:"Launch the largest possible attack and accept the risk.",
-            a:{aircraft:-18,readiness:-12,score:28},
-            b:{aircraft:-18,readiness:-12,score:28}
-        },
-
-        {
-            title:"BALANCED ATTACK",
-            text:"Attack aggressively while maintaining a reserve.",
-            a:{aircraft:-9,readiness:4,score:20},
-            b:{aircraft:-9,readiness:4,score:20}
-        },
-
-        {
-            title:"PRESERVE COMBAT POWER",
-            text:"Protect the carrier force and force the enemy to take the next risk.",
-            a:{aircraft:5,readiness:14,score:12},
-            b:{aircraft:5,readiness:14,score:12}
-        },
-
-        {
-            title:"COMPLETE THE MISSION",
-            text:"Ignore the opportunity for a decisive strike and accomplish the operational objective.",
-            a:{mission:12,readiness:7,score:23},
-            b:{mission:12,readiness:7,score:23}
-        }
-
-    ]
+ id:"COMMAND-03",
+ category:"command",
+ title:"THE LONG RETURN",
+ historical:"Distance and fuel affected carrier operations throughout the Pacific.",
+ question:"A strike group has a long return flight and fuel state is becoming a concern. What is the best command priority?",
+ options:[
+  {text:"Plan the recovery around aircraft fuel state and available deck capacity.",correct:true,score:4},
+  {text:"Keep aircraft circling until every aircraft has arrived.",correct:false,score:-4},
+  {text:"Launch another strike to use the remaining aircraft.",correct:false,score:-3},
+  {text:"Ignore fuel because carrier aircraft always have reserve fuel.",correct:false,score:-4}
+ ]
 }
 
 ];
 
 
-/* =========================================================
-   GAME STATE
-   ========================================================= */
+/* ============================================================
+   TOURNAMENT START
+============================================================ */
 
-let game = {
+function startTournament(){
 
-    battleNumber: 1,
+  battleNumber = 1;
+  round = 1;
 
-    round: 1,
+  usedThisBattle = [];
+  previousBattleScenarios = [];
+  tournamentScenarioHistory = [];
+  tournamentHistory = [];
 
-    currentScenario: null,
+  resetPlayers();
 
-    /*
-        Scenarios used during CURRENT battle.
-    */
-    usedThisBattle: [],
+  document.getElementById("briefingScreen")
+    .classList.remove("active");
 
-    /*
-        Scenarios used during IMMEDIATELY PREVIOUS battle.
-    */
-    previousBattleScenarios: [],
+  document.getElementById("finalScreen")
+    .classList.remove("active");
 
-    /*
-        Every scenario ever used during this tournament.
-        This gives us additional memory and lets the game
-        track long-term repetition.
-    */
-    tournamentScenarioHistory: [],
+  document.getElementById("gameScreen")
+    .classList.add("active");
 
-    tournamentHistory: [],
-
-    players: {
-
-        A: createPlayer("COMMANDER A"),
-
-        B: createPlayer("COMMANDER B")
-
-    }
-
-};
-
-
-/* =========================================================
-   PLAYER CREATION
-   ========================================================= */
-
-function createPlayer(name) {
-
-    return {
-
-        name: name,
-
-        score: 0,
-
-        aircraft: 100,
-
-        intel: 50,
-
-        readiness: 80,
-
-        fuel: 90,
-
-        mission: 50
-
-    };
+  beginBattle();
 
 }
 
 
-/* =========================================================
-   SCREEN CONTROL
-   ========================================================= */
+/* ============================================================
+   RESET PLAYERS
+============================================================ */
 
-function hideAllScreens() {
+function resetPlayers(){
 
-    document
-        .getElementById("startScreen")
-        .classList.add("hidden");
+  players.A = {
+    score:10,
+    aircraft:100,
+    intel:100,
+    readiness:100,
+    fuel:100,
+    mission:100
+  };
 
-    document
-        .getElementById("rulesScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("gameScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("finalScreen")
-        .classList.add("hidden");
-
-    document
-        .getElementById("tournamentScreen")
-        .classList.add("hidden");
+  players.B = {
+    score:10,
+    aircraft:100,
+    intel:100,
+    readiness:100,
+    fuel:100,
+    mission:100
+  };
 
 }
 
 
-function showRules() {
-
-    hideAllScreens();
-
-    document
-        .getElementById("rulesScreen")
-        .classList.remove("hidden");
-
-}
-
-
-function backToStart() {
-
-    hideAllScreens();
-
-    document
-        .getElementById("startScreen")
-        .classList.remove("hidden");
-
-}
-
-
-/* =========================================================
-   START NEW TOURNAMENT
-   ========================================================= */
-
-function startNewTournament() {
-
-    game = {
-
-        battleNumber: 1,
-
-        round: 1,
-
-        currentScenario: null,
-
-        usedThisBattle: [],
-
-        previousBattleScenarios: [],
-
-        tournamentScenarioHistory: [],
-
-        tournamentHistory: [],
-
-        players: {
-
-            A: createPlayer("COMMANDER A"),
-
-            B: createPlayer("COMMANDER B")
-
-        }
-
-    };
-
-    startBattle();
-
-}
-
-
-/* =========================================================
+/* ============================================================
    START BATTLE
-   ========================================================= */
+============================================================ */
 
-function startBattle() {
+function beginBattle(){
 
-    hideAllScreens();
+  round = 1;
 
-    document
-        .getElementById("gameScreen")
-        .classList.remove("hidden");
+  usedThisBattle = [];
 
-    game.round = 1;
+  commanderAChoice = null;
+  commanderBChoice = null;
 
-    game.usedThisBattle = [];
+  activeCommander = "A";
 
-    game.players.A =
-        createPlayer("COMMANDER A");
+  resetPlayers();
 
-    game.players.B =
-        createPlayer("COMMANDER B");
+  updateUI();
 
-    updateDashboard();
-
-    loadScenario();
+  loadRound();
 
 }
 
 
-/* =========================================================
+/* ============================================================
    SCENARIO SELECTION
-   =========================================================
+============================================================ */
 
-   THIS IS THE CORE ANTI-REPEAT SYSTEM.
+function chooseScenario(){
 
-   Priority:
+  /*
+    First priority:
+    - Not used this battle
+    - Not used in previous battles
+    - Not used anywhere in tournament
 
-   1. Never used in current battle.
-   2. Never used in previous battle.
-   3. Prefer scenarios not used anywhere in tournament.
-   4. If necessary, fall back to scenarios not used
-      in current battle.
+    This produces the strongest possible anti-repeat behavior.
+  */
 
-   Because the database currently contains 30 scenarios,
-   a ten-round battle leaves at least 20 scenarios outside
-   that battle.
+  let available = SCENARIOS.filter(s =>
+    !usedThisBattle.includes(s.id) &&
+    !previousBattleScenarios.includes(s.id) &&
+    !tournamentScenarioHistory.includes(s.id)
+  );
 
-   Therefore Battle 2 can use ten completely different
-   scenarios from Battle 1.
+  /*
+    If the tournament has used most of the database,
+    allow scenarios from older battles but still NEVER
+    repeat inside the current battle.
+  */
 
-   Battle 3 can also normally use another unique group.
-   ========================================================= */
+  if(available.length === 0){
 
-function chooseScenario() {
-
-    let available =
-        SCENARIOS.filter(scenario =>
-
-            !game.usedThisBattle.includes(
-                scenario.id
-            )
-
-            &&
-
-            !game.previousBattleScenarios.includes(
-                scenario.id
-            )
-
-        );
-
-
-    /*
-        Prefer scenarios never used anywhere in this
-        tournament.
-    */
-
-    let neverUsedTournament =
-        available.filter(scenario =>
-
-            !game.tournamentScenarioHistory.includes(
-                scenario.id
-            )
-
-        );
-
-
-    if(neverUsedTournament.length >= 10) {
-
-        available = neverUsedTournament;
-
-    }
-
-
-    /*
-        If fewer than ten completely new scenarios remain,
-        continue using scenarios that at least were NOT in
-        the previous battle.
-    */
-
-
-    /*
-        Absolute safety fallback.
-
-        This prevents the game from ever repeating a scenario
-        within the same ten-round battle.
-    */
-
-    if(available.length === 0) {
-
-        available =
-            SCENARIOS.filter(scenario =>
-
-                !game.usedThisBattle.includes(
-                    scenario.id
-                )
-
-            );
-
-    }
-
-
-    if(available.length === 0) {
-
-        alert(
-            "ERROR: No unused scenarios remain."
-        );
-
-        return null;
-
-    }
-
-
-    /*
-        Random selection happens ONLY AFTER filtering.
-
-        Therefore randomness cannot create an accidental repeat.
-    */
-
-    const selected =
-        available[
-            Math.floor(
-                Math.random() * available.length
-            )
-        ];
-
-
-    game.usedThisBattle.push(
-        selected.id
+    available = SCENARIOS.filter(s =>
+      !usedThisBattle.includes(s.id) &&
+      !previousBattleScenarios.includes(s.id)
     );
 
+  }
 
-    game.tournamentScenarioHistory.push(
-        selected.id
+  /*
+    Final fallback if the entire database has been exhausted.
+    The current battle itself is still protected.
+  */
+
+  if(available.length === 0){
+
+    available = SCENARIOS.filter(s =>
+      !usedThisBattle.includes(s.id)
     );
 
+  }
 
-    return selected;
+  /*
+    Try to use a different category than the previous round
+    whenever possible.
+  */
+
+  const previousCategory =
+    currentScenario ? currentScenario.category : null;
+
+  let categoryAlternatives =
+    available.filter(s => s.category !== previousCategory);
+
+  if(categoryAlternatives.length > 0){
+    available = categoryAlternatives;
+  }
+
+  const scenario =
+    available[Math.floor(Math.random()*available.length)];
+
+  usedThisBattle.push(scenario.id);
+
+  tournamentScenarioHistory.push(scenario.id);
+
+  return scenario;
 
 }
 
 
-/* =========================================================
-   LOAD SCENARIO
-   ========================================================= */
+/* ============================================================
+   LOAD ROUND
+============================================================ */
 
-function loadScenario() {
+function loadRound(){
 
-    const scenario =
-        chooseScenario();
+  currentScenario = chooseScenario();
 
-    if(!scenario) return;
+  commanderAChoice = null;
+  commanderBChoice = null;
 
-    game.currentScenario =
-        scenario;
+  activeCommander = "A";
 
-    document
-        .getElementById("roundNumber")
-        .textContent =
-        game.round;
+  document.getElementById("activeCommander").textContent = "A";
 
-    document
-        .getElementById("battleNumber")
-        .textContent =
-        game.battleNumber;
+  document.getElementById("roundNumber").textContent =
+    `${round} / 10`;
 
-    renderScenario(scenario);
+  document.getElementById("battleNumber").textContent =
+    battleNumber;
 
-    updateDashboard();
+  document.getElementById("turnover").classList.remove("show");
+
+  renderMission(currentScenario);
+
+  renderTaskForces();
+
+  updateUI();
 
 }
 
 
-/* =========================================================
-   RENDER SCENARIO
-   ========================================================= */
+/* ============================================================
+   MISSION RENDERER
+============================================================ */
 
-function renderScenario(scenario) {
+function renderMission(s){
 
-    const container =
-        document.getElementById(
-            "scenarioContainer"
-        );
+  const container =
+    document.getElementById("missionContainer");
 
+  let html = `
 
-    container.innerHTML = `
+    <div class="mission">
 
-        <div class="scenario">
+      <div class="missionHeader">
 
-            <div class="scenario-number">
+        <div>
+          <div class="roundBadge">
+            ROUND ${round} OF 10
+          </div>
 
-                ROUND ${game.round} OF 10
+          <h2>${s.title}</h2>
 
-                —
-                
-                ${scenario.type}
-
-            </div>
-
-
-            <div class="scenario-title">
-
-                ${scenario.title}
-
-            </div>
-
-
-            <div class="historical-note">
-
-                <strong>
-                    HISTORICAL CONTEXT:
-                </strong>
-
-                ${scenario.historical}
-
-            </div>
-
-
-            <p>
-                ${scenario.description}
-            </p>
-
-
-            <p class="typewriter">
-
-                COMMANDER A:
-                MAKE YOUR DECISION.
-
-            </p>
-
-
-            <div class="options">
-
-                ${scenario.options.map(
-                    (option,index) => `
-
-                    <button
-                        class="option"
-                        onclick="selectDecision(${index})"
-                        id="option-${index}">
-
-                        <div class="option-title">
-
-                            ${String.fromCharCode(65 + index)}.
-
-                            ${option.title}
-
-                        </div>
-
-                        <div>
-                            ${option.text}
-                        </div>
-
-                    </button>
-
-                `
-                ).join("")}
-
-            </div>
-
-
-            <div
-                id="decisionStatus"
-                class="typewriter"
-                style="margin-top:15px;">
-
-                Awaiting Commander A...
-
-            </div>
-
+          <div class="historical">
+            ${s.historical}
+          </div>
         </div>
 
-    `;
-
-}
-
-
-/* =========================================================
-   PLAYER DECISIONS
-   ========================================================= */
-
-let decisionA = null;
-
-let decisionB = null;
-
-
-/*
-    Commander A chooses first.
-
-    Commander B cannot see the selection.
-
-    Then the computer passes control to Commander B.
-*/
-
-function selectDecision(index) {
-
-    if(decisionA !== null) {
-        return;
-    }
-
-
-    decisionA = index;
-
-
-    document
-        .querySelectorAll(".option")
-        .forEach(button =>
-
-            button.classList.remove(
-                "selected"
-            )
-
-        );
-
-
-    document
-        .getElementById(
-            `option-${index}`
-        )
-        .classList.add("selected");
-
-
-    document
-        .getElementById(
-            "decisionStatus"
-        )
-        .innerHTML = `
-
-            COMMANDER A DECISION LOCKED.
-
-            <br><br>
-
-            <strong>
-                PASS THE COMMAND TO COMMANDER B.
-            </strong>
-
-            <br><br>
-
-            <button
-                class="btn primary"
-                onclick="beginPlayerBDecision()">
-
-                COMMANDER B —
-                TAKE CONTROL
-
-            </button>
-
-        `;
-
-}
-
-
-/* =========================================================
-   COMMANDER B DECISION SCREEN
-   ========================================================= */
-
-function beginPlayerBDecision() {
-
-    const scenario =
-        game.currentScenario;
-
-
-    document
-        .getElementById(
-            "scenarioContainer"
-        )
-        .innerHTML = `
-
-        <div class="scenario">
-
-            <div class="scenario-number">
-
-                ROUND ${game.round} OF 10
-
-            </div>
-
-
-            <div class="scenario-title">
-
-                COMMANDER B —
-                DECISION
-
-            </div>
-
-
-            <div class="historical-note">
-
-                <strong>
-                    CLASSIFIED:
-                </strong>
-
-                Commander A's decision is hidden.
-
-            </div>
-
-
-            <p>
-                ${scenario.description}
-            </p>
-
-
-            <p class="typewriter">
-
-                COMMANDER B:
-
-                MAKE YOUR DECISION.
-
-            </p>
-
-
-            <div class="options">
-
-                ${scenario.options.map(
-                    (option,index) => `
-
-                    <button
-                        class="option"
-                        onclick="selectPlayerB(${index})">
-
-                        <div class="option-title">
-
-                            ${String.fromCharCode(65 + index)}.
-
-                            ${option.title}
-
-                        </div>
-
-                        <div>
-                            ${option.text}
-                        </div>
-
-                    </button>
-
-                `
-                ).join("")}
-
-            </div>
-
+        <div>
+          <strong>
+            ${s.category.toUpperCase()}
+          </strong>
         </div>
 
-    `;
+      </div>
 
-}
+      <div class="question">
+        ${s.question}
+      </div>
 
+  `;
 
-/* =========================================================
-   PLAYER B SELECTS
-   ========================================================= */
 
-function selectPlayerB(index) {
+  /* ==========================================
+     NORMAL MULTIPLE CHOICE
+  ========================================== */
 
-    decisionB = index;
+  if(s.category === "command" ||
+     s.category === "recon" ||
+     s.category === "target" ||
+     s.category === "cap" ||
+     s.category === "flightDeck" ||
+     s.category === "recovery" ||
+     s.category === "carrierParts" ||
+     s.category === "geography"){
 
-    resolveRound();
+    html += `<div class="options">`;
 
-}
+    s.options.forEach((o,i)=>{
 
+      html += `
 
-/* =========================================================
-   RESOLVE ROUND
-   ========================================================= */
+        <button class="option"
+                onclick="selectOption(${i})">
 
-function resolveRound() {
+          <span class="letter">
+            ${String.fromCharCode(65+i)}
+          </span>
 
-    const scenario =
-        game.currentScenario;
+          ${o.text}
 
+        </button>
 
-    const resultA =
-        scenario
-            .options[decisionA]
-            .a;
-
-
-    const resultB =
-        scenario
-            .options[decisionB]
-            .b;
-
-
-    applyResult(
-        game.players.A,
-        resultA
-    );
-
-
-    applyResult(
-        game.players.B,
-        resultB
-    );
-
-
-    /*
-        Competitive tactical bonus.
-
-        If players make different decisions,
-        the stronger immediate tactical result earns
-        two additional victory points.
-    */
-
-    if(decisionA !== decisionB) {
-
-        const scoreA =
-            resultA.score || 0;
-
-        const scoreB =
-            resultB.score || 0;
-
-
-        if(scoreA > scoreB) {
-
-            game.players.A.score += 2;
-
-        }
-
-        else if(scoreB > scoreA) {
-
-            game.players.B.score += 2;
-
-        }
-
-    }
-
-
-    renderRoundResult(
-        scenario,
-        resultA,
-        resultB,
-        decisionA,
-        decisionB
-    );
-
-
-    decisionA = null;
-
-    decisionB = null;
-
-}
-
-
-/* =========================================================
-   APPLY RESULT
-   ========================================================= */
-
-function applyResult(
-    player,
-    result
-) {
-
-    player.score +=
-        result.score || 0;
-
-    player.aircraft +=
-        result.aircraft || 0;
-
-    player.intel +=
-        result.intel || 0;
-
-    player.readiness +=
-        result.readiness || 0;
-
-    player.fuel +=
-        result.fuel || 0;
-
-    player.mission +=
-        result.mission || 0;
-
-
-    player.aircraft =
-        clamp(
-            player.aircraft,
-            0,
-            100
-        );
-
-
-    player.intel =
-        clamp(
-            player.intel,
-            0,
-            100
-        );
-
-
-    player.readiness =
-        clamp(
-            player.readiness,
-            0,
-            100
-        );
-
-
-    player.fuel =
-        clamp(
-            player.fuel,
-            0,
-            100
-        );
-
-
-    player.mission =
-        clamp(
-            player.mission,
-            0,
-            100
-        );
-
-}
-
-
-/* =========================================================
-   CLAMP
-   ========================================================= */
-
-function clamp(
-    value,
-    min,
-    max
-) {
-
-    return Math.max(
-        min,
-        Math.min(
-            max,
-            value
-        )
-    );
-
-}
-
-
-/* =========================================================
-   ROUND RESULT
-   ========================================================= */
-
-function renderRoundResult(
-    scenario,
-    resultA,
-    resultB,
-    selectedA,
-    selectedB
-) {
-
-    const scoreA =
-        resultA.score || 0;
-
-    const scoreB =
-        resultB.score || 0;
-
-
-    let comparison;
-
-
-    if(scoreA > scoreB) {
-
-        comparison =
-            "COMMANDER A gains the tactical advantage.";
-
-    }
-
-    else if(scoreB > scoreA) {
-
-        comparison =
-            "COMMANDER B gains the tactical advantage.";
-
-    }
-
-    else {
-
-        comparison =
-            "Neither commander gains a tactical advantage.";
-
-    }
-
-
-    document
-        .getElementById(
-            "scenarioContainer"
-        )
-        .innerHTML = `
-
-        <div class="result">
-
-            <div class="stamp">
-                AFTER ACTION REPORT
-            </div>
-
-
-            <h2>
-                ROUND ${game.round}
-                COMPLETE
-            </h2>
-
-
-            <p>
-                ${comparison}
-            </p>
-
-
-            <div class="result-grid">
-
-
-                <div
-                    class="result-card
-                    ${scoreA >= scoreB
-                        ? "good"
-                        : "bad"}">
-
-                    <h3>
-                        COMMANDER A
-                    </h3>
-
-
-                    <p>
-
-                        Decision:
-
-                        <strong>
-                            ${scenario
-                                .options[selectedA]
-                                .title}
-                        </strong>
-
-                    </p>
-
-
-                    <p>
-
-                        Victory Points:
-
-                        <strong>
-
-                            ${scoreA >= 0
-                                ? "+"
-                                : ""}
-
-                            ${scoreA}
-
-                        </strong>
-
-                    </p>
-
-                </div>
-
-
-                <div
-                    class="result-card
-                    ${scoreB >= scoreA
-                        ? "good"
-                        : "bad"}">
-
-                    <h3>
-                        COMMANDER B
-                    </h3>
-
-
-                    <p>
-
-                        Decision:
-
-                        <strong>
-                            ${scenario
-                                .options[selectedB]
-                                .title}
-                        </strong>
-
-                    </p>
-
-
-                    <p>
-
-                        Victory Points:
-
-                        <strong>
-
-                            ${scoreB >= 0
-                                ? "+"
-                                : ""}
-
-                            ${scoreB}
-
-                        </strong>
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <br>
-
-
-            <button
-                class="btn primary large"
-                onclick="nextRound()">
-
-                ${
-                    game.round < 10
-                    ? "CONTINUE TO NEXT ROUND"
-                    : "END BATTLE"
-                }
-
-            </button>
-
-        </div>
-
-    `;
-
-}
-
-
-/* =========================================================
-   NEXT ROUND
-   ========================================================= */
-
-function nextRound() {
-
-    if(game.round >= 10) {
-
-        finishBattle();
-
-        return;
-
-    }
-
-
-    game.round++;
-
-    loadScenario();
-
-}
-
-
-/* =========================================================
-   DASHBOARD
-   ========================================================= */
-
-function updateDashboard() {
-
-    document
-        .getElementById("scoreA")
-        .textContent =
-        game.players.A.score;
-
-
-    document
-        .getElementById("scoreB")
-        .textContent =
-        game.players.B.score;
-
-
-    renderResources(
-        "resourcesA",
-        game.players.A
-    );
-
-
-    renderResources(
-        "resourcesB",
-        game.players.B
-    );
-
-
-    document
-        .getElementById("statusA")
-        .innerHTML =
-        commandStatus(
-            game.players.A
-        );
-
-
-    document
-        .getElementById("statusB")
-        .innerHTML =
-        commandStatus(
-            game.players.B
-        );
-
-}
-
-
-/* =========================================================
-   RESOURCES
-   ========================================================= */
-
-function renderResources(
-    elementID,
-    player
-) {
-
-    const container =
-        document.getElementById(
-            elementID
-        );
-
-
-    const resources = [
-
-        [
-            "Aircraft",
-            player.aircraft
-        ],
-
-        [
-            "Intel",
-            player.intel
-        ],
-
-        [
-            "Readiness",
-            player.readiness
-        ],
-
-        [
-            "Fuel",
-            player.fuel
-        ],
-
-        [
-            "Mission",
-            player.mission
-        ]
-
-    ];
-
-
-    container.innerHTML =
-        resources.map(
-            resource => `
-
-            <div class="resource">
-
-                <div class="resource-name">
-                    ${resource[0]}
-                </div>
-
-                <div class="resource-value">
-                    ${Math.round(
-                        resource[1]
-                    )}
-                </div>
-
-                <div class="bar">
-
-                    <div
-                        class="bar-fill"
-                        style="
-                            width:${resource[1]}%
-                        ">
-                    </div>
-
-                </div>
-
-            </div>
-
-        `
-        ).join("");
-
-}
-
-
-/* =========================================================
-   COMMAND STATUS
-   ========================================================= */
-
-function commandStatus(player) {
-
-    let status = [];
-
-
-    if(player.aircraft < 30) {
-
-        status.push(
-            "AIRCRAFT STRENGTH LOW"
-        );
-
-    }
-
-
-    if(player.readiness < 30) {
-
-        status.push(
-            "CARRIER READINESS CRITICAL"
-        );
-
-    }
-
-
-    if(player.intel < 25) {
-
-        status.push(
-            "INTELLIGENCE LIMITED"
-        );
-
-    }
-
-
-    if(player.fuel < 25) {
-
-        status.push(
-            "FUEL CRITICAL"
-        );
-
-    }
-
-
-    if(player.mission < 25) {
-
-        status.push(
-            "MISSION PROGRESS LOW"
-        );
-
-    }
-
-
-    if(status.length === 0) {
-
-        status.push(
-            "OPERATIONAL"
-        );
-
-    }
-
-
-    return status.map(
-        s => `
-
-        <div
-            class="typewriter"
-            style="margin:5px 0;">
-
-            ▪ ${s}
-
-        </div>
-
-        `
-    ).join("");
-
-}
-
-
-/* =========================================================
-   FINISH BATTLE
-   ========================================================= */
-
-function finishBattle() {
-
-    const A =
-        game.players.A;
-
-    const B =
-        game.players.B;
-
-
-    /*
-        COMMAND PRESERVATION BONUS
-
-        The final score is not simply the sum of decisions.
-
-        Preserving aircraft, readiness and intelligence
-        demonstrates command effectiveness.
-    */
-
-    A.score += Math.round(
-
-        A.aircraft * .10 +
-
-        A.readiness * .08 +
-
-        A.intel * .05 +
-
-        A.mission * .05
-
-    );
-
-
-    B.score += Math.round(
-
-        B.aircraft * .10 +
-
-        B.readiness * .08 +
-
-        B.intel * .05 +
-
-        B.mission * .05
-
-    );
-
-
-    let winner;
-
-
-    if(A.score > B.score) {
-
-        winner = "A";
-
-    }
-
-    else if(B.score > A.score) {
-
-        winner = "B";
-
-    }
-
-    else {
-
-        winner = "DRAW";
-
-    }
-
-
-    /*
-        SAVE THE BATTLE RECORD
-    */
-
-    game.tournamentHistory.push({
-
-        battle:
-            game.battleNumber,
-
-        winner:
-            winner,
-
-        scoreA:
-            A.score,
-
-        scoreB:
-            B.score,
-
-        scenarios:
-            [...game.usedThisBattle]
+      `;
 
     });
 
+    html += `</div>`;
 
-    /*
-        CRITICAL ANTI-REPEAT STEP.
-
-        The exact ten scenarios used in this battle are copied
-        into previousBattleScenarios.
-
-        We DO NOT clear this when the next battle begins.
-    */
-
-    game.previousBattleScenarios =
-        [...game.usedThisBattle];
+  }
 
 
-    showFinalScreen(
-        winner
+  /* ==========================================
+     AIRCRAFT
+  ========================================== */
+
+  if(s.category === "aircraft"){
+
+    html += `<div class="aircraftGrid">`;
+
+    s.aircraft.forEach((a,i)=>{
+
+      html += `
+
+        <button class="aircraftCard"
+                onclick="selectAircraft(${i})">
+
+          <div class="aircraftCode">
+            ${a.name}
+          </div>
+
+          <div class="aircraftRole">
+            ${a.role}
+          </div>
+
+        </button>
+
+      `;
+
+    });
+
+    html += `</div>`;
+
+  }
+
+
+  /* ==========================================
+     FORMATION
+  ========================================== */
+
+  if(s.category === "formation"){
+
+    html += `<div class="formationGrid">`;
+
+    s.formations.forEach((f,i)=>{
+
+      html += `
+
+        <button class="formation"
+                onclick="selectFormation(${i})">
+
+          <strong>${f.name}</strong>
+
+          <small>
+            ${f.description}
+          </small>
+
+        </button>
+
+      `;
+
+    });
+
+    html += `</div>`;
+
+  }
+
+
+  /* ==========================================
+     STRIKE ORDER
+  ========================================== */
+
+  if(s.category === "strikeOrder"){
+
+    html += `
+
+      <p>
+        Click the items in the correct order.
+        Your selections will appear below.
+      </p>
+
+      <div class="orderList">
+
+    `;
+
+    s.order.forEach((item,i)=>{
+
+      html += `
+
+        <button class="orderItem"
+                id="order-${i}"
+                onclick="selectOrderItem(${i})">
+
+          ${item}
+
+        </button>
+
+      `;
+
+    });
+
+    html += `
+
+      </div>
+
+      <div class="orderNumbers"
+           id="orderNumbers">
+        Selected order: —
+      </div>
+
+      <button class="bigButton"
+              onclick="submitOrder()">
+        SUBMIT COMMAND SEQUENCE
+      </button>
+
+    `;
+
+  }
+
+
+  html += `
+
+      <div id="resultBox"
+           class="resultBox">
+      </div>
+
+    </div>
+
+  `;
+
+  container.innerHTML = html;
+
+}
+
+
+/* ============================================================
+   MULTIPLE CHOICE
+============================================================ */
+
+function selectOption(index){
+
+  if(activeCommander !== "A" &&
+     activeCommander !== "B"){
+    return;
+  }
+
+  const buttons =
+    document.querySelectorAll(".option");
+
+  buttons.forEach(b=>b.disabled=true);
+
+  const choice =
+    currentScenario.options[index];
+
+  buttons[index].classList.add("selected");
+
+  submitDecision(choice);
+
+}
+
+
+/* ============================================================
+   AIRCRAFT
+============================================================ */
+
+function selectAircraft(index){
+
+  const cards =
+    document.querySelectorAll(".aircraftCard");
+
+  cards.forEach(c=>c.disabled=true);
+
+  cards[index].classList.add("selected");
+
+  const aircraft =
+    currentScenario.aircraft[index];
+
+  const choice = {
+    correct:aircraft.correct,
+    score:aircraft.correct ? 4 : -3,
+    text:aircraft.name
+  };
+
+  submitDecision(choice);
+
+}
+
+
+/* ============================================================
+   FORMATION
+============================================================ */
+
+function selectFormation(index){
+
+  const buttons =
+    document.querySelectorAll(".formation");
+
+  buttons.forEach(b=>b.disabled=true);
+
+  buttons[index].classList.add("selected");
+
+  const formation =
+    currentScenario.formations[index];
+
+  const choice = {
+    correct:formation.correct,
+    score:formation.correct ? 4 : -3,
+    text:formation.name
+  };
+
+  renderFormationOnMap(
+    formation.name,
+    activeCommander
+  );
+
+  submitDecision(choice);
+
+}
+
+
+/* ============================================================
+   STRIKE ORDER
+============================================================ */
+
+let selectedOrder = [];
+
+
+function selectOrderItem(index){
+
+  if(selectedOrder.includes(index)){
+    return;
+  }
+
+  selectedOrder.push(index);
+
+  const item =
+    document.getElementById(`order-${index}`);
+
+  item.classList.add("selected");
+
+  item.disabled=true;
+
+  document.getElementById("orderNumbers")
+    .textContent =
+    "Selected order: " +
+    selectedOrder
+      .map(i=>`${i+1}`)
+      .join(" → ");
+
+}
+
+
+/* ============================================================
+   SUBMIT ORDER
+============================================================ */
+
+function submitOrder(){
+
+  if(selectedOrder.length !== currentScenario.order.length){
+
+    alert(
+      "Commander: you must establish the complete sequence before submitting."
     );
 
+    return;
+
+  }
+
+  const correctOrder =
+    currentScenario.order.map((_,i)=>i);
+
+  const correct =
+    selectedOrder.every(
+      (value,index)=>value === correctOrder[index]
+    );
+
+  submitDecision({
+
+    correct:correct,
+
+    score:correct
+      ? 5
+      : -4,
+
+    text:correct
+      ? "Correct operational sequence"
+      : "Incorrect operational sequence"
+
+  });
+
 }
 
 
-/* =========================================================
-   FINAL SCREEN
-   ========================================================= */
+/* ============================================================
+   DECISION RESOLUTION
+============================================================ */
 
-function showFinalScreen(
-    winner
-) {
+function submitDecision(choice){
 
-    hideAllScreens();
+  const result =
+    document.getElementById("resultBox");
 
+  let player =
+    players[activeCommander];
 
-    document
-        .getElementById(
-            "finalScreen"
-        )
-        .classList.remove("hidden");
+  player.score += choice.score;
 
+  if(choice.correct){
 
-    const A =
-        game.players.A;
+    player.readiness =
+      Math.min(100,player.readiness+3);
 
-    const B =
-        game.players.B;
+    player.mission =
+      Math.min(100,player.mission+2);
 
+    result.innerHTML = `
 
-    let title;
+      <div class="resultTitle resultGood">
+        COMMAND DECISION CORRECT
+      </div>
 
+      <p>
+        ${choice.text}
+      </p>
 
-    if(winner === "A") {
+      <p>
+        <strong>
+          +${choice.score} Victory Points
+        </strong>
+      </p>
 
-        title =
-            "COMMANDER A — VICTORY";
-
-    }
-
-    else if(winner === "B") {
-
-        title =
-            "COMMANDER B — VICTORY";
-
-    }
-
-    else {
-
-        title =
-            "TACTICAL DRAW";
-
-    }
-
-
-    document
-        .getElementById(
-            "finalTitle"
-        )
-        .textContent =
-        title;
-
-
-    document
-        .getElementById(
-            "finalResults"
-        )
-        .innerHTML = `
-
-        <div class="result-grid">
-
-
-            <div
-                class="result-card
-                ${A.score >= B.score
-                    ? "good"
-                    : "bad"}">
-
-                <h3>
-                    COMMANDER A
-                </h3>
-
-                <div
-                    style="font-size:40px;">
-
-                    ${A.score}
-
-                </div>
-
-                <p>
-                    FINAL VICTORY POINTS
-                </p>
-
-                <p>
-                    Aircraft:
-                    ${A.aircraft}
-                </p>
-
-                <p>
-                    Readiness:
-                    ${A.readiness}
-                </p>
-
-                <p>
-                    Intelligence:
-                    ${A.intel}
-                </p>
-
-                <p>
-                    Mission:
-                    ${A.mission}
-                </p>
-
-            </div>
-
-
-            <div
-                class="result-card
-                ${B.score >= A.score
-                    ? "good"
-                    : "bad"}">
-
-                <h3>
-                    COMMANDER B
-                </h3>
-
-                <div
-                    style="font-size:40px;">
-
-                    ${B.score}
-
-                </div>
-
-                <p>
-                    FINAL VICTORY POINTS
-                </p>
-
-                <p>
-                    Aircraft:
-                    ${B.aircraft}
-                </p>
-
-                <p>
-                    Readiness:
-                    ${B.readiness}
-                </p>
-
-                <p>
-                    Intelligence:
-                    ${B.intel}
-                </p>
-
-                <p>
-                    Mission:
-                    ${B.mission}
-                </p>
-
-            </div>
-
-        </div>
+      <p>
+        Your command decision improved the task force's
+        operational position.
+      </p>
 
     `;
 
+  }else{
 
-    document
-        .getElementById(
-            "usedScenarioList"
-        )
-        .innerHTML =
+    player.readiness =
+      Math.max(0,player.readiness-5);
 
-        game.usedThisBattle
-            .map(
-                (id,index) => {
+    player.intel =
+      Math.max(0,player.intel-2);
 
-                    const scenario =
-                        SCENARIOS.find(
-                            s =>
-                            s.id === id
-                        );
+    player.mission =
+      Math.max(0,player.mission-3);
 
+    result.innerHTML = `
 
-                    return `
+      <div class="resultTitle resultBad">
+        COMMAND ERROR
+      </div>
 
-                        <div
-                            class="typewriter"
-                            style="
-                                padding:5px;
-                            ">
+      <p>
+        ${choice.text}
+      </p>
 
-                            ${index + 1}.
+      <p>
+        <strong>
+          ${choice.score} Victory Points
+        </strong>
+      </p>
 
-                            ${
-                                scenario
-                                ? scenario.title
-                                : id
-                            }
+      <p>
+        Review your command notes before the next round.
+      </p>
 
-                        </div>
+    `;
 
-                    `;
+  }
 
-                }
-            )
-            .join("");
+  result.classList.add("show");
 
-}
+  if(activeCommander === "A"){
 
+    commanderAChoice = choice;
 
-/* =========================================================
-   NEXT BATTLE
-   ========================================================= */
+    document.getElementById("turnoverTitle")
+      .textContent =
+      "COMMANDER A HAS COMPLETED THE DECISION";
 
-function beginNextBattle() {
+    document.getElementById("turnover")
+      .classList.add("show");
 
-    /*
-        DO NOT CLEAR:
+  }else{
 
-        game.previousBattleScenarios
+    commanderBChoice = choice;
 
-        DO NOT CLEAR:
+    setTimeout(resolveRound,700);
 
-        game.tournamentScenarioHistory
+  }
 
-        Those are what prevent the next battle from simply
-        repeating the previous battle.
-    */
-
-    game.battleNumber++;
-
-    game.round = 1;
-
-    game.usedThisBattle = [];
-
-
-    /*
-        New commanders start with fresh forces.
-
-        Scenario memory remains.
-    */
-
-    game.players.A =
-        createPlayer(
-            "COMMANDER A"
-        );
-
-    game.players.B =
-        createPlayer(
-            "COMMANDER B"
-        );
-
-
-    hideAllScreens();
-
-
-    document
-        .getElementById(
-            "gameScreen"
-        )
-        .classList.remove("hidden");
-
-
-    updateDashboard();
-
-    loadScenario();
+  updateUI();
 
 }
 
 
-/* =========================================================
-   TOURNAMENT SCREEN
-   ========================================================= */
+/* ============================================================
+   PASS COMMAND
+============================================================ */
 
-function showTournament() {
+function passCommand(){
 
-    hideAllScreens();
+  activeCommander = "B";
+
+  document.getElementById("activeCommander")
+    .textContent = "B";
+
+  document.getElementById("turnover")
+    .classList.remove("show");
+
+  /*
+    Re-render the mission so Commander B cannot see
+    Commander A's selected answer.
+  */
+
+  renderMission(currentScenario);
+
+  /*
+    Reset order challenge selection for Commander B.
+  */
+
+  selectedOrder = [];
+
+  updateUI();
+
+}
 
 
-    document
-        .getElementById(
-            "tournamentScreen"
-        )
-        .classList.remove("hidden");
+/* ============================================================
+   RESOLVE ROUND
+============================================================ */
 
+function resolveRound(){
 
-    const container =
-        document.getElementById(
-            "tournamentContent"
-        );
+  /*
+    Small tactical bonus if commanders make different
+    choices. This rewards independent command thinking.
+  */
 
+  if(
+    commanderAChoice &&
+    commanderBChoice &&
+    commanderAChoice.text !== commanderBChoice.text
+  ){
 
     if(
-        game.tournamentHistory.length === 0
-    ) {
+      commanderAChoice.score >
+      commanderBChoice.score
+    ){
 
-        container.innerHTML =
-            "<p>No battles have been completed.</p>";
+      players.A.score += 2;
 
-        return;
+    }else if(
+      commanderBChoice.score >
+      commanderAChoice.score
+    ){
+
+      players.B.score += 2;
 
     }
 
+  }
 
-    container.innerHTML = `
+  updateUI();
 
-        <div class="bracket">
+  if(round >= 10){
 
-            <div class="bracket-round">
+    setTimeout(finishBattle,900);
 
-                <h3>
-                    COMPLETED BATTLES
-                </h3>
+    return;
 
-                ${
-                    game
-                    .tournamentHistory
-                    .map(
-                        (battle,index) => `
+  }
 
-                        <div
-                            class="bracket-match">
+  round++;
 
-                            <strong>
+  setTimeout(loadRound,900);
 
-                                BATTLE
-                                ${index + 1}
-
-                            </strong>
-
-                            <hr>
+}
 
 
-                            <div>
+/* ============================================================
+   UPDATE UI
+============================================================ */
 
-                                COMMANDER A:
-                                ${battle.scoreA}
+function updateUI(){
 
-                            </div>
+  document.getElementById("scoreA")
+    .textContent =
+    players.A.score;
 
+  document.getElementById("scoreB")
+    .textContent =
+    players.B.score;
 
-                            <div>
+  document.getElementById("aircraftA")
+    .textContent =
+    players.A.aircraft;
 
-                                COMMANDER B:
-                                ${battle.scoreB}
+  document.getElementById("aircraftB")
+    .textContent =
+    players.B.aircraft;
 
-                            </div>
+  document.getElementById("readinessA")
+    .textContent =
+    players.A.readiness;
 
+  document.getElementById("readinessB")
+    .textContent =
+    players.B.readiness;
 
-                            <br>
+  document.getElementById("fuelA")
+    .textContent =
+    players.A.fuel;
 
+  document.getElementById("fuelB")
+    .textContent =
+    players.B.fuel;
 
-                            <div
-                                class="${
-                                    battle.winner ===
-                                    "DRAW"
-                                    ? ""
-                                    : "winner"
-                                }">
+  document.getElementById("intelA")
+    .textContent =
+    players.A.intel;
 
-                                ${
-                                    battle.winner ===
-                                    "DRAW"
+  document.getElementById("intelB")
+    .textContent =
+    players.B.intel;
 
-                                    ? "DRAW"
+  document.getElementById("missionA")
+    .textContent =
+    players.A.mission;
 
-                                    : "COMMANDER " +
-                                      battle.winner +
-                                      " ADVANCES"
-                                }
+  document.getElementById("missionB")
+    .textContent =
+    players.B.mission;
 
-                            </div>
-
-
-                            <br>
-
-
-                            <div
-                                style="
-                                    font-size:11px;
-                                    color:#b5a98b;
-                                ">
-
-                                UNIQUE SCENARIOS:
-                                ${battle.scenarios.length}
-
-                            </div>
-
-                        </div>
-
-                    `
-                    )
-                    .join("")
-                }
-
-            </div>
-
-        </div>
+}
 
 
-        <p class="typewriter">
+/* ============================================================
+   TASK FORCE MAP
+============================================================ */
 
-            TOTAL BATTLES COMPLETED:
-            ${game.tournamentHistory.length}
+/*
+  This map deliberately uses a stylized Pacific chart rather
+  than an inaccurate modern satellite image.
 
-        </p>
+  Ship symbols:
+
+  CV = Carrier
+  CA = Heavy Cruiser
+  CL = Light Cruiser
+  DD = Destroyer
+  AO = Oiler / support
+
+  The game uses the term "carrier strike group" for students,
+  while historically these formations were carrier task forces.
+*/
 
 
-        <p class="typewriter">
+function renderTaskForces(){
 
-            UNIQUE SCENARIOS USED:
-            ${game.tournamentScenarioHistory.length}
+  const groupA =
+    document.getElementById("taskForceA");
 
-        </p>
+  const groupB =
+    document.getElementById("taskForceB");
+
+  groupA.innerHTML = "";
+  groupB.innerHTML = "";
+
+  drawTaskForce(
+    groupA,
+    390,
+    260,
+    "A",
+    "screen"
+  );
+
+  drawTaskForce(
+    groupB,
+    600,
+    180,
+    "B",
+    "screen"
+  );
+
+}
+
+
+function drawTaskForce(
+  parent,
+  x,
+  y,
+  side,
+  formation
+){
+
+  const color =
+    side === "A"
+      ? "#d7b95b"
+      : "#8eb8ce";
+
+  const group =
+    document.createElementNS(
+      "http://www.w3.org/2000/svg",
+      "g"
+    );
+
+  group.setAttribute(
+    "transform",
+    `translate(${x},${y})`
+  );
+
+  /* Carrier */
+
+  addShip(
+    group,
+    0,
+    0,
+    "CV",
+    color,
+    1.5
+  );
+
+  /* Cruisers */
+
+  addShip(
+    group,
+    -55,
+    -35,
+    "CA",
+    color,
+    .9
+  );
+
+  addShip(
+    group,
+    55,
+    -35,
+    "CL",
+    color,
+    .9
+  );
+
+  /* Destroyers */
+
+  addShip(
+    group,
+    -90,
+    -85,
+    "DD",
+    color,
+    .75
+  );
+
+  addShip(
+    group,
+    -30,
+    -100,
+    "DD",
+    color,
+    .75
+  );
+
+  addShip(
+    group,
+    30,
+    -100,
+    "DD",
+    color,
+    .75
+  );
+
+  addShip(
+    group,
+    90,
+    -85,
+    "DD",
+    color,
+    .75
+  );
+
+  /* Support ship */
+
+  addShip(
+    group,
+    120,
+    35,
+    "AO",
+    color,
+    .7
+  );
+
+  /*
+    CAP aircraft symbols
+  */
+
+  addAircraftSymbol(
+    group,
+    -35,
+    -145,
+    color
+  );
+
+  addAircraftSymbol(
+    group,
+    35,
+    -145,
+    color
+  );
+
+  parent.appendChild(group);
+
+}
+
+
+/* ============================================================
+   DRAW SHIP
+============================================================ */
+
+function addShip(
+  parent,
+  x,
+  y,
+  label,
+  color,
+  scale
+){
+
+  const ns =
+    "http://www.w3.org/2000/svg";
+
+  const g =
+    document.createElementNS(ns,"g");
+
+  g.setAttribute(
+    "transform",
+    `translate(${x},${y}) scale(${scale})`
+  );
+
+  const body =
+    document.createElementNS(ns,"path");
+
+  body.setAttribute(
+    "d",
+    "M-28,-5 L18,-5 L28,0 L18,5 L-28,5 L-34,0 Z"
+  );
+
+  body.setAttribute("fill","#1a211d");
+
+  body.setAttribute(
+    "stroke",
+    color
+  );
+
+  body.setAttribute(
+    "stroke-width",
+    "2"
+  );
+
+  g.appendChild(body);
+
+  if(label === "CV"){
+
+    const deck =
+      document.createElementNS(ns,"rect");
+
+    deck.setAttribute("x",-20);
+    deck.setAttribute("y",-13);
+    deck.setAttribute("width",40);
+    deck.setAttribute("height",8);
+
+    deck.setAttribute(
+      "fill",
+      color
+    );
+
+    deck.setAttribute(
+      "opacity",
+      ".8"
+    );
+
+    g.appendChild(deck);
+
+  }
+
+  const text =
+    document.createElementNS(ns,"text");
+
+  text.setAttribute("x",0);
+  text.setAttribute("y",22);
+  text.setAttribute("text-anchor","middle");
+
+  text.setAttribute(
+    "fill",
+    color
+  );
+
+  text.setAttribute(
+    "font-size",
+    "11"
+  );
+
+  text.setAttribute(
+    "font-weight",
+    "bold"
+  );
+
+  text.textContent = label;
+
+  g.appendChild(text);
+
+  parent.appendChild(g);
+
+}
+
+
+/* ============================================================
+   AIRCRAFT MAP SYMBOL
+============================================================ */
+
+function addAircraftSymbol(
+  parent,
+  x,
+  y,
+  color
+){
+
+  const ns =
+    "http://www.w3.org/2000/svg";
+
+  const g =
+    document.createElementNS(ns,"g");
+
+  g.setAttribute(
+    "transform",
+    `translate(${x},${y})`
+  );
+
+  const path =
+    document.createElementNS(ns,"path");
+
+  path.setAttribute(
+    "d",
+    "M0,-10 L4,-2 L13,3 L4,4 L0,11 L-4,4 L-13,3 L-4,-2 Z"
+  );
+
+  path.setAttribute(
+    "fill",
+    color
+  );
+
+  path.setAttribute(
+    "opacity",
+    ".9"
+  );
+
+  g.appendChild(path);
+
+  parent.appendChild(g);
+
+}
+
+
+/* ============================================================
+   FORMATION MAP UPDATE
+============================================================ */
+
+function renderFormationOnMap(
+  formation,
+  side
+){
+
+  document.getElementById("mapFormation")
+    .textContent =
+    `${side} TASK FORCE: ${formation.toUpperCase()}`;
+
+  /*
+    The formation selection is primarily a command decision.
+    The visible task-force symbols reinforce the relationship
+    between carrier, cruisers and destroyers.
+  */
+
+}
+
+
+/* ============================================================
+   BATTLE FINISH
+============================================================ */
+
+function finishBattle(){
+
+  /*
+    Resource preservation bonuses make the game about more
+    than simply choosing correct answers.
+  */
+
+  players.A.score +=
+    Math.round(players.A.aircraft * .10);
+
+  players.A.score +=
+    Math.round(players.A.readiness * .08);
+
+  players.A.score +=
+    Math.round(players.A.intel * .05);
+
+  players.A.score +=
+    Math.round(players.A.mission * .05);
+
+
+  players.B.score +=
+    Math.round(players.B.aircraft * .10);
+
+  players.B.score +=
+    Math.round(players.B.readiness * .08);
+
+  players.B.score +=
+    Math.round(players.B.intel * .05);
+
+  players.B.score +=
+    Math.round(players.B.mission * .05);
+
+
+  let winner;
+
+  if(players.A.score > players.B.score){
+
+    winner = "COMMANDER A";
+
+  }else if(players.B.score > players.A.score){
+
+    winner = "COMMANDER B";
+
+  }else{
+
+    /*
+      Tie breaker:
+      mission readiness.
+    */
+
+    const aTie =
+      players.A.readiness +
+      players.A.mission;
+
+    const bTie =
+      players.B.readiness +
+      players.B.mission;
+
+    winner =
+      aTie >= bTie
+        ? "COMMANDER A"
+        : "COMMANDER B";
+
+  }
+
+
+  tournamentHistory.push({
+
+    battle:battleNumber,
+
+    winner:winner,
+
+    scoreA:players.A.score,
+
+    scoreB:players.B.score,
+
+    scenarios:[...usedThisBattle]
+
+  });
+
+
+  document.getElementById("gameScreen")
+    .classList.remove("active");
+
+  document.getElementById("finalScreen")
+    .classList.add("active");
+
+
+  document.getElementById("finalTitle")
+    .textContent =
+    `BATTLE ${battleNumber} COMPLETE`;
+
+  document.getElementById("winnerText")
+    .textContent =
+    `${winner} ADVANCES`;
+
+  document.getElementById("finalScores")
+    .innerHTML = `
+
+      <p>
+        Commander A:
+        <strong>${players.A.score} VP</strong>
+      </p>
+
+      <p>
+        Commander B:
+        <strong>${players.B.score} VP</strong>
+      </p>
+
+      <p>
+        Ten operational rounds completed.
+      </p>
 
     `;
 
-}
 
-
-/* =========================================================
-   RESET TOURNAMENT
-   ========================================================= */
-
-function resetTournament() {
-
-    const confirmed =
-        confirm(
-            "Reset the entire tournament and clear all scenario history?"
-        );
-
-
-    if(!confirmed) {
-        return;
-    }
-
-
-    game = {
-
-        battleNumber: 1,
-
-        round: 1,
-
-        currentScenario: null,
-
-        usedThisBattle: [],
-
-        previousBattleScenarios: [],
-
-        tournamentScenarioHistory: [],
-
-        tournamentHistory: [],
-
-        players: {
-
-            A:createPlayer(
-                "COMMANDER A"
-            ),
-
-            B:createPlayer(
-                "COMMANDER B"
-            )
-
-        }
-
-    };
-
-
-    backToStart();
+  renderTournamentHistory();
 
 }
 
 
-/* =========================================================
-   KEYBOARD SUPPORT
-   =========================================================
+/* ============================================================
+   TOURNAMENT HISTORY
+============================================================ */
 
-   A = option A
-   B = option B
-   C = option C
-   D = option D
+function renderTournamentHistory(){
 
-   This only works while Commander A is selecting.
-   ========================================================= */
+  const box =
+    document.getElementById("historyList");
 
-document.addEventListener(
-    "keydown",
-    function(event) {
+  box.innerHTML = "";
 
-        if(
+  tournamentHistory.forEach(b=>{
 
-            game.currentScenario &&
+    const div =
+      document.createElement("div");
 
-            decisionA === null &&
+    div.style.padding = "10px 0";
+    div.style.borderBottom =
+      "1px solid #8a8067";
 
-            ["a","b","c","d"]
-                .includes(
-                    event.key.toLowerCase()
-                )
+    div.innerHTML = `
 
-        ) {
+      <strong>
+        Battle ${b.battle}
+      </strong>
 
-            const index =
-                event
-                .key
-                .toLowerCase()
-                .charCodeAt(0)
-                -
-                97;
+      —
+      ${b.winner}
+
+      <br>
+
+      <small>
+        A: ${b.scoreA} VP |
+        B: ${b.scoreB} VP |
+        ${b.scenarios.length}
+        unique scenarios used
+      </small>
+
+    `;
+
+    box.appendChild(div);
+
+  });
+
+}
 
 
-            selectDecision(index);
+/* ============================================================
+   BEGIN NEXT BATTLE
+============================================================ */
 
-        }
+function beginNextBattle(){
 
-    }
-);
+  /*
+    CRITICAL ANTI-REPEAT SYSTEM
+
+    Save the scenarios from this battle before beginning
+    the next one.
+
+    They remain protected.
+  */
+
+  previousBattleScenarios = [
+    ...previousBattleScenarios,
+    ...usedThisBattle
+  ];
 
 
-/* =========================================================
-   INITIALIZE
-   ========================================================= */
+  battleNumber++;
 
-document.addEventListener(
-    "DOMContentLoaded",
-    function() {
+  /*
+    Tournament scenario history is NOT cleared.
 
-        /*
-            The start screen is displayed automatically.
-        */
+    This is what prevents the tournament from recycling
+    previously used scenarios unnecessarily.
+  */
 
-        hideAllScreens();
+  document.getElementById("finalScreen")
+    .classList.remove("active");
 
-        document
-            .getElementById(
-                "startScreen"
-            )
-            .classList.remove(
-                "hidden"
-            );
+  document.getElementById("gameScreen")
+    .classList.add("active");
 
-    }
-);
+  beginBattle();
+
+}
+
+
+/* ============================================================
+   INITIAL MAP
+============================================================ */
+
+renderTaskForces();
+
 
 </script>
 
