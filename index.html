@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>WWII Pacific Carrier Command</title>
 
 <style>
 
 /* =========================================================
-   GENERAL
+   BASIC
 ========================================================= */
 
 * {
@@ -19,7 +18,7 @@
 body {
     margin: 0;
     background: #d8ceb0;
-    color: #1d2222;
+    color: #202525;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -31,7 +30,7 @@ button {
 .screen {
     display: none;
     min-height: 100vh;
-    padding: 30px;
+    padding: 28px;
 }
 
 .screen.active {
@@ -48,74 +47,74 @@ button {
     padding-top: 120px;
 }
 
-.military-title {
-    font-size: 56px;
+.title {
+    font-size: 58px;
     font-weight: 900;
     letter-spacing: 4px;
 }
 
 .subtitle {
     font-size: 20px;
-    letter-spacing: 2px;
+    letter-spacing: 3px;
     margin: 20px 0 60px;
 }
 
-.big-button {
+.bigButton {
     background: #252b2b;
     color: white;
     border: 4px solid #151919;
     border-radius: 7px;
     padding: 20px 55px;
-    font-size: 25px;
+    font-size: 26px;
     font-weight: bold;
 }
 
-.big-button:hover {
-    background: #3b4444;
+.bigButton:hover {
+    background: #3d4747;
 }
 
 
 /* =========================================================
-   SETUP
+   PANELS
 ========================================================= */
 
 .panel {
-    max-width: 850px;
-    margin: 50px auto;
+    max-width: 950px;
+    margin: 35px auto;
     background: #eee5cc;
     border: 5px solid #292d2d;
-    padding: 40px;
+    padding: 35px;
     box-shadow: 8px 8px 0 #8d856e;
 }
 
 .panel h1 {
+    margin-top: 0;
     font-size: 40px;
 }
 
 label {
     display: block;
-    margin-top: 20px;
-    font-size: 19px;
     font-weight: bold;
+    margin-top: 18px;
 }
 
 input {
     width: 100%;
     padding: 14px;
-    margin-top: 8px;
+    font-size: 20px;
     border: 3px solid #292d2d;
-    background: #f8f4e7;
-    font-size: 19px;
+    margin-top: 7px;
+    background: #faf7ea;
 }
 
 
 /* =========================================================
-   PASS SCREEN
+   PASS
 ========================================================= */
 
-.pass-box {
+.passBox {
     max-width: 800px;
-    margin: 100px auto;
+    margin: 90px auto;
     background: #eee5cc;
     border: 6px solid #292d2d;
     padding: 55px;
@@ -123,45 +122,79 @@ input {
     box-shadow: 10px 10px 0 #8d856e;
 }
 
-.pass-title {
+.passTitle {
     font-size: 46px;
     font-weight: 900;
 }
 
-.pass-name {
-    font-size: 32px;
+.passName {
+    font-size: 34px;
     font-weight: bold;
     margin: 25px 0;
 }
 
-.warning {
-    margin-bottom: 30px;
-    font-size: 18px;
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.header {
+    background: #252b2b;
+    color: white;
+    border: 4px solid #151919;
+    padding: 15px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.headerTitle {
+    font-size: 27px;
+    font-weight: bold;
+}
+
+.round {
+    font-size: 23px;
+    font-weight: bold;
 }
 
 
 /* =========================================================
-   GAME HEADER
+   COMMANDER BRIEF
 ========================================================= */
 
-.game-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #252b2b;
-    color: white;
-    border: 4px solid #151919;
-    padding: 16px 22px;
+.commandBrief {
+    background: #eee5cc;
+    border: 4px solid #292d2d;
+    margin: 15px 0;
+    padding: 18px;
 }
 
-.game-header h1 {
-    margin: 0;
+.commandBrief h2 {
+    margin: 0 0 8px;
     font-size: 27px;
 }
 
-.round-number {
-    font-size: 23px;
-    font-weight: bold;
+.briefText {
+    font-size: 18px;
+    line-height: 1.5;
+}
+
+.briefGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.briefBox {
+    background: #ddd2b2;
+    border: 3px solid #292d2d;
+    padding: 14px;
+}
+
+.briefBox h3 {
+    margin: 0 0 10px;
 }
 
 
@@ -169,29 +202,29 @@ input {
    STATUS
 ========================================================= */
 
-.status-grid {
+.statusGrid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 16px 0;
+    gap: 10px;
+    margin: 15px 0;
 }
 
-.status-card {
+.statusCard {
     background: #eee5cc;
     border: 3px solid #292d2d;
-    padding: 13px;
     text-align: center;
+    padding: 11px;
 }
 
-.status-card strong {
+.statusCard strong {
     display: block;
     font-size: 13px;
 }
 
-.status-number {
-    font-size: 25px;
-    font-weight: bold;
-    margin-top: 6px;
+.statusValue {
+    font-size: 24px;
+    font-weight: 900;
+    margin-top: 5px;
 }
 
 
@@ -199,30 +232,62 @@ input {
    MAP
 ========================================================= */
 
-.map {
-    position: relative;
-    height: 390px;
-
-    background:
-        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px),
-        #647b75;
-
-    background-size: 40px 40px;
-
-    border: 5px solid #292d2d;
-    overflow: hidden;
+.mapLabel {
+    background: #292d2d;
+    color: white;
+    padding: 11px 15px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
-.map-title {
+.map {
+    position: relative;
+    height: 420px;
+    border: 5px solid #292d2d;
+    overflow: hidden;
+
+    background-color: #667e77;
+
+    background-image:
+        linear-gradient(rgba(255,255,255,.10) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.10) 1px, transparent 1px);
+
+    background-size: 40px 40px;
+}
+
+.mapTitle {
     position: absolute;
     top: 10px;
     left: 15px;
     color: white;
     font-weight: bold;
     letter-spacing: 2px;
-    z-index: 20;
+    z-index: 50;
 }
+
+.north {
+    position: absolute;
+    right: 18px;
+    top: 15px;
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    z-index: 50;
+}
+
+.zone {
+    position: absolute;
+    color: rgba(255,255,255,.45);
+    font-weight: bold;
+    font-size: 15px;
+}
+
+.zoneA { left: 8%; top: 20%; }
+.zoneB { left: 35%; top: 20%; }
+.zoneC { left: 65%; top: 20%; }
+.zoneD { left: 8%; top: 65%; }
+.zoneE { left: 35%; top: 65%; }
+.zoneF { left: 65%; top: 65%; }
 
 
 /* =========================================================
@@ -232,66 +297,67 @@ input {
 .ship {
     position: absolute;
     width: 82px;
-    height: 25px;
+    height: 27px;
+    border: 3px solid #111;
     border-radius: 5px;
-
+    color: white;
     text-align: center;
     padding-top: 4px;
-
-    color: white;
     font-size: 11px;
-    font-weight: bold;
-
-    border: 2px solid #111;
-
-    transition:
-        left .7s ease,
-        top .7s ease,
-        opacity .5s ease,
-        transform .5s ease;
+    font-weight: 900;
+    z-index: 20;
+    transition: all .7s ease;
 }
 
-.blue {
-    background: #254758;
+.shipA {
+    background: #244b5a;
 }
 
-.red {
-    background: #762d28;
+.shipB {
+    background: #7d302b;
 }
 
-.damaged {
-    border: 3px solid #d99a2e;
-    box-shadow: 0 0 10px #d99a2e;
+.shipDamaged {
+    border-color: #e1a72e;
+    box-shadow: 0 0 12px #e1a72e;
 }
 
-.destroyed {
+.shipDestroyed {
     display: none !important;
+}
+
+.fleetLabel {
+    position: absolute;
+    color: white;
+    font-size: 14px;
+    font-weight: bold;
+    z-index: 30;
 }
 
 
 /* =========================================================
-   ORDER AREA
+   ORDERS
 ========================================================= */
 
-.orders-area {
-    max-width: 1000px;
-    margin: 22px auto;
+.orders {
+    max-width: 1050px;
+    margin: 20px auto;
 }
 
-.orders-title {
-    font-size: 34px;
+.ordersTitle {
+    font-size: 33px;
     font-weight: 900;
-    margin-bottom: 15px;
+    margin-bottom: 14px;
 }
 
-.order-grid {
+.orderGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 14px;
 }
 
-.order-button {
-    min-height: 76px;
+.orderButton {
+    min-height: 78px;
     background: #252b2b;
     color: white;
     border: 4px solid #171b1b;
@@ -300,197 +366,166 @@ input {
     font-weight: bold;
 }
 
-.order-button:hover {
-    background: #3b4444;
+.orderButton:hover {
+    background: #3c4646;
 }
 
-.order-button.recon {
+.orderButton.recon {
     background: #365f43;
 }
 
-.order-button.attack {
+.orderButton.attack {
     background: #982821;
 }
 
-.order-button.selected {
+.orderButton.selected {
     outline: 5px solid #d49b32;
 }
 
-
-/* =========================================================
-   ORDER DESCRIPTION
-========================================================= */
-
-.order-info {
+.orderInfo {
     display: none;
-    margin-top: 18px;
     background: #eee5cc;
     border: 4px solid #292d2d;
-    padding: 20px;
+    padding: 18px;
+    margin-top: 15px;
 }
 
-.order-info.active {
+.orderInfo.active {
     display: block;
 }
 
-.order-info h2 {
+.orderInfo h2 {
     margin-top: 0;
 }
 
-.transmit-button {
+.transmit {
     width: 100%;
-    padding: 18px;
-    margin-top: 15px;
-
     background: #a67620;
     color: white;
-
-    border: 4px solid #5c4515;
-    border-radius: 6px;
-
+    border: 4px solid #5d4315;
+    padding: 17px;
+    margin-top: 12px;
     font-size: 23px;
     font-weight: bold;
 }
 
 
 /* =========================================================
-   REPORT
+   AFTER ACTION REPORT
 ========================================================= */
 
-.report-container {
-    max-width: 1100px;
+.report {
+    max-width: 1150px;
     margin: auto;
 }
 
-.report-header {
+.reportHeader {
     background: #252b2b;
     color: white;
     border: 5px solid #151919;
-    padding: 22px;
     text-align: center;
+    padding: 20px;
 }
 
-.report-header h1 {
+.reportHeader h1 {
     margin: 0;
-    font-size: 39px;
+    font-size: 38px;
 }
 
-.winner-banner {
+.winner {
+    margin: 15px 0;
     background: #a67620;
     color: white;
     border: 4px solid #60430f;
-    margin: 18px 0;
-    padding: 18px;
     text-align: center;
+    padding: 17px;
     font-size: 30px;
-    font-weight: bold;
+    font-weight: 900;
 }
 
 
 /* =========================================================
-   REPORT MAP
+   REPORT COMMANDER CARDS
 ========================================================= */
 
-.report-map-title {
-    background: #292d2d;
-    color: white;
-    padding: 13px;
-    font-size: 21px;
-    font-weight: bold;
-    margin-top: 18px;
-}
-
-#reportMap {
-    height: 390px;
-}
-
-
-/* =========================================================
-   COMMANDER RESULTS
-========================================================= */
-
-.score-grid {
+.commanderResults {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
-    margin-top: 20px;
+    margin-top: 18px;
 }
 
-.score-card {
+.resultCard {
     background: #eee5cc;
     border: 5px solid #292d2d;
-    padding: 23px;
+    padding: 22px;
 }
 
-.score-card.winner {
+.resultCard.winnerCard {
     border-color: #a67620;
-    box-shadow: 0 0 0 3px #d49b32;
 }
 
-.commander-name {
-    font-size: 24px;
+.resultName {
+    font-size: 25px;
+    font-weight: 900;
+}
+
+.resultOrder {
+    font-size: 18px;
     font-weight: bold;
-}
-
-.order-used {
     margin-top: 6px;
-    font-size: 17px;
-    font-weight: bold;
 }
 
-.score-number {
+.resultScore {
     font-size: 62px;
     font-weight: 900;
     margin: 8px 0;
 }
 
-.score-detail {
+.detail {
+    padding: 9px 0;
     border-top: 2px solid #aaa;
-    padding: 10px 0;
-    font-size: 16px;
+    line-height: 1.4;
 }
 
 
 /* =========================================================
-   DAMAGE REPORT
+   DAMAGE RESULTS
 ========================================================= */
 
-.damage-grid {
+.damageGrid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 18px;
     margin-top: 18px;
 }
 
-.damage-box {
+.damageBox {
     background: #eee5cc;
     border: 4px solid #292d2d;
     padding: 20px;
 }
 
-.damage-box h2 {
+.damageBox h2 {
     margin-top: 0;
 }
 
-.loss {
-    padding: 9px;
+.damageItem {
+    padding: 10px;
     margin: 6px 0;
-    background: #d8cdb0;
-    border-left: 6px solid #762d28;
+    background: #d8ceb0;
 }
 
-.damage {
-    padding: 9px;
-    margin: 6px 0;
-    background: #d8cdb0;
-    border-left: 6px solid #d49b32;
-}
-
-.success {
-    padding: 9px;
-    margin: 6px 0;
-    background: #d8cdb0;
+.damageItem.success {
     border-left: 6px solid #365f43;
+}
+
+.damageItem.damage {
+    border-left: 6px solid #d49b2e;
+}
+
+.damageItem.loss {
+    border-left: 6px solid #982821;
 }
 
 
@@ -498,17 +533,13 @@ input {
    CONTINUE
 ========================================================= */
 
-.continue-button {
+.continue {
     width: 100%;
     margin-top: 20px;
     padding: 19px;
-
     background: #252b2b;
     color: white;
-
     border: 4px solid #111;
-    border-radius: 6px;
-
     font-size: 25px;
     font-weight: bold;
 }
@@ -518,7 +549,7 @@ input {
    FINAL
 ========================================================= */
 
-.final-box {
+.finalBox {
     max-width: 900px;
     margin: 70px auto;
     background: #eee5cc;
@@ -528,15 +559,10 @@ input {
     box-shadow: 10px 10px 0 #8d856e;
 }
 
-.final-winner {
-    font-size: 48px;
+.finalWinner {
+    font-size: 50px;
     font-weight: 900;
-    margin: 25px 0;
-}
-
-.final-score {
-    font-size: 27px;
-    margin: 12px;
+    margin: 30px 0;
 }
 
 
@@ -547,28 +573,28 @@ input {
 @media(max-width:700px) {
 
     .screen {
-        padding: 14px;
+        padding: 12px;
     }
 
-    .military-title {
-        font-size: 36px;
+    .title {
+        font-size: 37px;
     }
 
-    .status-grid,
-    .order-grid,
-    .score-grid,
-    .damage-grid {
+    .statusGrid,
+    .orderGrid,
+    .commanderResults,
+    .damageGrid,
+    .briefGrid {
         grid-template-columns: 1fr;
     }
 
-    .game-header {
+    .header {
         display: block;
         text-align: center;
     }
 
-    .map,
-    #reportMap {
-        height: 300px;
+    .map {
+        height: 330px;
     }
 
 }
@@ -586,7 +612,7 @@ input {
 
 <section id="opening" class="screen active">
 
-    <div class="military-title">
+    <div class="title">
         PACIFIC CARRIER COMMAND
     </div>
 
@@ -594,7 +620,7 @@ input {
         WWII NAVAL TACTICAL SIMULATION • 1942
     </div>
 
-    <button class="big-button" onclick="showSetup()">
+    <button class="bigButton" onclick="showSetup()">
         BEGIN COMMAND
     </button>
 
@@ -612,8 +638,9 @@ input {
         <h1>COMMAND ASSIGNMENT</h1>
 
         <p>
-            Two commanders will control opposing carrier task forces.
-            Each commander will issue one tactical order per round.
+            Two carrier task force commanders will fight through
+            fifteen tactical rounds. Every order changes the
+            battlefield.
         </p>
 
         <label>COMMANDER A</label>
@@ -630,14 +657,10 @@ input {
             placeholder="Enter commander name"
         >
 
-        <br><br>
+        <br>
 
-        <button
-            class="big-button"
-            onclick="startGame()">
-
+        <button class="bigButton" onclick="startGame()">
             ASSUME COMMAND
-
         </button>
 
     </div>
@@ -646,34 +669,29 @@ input {
 
 
 <!-- =======================================================
-     PASS SCREEN
+     PASS
 ======================================================= -->
 
 <section id="passScreen" class="screen">
 
-    <div class="pass-box">
+    <div class="passBox">
 
-        <div class="pass-title">
+        <div class="passTitle">
             PASS THE COMMAND
         </div>
 
         <div
-            class="pass-name"
-            id="passName">
-
+            id="passName"
+            class="passName">
             COMMANDER
-
         </div>
 
-        <div class="warning">
-
-            Pass the computer to the next commander.
-            Do not reveal your previous orders.
-
-        </div>
+        <p>
+            Pass the device. The next commander may now assume command.
+        </p>
 
         <button
-            class="big-button"
+            class="bigButton"
             onclick="enterBattle()">
 
             ASSUME COMMAND
@@ -691,240 +709,192 @@ input {
 
 <section id="battle" class="screen">
 
-    <div class="game-header">
+    <div class="header">
 
-        <h1>PACIFIC CARRIER COMMAND</h1>
+        <div class="headerTitle">
+            PACIFIC CARRIER COMMAND
+        </div>
 
-        <div class="round-number">
+        <div class="round">
+            ROUND <span id="roundNumber">1</span> / 15
+        </div>
 
-            ROUND
-            <span id="roundNumber">1</span>
-            / 15
+    </div>
+
+
+    <!-- COMMANDER BRIEF -->
+
+    <div class="commandBrief">
+
+        <h2 id="commanderHeading">
+            COMMANDER
+        </h2>
+
+        <div
+            id="briefText"
+            class="briefText">
+        </div>
+
+
+        <div class="briefGrid">
+
+            <div class="briefBox">
+
+                <h3>
+                    YOUR TASK FORCE
+                </h3>
+
+                <div id="yourForceBrief"></div>
+
+            </div>
+
+
+            <div class="briefBox">
+
+                <h3>
+                    ENEMY INTELLIGENCE
+                </h3>
+
+                <div id="enemyForceBrief"></div>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <div class="status-grid">
+    <!-- STATUS -->
 
-        <div class="status-card">
+    <div class="statusGrid">
 
+        <div class="statusCard">
             <strong>YOUR CARRIER</strong>
-
             <div
-                class="status-number"
-                id="yourCarrierHP">
-
+                id="yourCarrier"
+                class="statusValue">
                 100%
-
             </div>
-
         </div>
 
-
-        <div class="status-card">
-
+        <div class="statusCard">
             <strong>ENEMY CARRIER</strong>
-
             <div
-                class="status-number"
-                id="enemyCarrierHP">
-
+                id="enemyCarrier"
+                class="statusValue">
                 100%
-
             </div>
-
         </div>
 
-
-        <div class="status-card">
-
+        <div class="statusCard">
             <strong>YOUR AIRCRAFT</strong>
-
             <div
-                class="status-number"
-                id="yourAircraft">
-
+                id="yourAircraft"
+                class="statusValue">
                 48
-
             </div>
-
         </div>
 
-
-        <div class="status-card">
-
+        <div class="statusCard">
             <strong>ENEMY AIRCRAFT</strong>
-
             <div
-                class="status-number"
-                id="enemyAircraft">
-
+                id="enemyAircraft"
+                class="statusValue">
                 48
-
             </div>
-
         </div>
 
     </div>
 
 
-    <div class="map">
+    <!-- MAP -->
 
-        <div class="map-title">
-            TACTICAL PLOT
+    <div class="mapLabel">
+        TACTICAL MAP — CURRENT BATTLEFIELD
+    </div>
+
+    <div id="battleMap" class="map">
+
+        <div class="mapTitle">
+            PACIFIC OPERATIONS AREA
         </div>
 
-
-        <!-- COMMANDER A SHIPS -->
-
-        <div
-            id="aCV"
-            class="ship blue">
-
-            A — CV
-
+        <div class="north">
+            N ↑
         </div>
 
-        <div
-            id="aCVL"
-            class="ship blue">
-
-            A — CVL
-
-        </div>
-
-        <div
-            id="aBB"
-            class="ship blue">
-
-            A — BB
-
-        </div>
-
-        <div
-            id="aCA"
-            class="ship blue">
-
-            A — CA
-
-        </div>
-
-        <div
-            id="aDD"
-            class="ship blue">
-
-            A — DD
-
-        </div>
+        <div class="zone zoneA">A</div>
+        <div class="zone zoneB">B</div>
+        <div class="zone zoneC">C</div>
+        <div class="zone zoneD">D</div>
+        <div class="zone zoneE">E</div>
+        <div class="zone zoneF">F</div>
 
 
-        <!-- COMMANDER B SHIPS -->
+        <!-- A SHIPS -->
 
-        <div
-            id="bCV"
-            class="ship red">
+        <div id="ACV" class="ship shipA">A CV</div>
+        <div id="ACVL" class="ship shipA">A CVL</div>
+        <div id="ABB" class="ship shipA">A BB</div>
+        <div id="ACA" class="ship shipA">A CA</div>
+        <div id="ADD" class="ship shipA">A DD</div>
 
-            B — CV
 
-        </div>
+        <!-- B SHIPS -->
 
-        <div
-            id="bCVL"
-            class="ship red">
-
-            B — CVL
-
-        </div>
-
-        <div
-            id="bBB"
-            class="ship red">
-
-            B — BB
-
-        </div>
-
-        <div
-            id="bCA"
-            class="ship red">
-
-            B — CA
-
-        </div>
-
-        <div
-            id="bDD"
-            class="ship red">
-
-            B — DD
-
-        </div>
+        <div id="BCV" class="ship shipB">B CV</div>
+        <div id="BCVL" class="ship shipB">B CVL</div>
+        <div id="BBB" class="ship shipB">B BB</div>
+        <div id="BCA" class="ship shipB">B CA</div>
+        <div id="BDD" class="ship shipB">B DD</div>
 
     </div>
 
 
-    <div class="orders-area">
+    <!-- ORDERS -->
 
-        <div class="orders-title">
+    <div class="orders">
+
+        <div class="ordersTitle">
             TACTICAL ORDERS
         </div>
 
-
-        <div class="order-grid">
+        <div class="orderGrid">
 
             <button
-                class="order-button"
-                onclick="selectOrder('advance', this)">
-
+                class="orderButton"
+                onclick="selectOrder('advance',this)">
                 ADVANCE
-
             </button>
 
-
             <button
-                class="order-button"
-                onclick="selectOrder('open', this)">
-
+                class="orderButton"
+                onclick="selectOrder('open',this)">
                 OPEN DISTANCE
-
             </button>
 
-
             <button
-                class="order-button"
-                onclick="selectOrder('north', this)">
-
+                class="orderButton"
+                onclick="selectOrder('north',this)">
                 MANEUVER NORTH
-
             </button>
 
-
             <button
-                class="order-button"
-                onclick="selectOrder('south', this)">
-
+                class="orderButton"
+                onclick="selectOrder('south',this)">
                 MANEUVER SOUTH
-
             </button>
 
-
             <button
-                class="order-button recon"
-                onclick="selectOrder('recon', this)">
-
+                class="orderButton recon"
+                onclick="selectOrder('recon',this)">
                 RECONNAISSANCE
-
             </button>
 
-
             <button
-                class="order-button attack"
-                onclick="selectOrder('attack', this)">
-
+                class="orderButton attack"
+                onclick="selectOrder('attack',this)">
                 SURFACE ATTACK
-
             </button>
 
         </div>
@@ -932,18 +902,17 @@ input {
 
         <div
             id="orderInfo"
-            class="order-info">
+            class="orderInfo">
 
             <h2 id="selectedOrderTitle">
                 ORDER
             </h2>
 
             <p id="selectedOrderDescription">
-                Select an order.
             </p>
 
             <button
-                class="transmit-button"
+                class="transmit"
                 onclick="transmitOrder()">
 
                 TRANSMIT ORDER
@@ -963,17 +932,13 @@ input {
 
 <section id="report" class="screen">
 
-    <div class="report-container">
+    <div class="report">
 
-
-        <div class="report-header">
+        <div class="reportHeader">
 
             <h1>
-
-                ROUND
-                <span id="reportRound">1</span>
-                — BATTLE REPORT
-
+                ROUND <span id="reportRound">1</span>
+                — AFTER ACTION REPORT
             </h1>
 
         </div>
@@ -981,7 +946,7 @@ input {
 
         <div
             id="winnerBanner"
-            class="winner-banner">
+            class="winner">
 
             ROUND WINNER
 
@@ -990,137 +955,95 @@ input {
 
         <!-- UPDATED MAP -->
 
-        <div class="report-map-title">
-
-            BATTLEFIELD — AFTER ACTION
-
+        <div class="mapLabel">
+            BATTLEFIELD AFTER ORDERS WERE EXECUTED
         </div>
 
+        <div id="reportMap" class="map">
 
-        <div
-            id="reportMap"
-            class="map">
+            <div class="mapTitle">
+                UPDATED TACTICAL POSITION
+            </div>
 
-            <div class="map-title">
-                CURRENT TACTICAL POSITION
+            <div class="north">
+                N ↑
+            </div>
+
+            <div class="zone zoneA">A</div>
+            <div class="zone zoneB">B</div>
+            <div class="zone zoneC">C</div>
+            <div class="zone zoneD">D</div>
+            <div class="zone zoneE">E</div>
+            <div class="zone zoneF">F</div>
+
+
+            <div id="rACV" class="ship shipA">
+                A CV
+            </div>
+
+            <div id="rACVL" class="ship shipA">
+                A CVL
+            </div>
+
+            <div id="rABB" class="ship shipA">
+                A BB
+            </div>
+
+            <div id="rACA" class="ship shipA">
+                A CA
+            </div>
+
+            <div id="rADD" class="ship shipA">
+                A DD
             </div>
 
 
-            <div
-                id="rACV"
-                class="ship blue">
-
-                A — CV
-
+            <div id="rBCV" class="ship shipB">
+                B CV
             </div>
 
-            <div
-                id="rACVL"
-                class="ship blue">
-
-                A — CVL
-
+            <div id="rBCVL" class="ship shipB">
+                B CVL
             </div>
 
-            <div
-                id="rABB"
-                class="ship blue">
-
-                A — BB
-
+            <div id="rBBB" class="ship shipB">
+                B BB
             </div>
 
-            <div
-                id="rACA"
-                class="ship blue">
-
-                A — CA
-
+            <div id="rBCA" class="ship shipB">
+                B CA
             </div>
 
-            <div
-                id="rADD"
-                class="ship blue">
-
-                A — DD
-
-            </div>
-
-
-            <div
-                id="rBCV"
-                class="ship red">
-
-                B — CV
-
-            </div>
-
-            <div
-                id="rBCVL"
-                class="ship red">
-
-                B — CVL
-
-            </div>
-
-            <div
-                id="rBBB"
-                class="ship red">
-
-                B — BB
-
-            </div>
-
-            <div
-                id="rBCA"
-                class="ship red">
-
-                B — CA
-
-            </div>
-
-            <div
-                id="rBDD"
-                class="ship red">
-
-                B — DD
-
+            <div id="rBDD" class="ship shipB">
+                B DD
             </div>
 
         </div>
 
 
-        <!-- SCORES -->
+        <!-- COMMANDER RESULTS -->
 
-        <div class="score-grid">
+        <div class="commanderResults">
 
 
             <div
-                id="scoreCardA"
-                class="score-card">
+                id="resultCardA"
+                class="resultCard">
 
                 <div
-                    id="reportNameA"
-                    class="commander-name">
-
-                    COMMANDER A
-
+                    id="resultNameA"
+                    class="resultName">
                 </div>
 
                 <div
-                    id="orderA"
-                    class="order-used">
-
-                    ORDER
-
+                    id="resultOrderA"
+                    class="resultOrder">
                 </div>
 
                 <div
-                    id="scoreA"
-                    class="score-number">
-
+                    id="resultScoreA"
+                    class="resultScore">
                     0
-
                 </div>
 
                 <div id="detailsA"></div>
@@ -1129,31 +1052,23 @@ input {
 
 
             <div
-                id="scoreCardB"
-                class="score-card">
+                id="resultCardB"
+                class="resultCard">
 
                 <div
-                    id="reportNameB"
-                    class="commander-name">
-
-                    COMMANDER B
-
+                    id="resultNameB"
+                    class="resultName">
                 </div>
 
                 <div
-                    id="orderB"
-                    class="order-used">
-
-                    ORDER
-
+                    id="resultOrderB"
+                    class="resultOrder">
                 </div>
 
                 <div
-                    id="scoreB"
-                    class="score-number">
-
+                    id="resultScoreB"
+                    class="resultScore">
                     0
-
                 </div>
 
                 <div id="detailsB"></div>
@@ -1163,29 +1078,33 @@ input {
         </div>
 
 
-        <!-- DAMAGE -->
+        <!-- ACTUAL DAMAGE -->
 
-        <div class="damage-grid">
+        <div class="damageGrid">
 
 
-            <div class="damage-box">
+            <div class="damageBox">
 
                 <h2>
-                    COMMANDER A — BATTLE RESULTS
+                    <span id="damageTitleA">
+                        COMMANDER A
+                    </span>
                 </h2>
 
-                <div id="resultsA"></div>
+                <div id="battleResultsA"></div>
 
             </div>
 
 
-            <div class="damage-box">
+            <div class="damageBox">
 
                 <h2>
-                    COMMANDER B — BATTLE RESULTS
+                    <span id="damageTitleB">
+                        COMMANDER B
+                    </span>
                 </h2>
 
-                <div id="resultsB"></div>
+                <div id="battleResultsB"></div>
 
             </div>
 
@@ -1194,10 +1113,12 @@ input {
 
         <!-- FLEET CONDITION -->
 
-        <div class="damage-box" style="margin-top:18px;">
+        <div
+            class="damageBox"
+            style="margin-top:18px;">
 
             <h2>
-                CURRENT FLEET CONDITION
+                FLEET CONDITION AFTER ROUND
             </h2>
 
             <div id="fleetCondition"></div>
@@ -1207,7 +1128,7 @@ input {
 
         <button
             id="continueButton"
-            class="continue-button"
+            class="continue"
             onclick="continueGame()">
 
             CONTINUE
@@ -1225,44 +1146,27 @@ input {
 
 <section id="final" class="screen">
 
-    <div class="final-box">
+    <div class="finalBox">
 
         <h1>
             CAMPAIGN COMPLETE
         </h1>
 
-        <div class="subtitle">
-            15 ROUNDS COMPLETE
-        </div>
-
         <div
             id="finalWinner"
-            class="final-winner">
-
-            COMMANDER
-
+            class="finalWinner">
         </div>
 
-        <div
-            id="finalScoreA"
-            class="final-score">
+        <div id="finalScoreA"></div>
 
-            Commander A: 0
-
-        </div>
-
-        <div
-            id="finalScoreB"
-            class="final-score">
-
-            Commander B: 0
-
-        </div>
+        <div id="finalScoreB"></div>
 
         <p id="finalMessage"></p>
 
+        <br>
+
         <button
-            class="big-button"
+            class="bigButton"
             onclick="location.reload()">
 
             NEW CAMPAIGN
@@ -1296,7 +1200,7 @@ const game = {
         B: null
     },
 
-    score: {
+    campaignScore: {
         A: 0,
         B: 0
     },
@@ -1311,7 +1215,7 @@ const game = {
             dd: 100,
             aircraft: 48,
             x: 20,
-            y: 60
+            y: 58
         },
 
         B: {
@@ -1321,8 +1225,8 @@ const game = {
             ca: 100,
             dd: 100,
             aircraft: 48,
-            x: 75,
-            y: 30
+            x: 72,
+            y: 28
         }
 
     },
@@ -1333,17 +1237,17 @@ const game = {
 
 
 /* =========================================================
-   ORDER DATA
+   ORDERS
 ========================================================= */
 
-const orderData = {
+const orders = {
 
     advance: {
 
         title: "ADVANCE",
 
         description:
-        "Close the distance and increase offensive pressure. You may gain a better attack position, but your task force becomes more exposed.",
+        "Close the distance and increase offensive pressure. Your force moves toward the opposing task force, but the carrier becomes more exposed to enemy action.",
 
         base: 7
 
@@ -1354,7 +1258,7 @@ const orderData = {
         title: "OPEN DISTANCE",
 
         description:
-        "Increase separation from the enemy. This protects the task force and reduces the effectiveness of enemy attacks.",
+        "Increase separation from the opposing task force. This protects the carrier and reduces the effectiveness of surface attacks, but sacrifices some offensive pressure.",
 
         base: 7
 
@@ -1365,7 +1269,7 @@ const orderData = {
         title: "MANEUVER NORTH",
 
         description:
-        "Shift the task force north to alter the tactical geometry and attempt to gain a positional advantage.",
+        "Move the task force north to change the geometry of the engagement and seek a better tactical position.",
 
         base: 7
 
@@ -1376,7 +1280,7 @@ const orderData = {
         title: "MANEUVER SOUTH",
 
         description:
-        "Shift the task force south to alter the tactical geometry and attempt to gain a positional advantage.",
+        "Move the task force south to change the geometry of the engagement and seek a better tactical position.",
 
         base: 7
 
@@ -1387,7 +1291,7 @@ const orderData = {
         title: "RECONNAISSANCE",
 
         description:
-        "Launch reconnaissance aircraft to locate and assess enemy forces before committing the main force.",
+        "Launch reconnaissance aircraft to gather information about the opposing force before committing the main task force.",
 
         base: 8
 
@@ -1398,7 +1302,7 @@ const orderData = {
         title: "SURFACE ATTACK",
 
         description:
-        "Commit surface ships against the opposing task force. This can damage enemy ships but exposes your own force to counterattack.",
+        "Commit surface ships against the enemy task force. A successful attack can damage or destroy ships, but your own force may suffer losses.",
 
         base: 8
 
@@ -1408,18 +1312,14 @@ const orderData = {
 
 
 /* =========================================================
-   SCREEN CONTROL
+   SCREEN
 ========================================================= */
 
 function showScreen(id) {
 
     document
         .querySelectorAll(".screen")
-        .forEach(screen => {
-
-            screen.classList.remove("active");
-
-        });
+        .forEach(s => s.classList.remove("active"));
 
     document
         .getElementById(id)
@@ -1429,7 +1329,7 @@ function showScreen(id) {
 
 
 /* =========================================================
-   SETUP
+   START
 ========================================================= */
 
 function showSetup() {
@@ -1442,16 +1342,10 @@ function showSetup() {
 function startGame() {
 
     const a =
-        document
-        .getElementById("commanderA")
-        .value
-        .trim();
+        document.getElementById("commanderA").value.trim();
 
     const b =
-        document
-        .getElementById("commanderB")
-        .value
-        .trim();
+        document.getElementById("commanderB").value.trim();
 
 
     if (!a || !b) {
@@ -1470,39 +1364,12 @@ function startGame() {
 
     game.currentCommander = "A";
 
-    game.orders.A = null;
-    game.orders.B = null;
-
-    game.score.A = 0;
-    game.score.B = 0;
+    game.campaignScore.A = 0;
+    game.campaignScore.B = 0;
 
 
-    game.fleet.A = {
-
-        carrier: 100,
-        cvl: 100,
-        bb: 100,
-        ca: 100,
-        dd: 100,
-        aircraft: 48,
-        x: 20,
-        y: 60
-
-    };
-
-
-    game.fleet.B = {
-
-        carrier: 100,
-        cvl: 100,
-        bb: 100,
-        ca: 100,
-        dd: 100,
-        aircraft: 48,
-        x: 75,
-        y: 30
-
-    };
+    resetFleet("A");
+    resetFleet("B");
 
 
     showPassScreen();
@@ -1510,8 +1377,45 @@ function startGame() {
 }
 
 
+function resetFleet(side) {
+
+    if (side === "A") {
+
+        game.fleet.A = {
+
+            carrier: 100,
+            cvl: 100,
+            bb: 100,
+            ca: 100,
+            dd: 100,
+            aircraft: 48,
+            x: 20,
+            y: 58
+
+        };
+
+    } else {
+
+        game.fleet.B = {
+
+            carrier: 100,
+            cvl: 100,
+            bb: 100,
+            ca: 100,
+            dd: 100,
+            aircraft: 48,
+            x: 72,
+            y: 28
+
+        };
+
+    }
+
+}
+
+
 /* =========================================================
-   PASS SCREEN
+   PASS
 ========================================================= */
 
 function showPassScreen() {
@@ -1542,12 +1446,10 @@ function enterBattle() {
 
 
     document
-        .querySelectorAll(".order-button")
-        .forEach(button => {
-
-            button.classList.remove("selected");
-
-        });
+        .querySelectorAll(".orderButton")
+        .forEach(b =>
+            b.classList.remove("selected")
+        );
 
 
     updateBattleScreen();
@@ -1558,15 +1460,10 @@ function enterBattle() {
 
 
 /* =========================================================
-   BATTLE SCREEN
+   COMMANDER BRIEF
 ========================================================= */
 
 function updateBattleScreen() {
-
-    document
-        .getElementById("roundNumber")
-        .textContent = game.round;
-
 
     const me = game.currentCommander;
 
@@ -1577,13 +1474,45 @@ function updateBattleScreen() {
 
 
     document
-        .getElementById("yourCarrierHP")
+        .getElementById("roundNumber")
+        .textContent = game.round;
+
+
+    document
+        .getElementById("commanderHeading")
+        .textContent =
+        "COMMANDER " +
+        (me === "A"
+            ? game.commanderA
+            : game.commanderB);
+
+
+    document
+        .getElementById("briefText")
+        .innerHTML =
+        buildBrief(me, enemy);
+
+
+    document
+        .getElementById("yourForceBrief")
+        .innerHTML =
+        forceBrief(me);
+
+
+    document
+        .getElementById("enemyForceBrief")
+        .innerHTML =
+        enemyBrief(enemy);
+
+
+    document
+        .getElementById("yourCarrier")
         .textContent =
         game.fleet[me].carrier + "%";
 
 
     document
-        .getElementById("enemyCarrierHP")
+        .getElementById("enemyCarrier")
         .textContent =
         game.fleet[enemy].carrier + "%";
 
@@ -1600,35 +1529,102 @@ function updateBattleScreen() {
         game.fleet[enemy].aircraft;
 
 
-    updateBattleMap();
+    positionBattleMap();
+
+}
+
+
+function buildBrief(me, enemy) {
+
+    if (game.round === 1) {
+
+        return `
+            <strong>SITUATION:</strong>
+            Your carrier task force is operating in the Pacific.
+            Enemy forces have been detected in the area.
+            You must decide how to employ your force.
+            Your order will affect the battlefield before the opposing commander acts.
+        `;
+
+    }
+
+
+    return `
+        <strong>SITUATION:</strong>
+        The battle continues from the previous round.
+        Ships and aircraft lost in earlier fighting remain unavailable.
+        Your decision must account for the current position,
+        damage, and remaining strength of both task forces.
+    `;
+
+}
+
+
+function forceBrief(side) {
+
+    const f = game.fleet[side];
+
+    return `
+        Aircraft Carrier: ${status(f.carrier)}<br>
+        Light Carrier: ${status(f.cvl)}<br>
+        Fast Battleship: ${status(f.bb)}<br>
+        Heavy Cruiser: ${status(f.ca)}<br>
+        Destroyer: ${status(f.dd)}<br>
+        Aircraft Available: ${f.aircraft}
+    `;
+
+}
+
+
+function enemyBrief(side) {
+
+    const f = game.fleet[side];
+
+    return `
+        Carrier: ${status(f.carrier)}<br>
+        Light Carrier: ${status(f.cvl)}<br>
+        Battleship: ${status(f.bb)}<br>
+        Heavy Cruiser: ${status(f.ca)}<br>
+        Destroyer: ${status(f.dd)}<br>
+        Aircraft Estimate: ${f.aircraft}
+    `;
+
+}
+
+
+function status(value) {
+
+    if (value <= 0) {
+        return "DESTROYED";
+    }
+
+    if (value < 60) {
+        return value + "% — DAMAGED";
+    }
+
+    return value + "% — OPERATIONAL";
 
 }
 
 
 /* =========================================================
-   BATTLE MAP
+   MAP
 ========================================================= */
 
-function updateBattleMap() {
+function positionBattleMap() {
 
-    positionShips("A", false);
-    positionShips("B", false);
+    positionSide("A", false);
+    positionSide("B", false);
 
 }
 
 
-/* =========================================================
-   POSITION SHIPS
-========================================================= */
-
-function positionShips(side, report) {
+function positionSide(side, report) {
 
     const f = game.fleet[side];
 
     const prefix =
-        report
-        ? "r"
-        : "";
+        report ? "r" : "";
 
     const ids = {
 
@@ -1641,36 +1637,17 @@ function positionShips(side, report) {
     };
 
 
-    const baseX = f.x;
-    const baseY = f.y;
-
-
     const positions = {
 
-        carrier: {
-            x: baseX,
-            y: baseY
-        },
+        carrier: [f.x, f.y],
 
-        cvl: {
-            x: baseX + 3,
-            y: baseY + 8
-        },
+        cvl: [f.x + 4, f.y + 8],
 
-        bb: {
-            x: baseX - 5,
-            y: baseY - 8
-        },
+        bb: [f.x - 5, f.y - 8],
 
-        ca: {
-            x: baseX + 7,
-            y: baseY - 3
-        },
+        ca: [f.x + 8, f.y - 3],
 
-        dd: {
-            x: baseX - 7,
-            y: baseY + 4
-        }
+        dd: [f.x - 8, f.y + 5]
 
     };
 
@@ -1683,32 +1660,39 @@ function positionShips(side, report) {
         if (!element) return;
 
 
-        if (f[type] <= 0) {
+        element.style.left =
+            positions[type][0] + "%";
 
-            element.classList.add("destroyed");
+        element.style.top =
+            positions[type][1] + "%";
+
+
+        const value =
+            f[type === "carrier"
+                ? "carrier"
+                : type];
+
+
+        if (value <= 0) {
+
+            element.classList.add("shipDestroyed");
 
         } else {
 
-            element.classList.remove("destroyed");
-
-            if (f[type] < 60) {
-
-                element.classList.add("damaged");
-
-            } else {
-
-                element.classList.remove("damaged");
-
-            }
+            element.classList.remove("shipDestroyed");
 
         }
 
 
-        element.style.left =
-            positions[type].x + "%";
+        if (value > 0 && value < 60) {
 
-        element.style.top =
-            positions[type].y + "%";
+            element.classList.add("shipDamaged");
+
+        } else {
+
+            element.classList.remove("shipDamaged");
+
+        }
 
     });
 
@@ -1727,13 +1711,13 @@ function selectOrder(order, button) {
     document
         .getElementById("selectedOrderTitle")
         .textContent =
-        orderData[order].title;
+        orders[order].title;
 
 
     document
         .getElementById("selectedOrderDescription")
         .textContent =
-        orderData[order].description;
+        orders[order].description;
 
 
     document
@@ -1742,12 +1726,10 @@ function selectOrder(order, button) {
 
 
     document
-        .querySelectorAll(".order-button")
-        .forEach(b => {
-
-            b.classList.remove("selected");
-
-        });
+        .querySelectorAll(".orderButton")
+        .forEach(b =>
+            b.classList.remove("selected")
+        );
 
 
     button.classList.add("selected");
@@ -1791,57 +1773,57 @@ function transmitOrder() {
 
 
 /* =========================================================
-   RANDOM HELPER
+   DAMAGE
 ========================================================= */
 
-function randomNumber(min, max) {
+function random(min, max) {
 
     return Math.floor(
-        Math.random() * (max - min + 1)
+        Math.random() *
+        (max - min + 1)
     ) + min;
 
 }
 
 
-/* =========================================================
-   DAMAGE SHIP
-========================================================= */
+function applyShipDamage(side, amount) {
 
-function damageShip(side, amount) {
+    const f = game.fleet[side];
 
-    const ships = [
+    const possible = [
+
         "carrier",
         "cvl",
         "bb",
         "ca",
         "dd"
-    ];
+
+    ].filter(type =>
+        f[type] > 0
+    );
 
 
-    const available =
-        ships.filter(type =>
-            game.fleet[side][type] > 0
-        );
-
-
-    if (available.length === 0) {
+    if (!possible.length) {
 
         return null;
 
     }
 
 
-    /* Prefer carrier only when it is already
-       the primary surviving target. */
-
     let target;
+
+
+    /*
+       Attackers are more likely to hit major ships,
+       but the result is not automatic.
+    */
 
     const roll = Math.random();
 
 
     if (
-        game.fleet[side].carrier > 0 &&
-        roll < .30
+        f.carrier > 0 &&
+        roll < .35
     ) {
 
         target = "carrier";
@@ -1849,21 +1831,19 @@ function damageShip(side, amount) {
     } else {
 
         target =
-            available[
-                randomNumber(
+            possible[
+                random(
                     0,
-                    available.length - 1
+                    possible.length - 1
                 )
             ];
 
     }
 
 
-    const before =
-        game.fleet[side][target];
+    const before = f[target];
 
-
-    game.fleet[side][target] =
+    f[target] =
         Math.max(
             0,
             before - amount
@@ -1876,12 +1856,42 @@ function damageShip(side, amount) {
 
         before: before,
 
-        after: game.fleet[side][target],
+        after: f[target],
 
         destroyed:
-            game.fleet[side][target] === 0
+            f[target] === 0
 
     };
+
+}
+
+
+/* =========================================================
+   SHIP NAME
+========================================================= */
+
+function shipName(side, type) {
+
+    const name =
+        side === "A"
+        ? game.commanderA
+        : game.commanderB;
+
+
+    const names = {
+
+        carrier: "Aircraft Carrier",
+        cvl: "Light Carrier",
+        bb: "Fast Battleship",
+        ca: "Heavy Cruiser",
+        dd: "Destroyer"
+
+    };
+
+
+    return name +
+        " " +
+        names[type];
 
 }
 
@@ -1893,61 +1903,21 @@ function damageShip(side, amount) {
 function resolveRound() {
 
     const orderA = game.orders.A;
-
     const orderB = game.orders.B;
 
 
     let scoreA =
-        orderData[orderA].base;
+        orders[orderA].base;
 
     let scoreB =
-        orderData[orderB].base;
+        orders[orderB].base;
 
 
-    let detailsA = [];
-    let detailsB = [];
+    const detailsA = [];
+    const detailsB = [];
 
-
-    let resultsA = [];
-    let resultsB = [];
-
-
-    /* =====================================================
-       RECONNAISSANCE
-    ===================================================== */
-
-    if (orderA === "recon") {
-
-        scoreA += 5;
-
-        detailsA.push(
-            "Reconnaissance located the opposing task force."
-        );
-
-        resultsA.push({
-            type: "success",
-            text:
-            "Reconnaissance aircraft returned with enemy position and strength information."
-        });
-
-    }
-
-
-    if (orderB === "recon") {
-
-        scoreB += 5;
-
-        detailsB.push(
-            "Reconnaissance located the opposing task force."
-        );
-
-        resultsB.push({
-            type: "success",
-            text:
-            "Reconnaissance aircraft returned with enemy position and strength information."
-        });
-
-    }
+    const battleA = [];
+    const battleB = [];
 
 
     /* =====================================================
@@ -1959,61 +1929,123 @@ function resolveRound() {
 
 
     if (
-        orderA === "north" ||
-        orderA === "south" ||
-        orderA === "advance" ||
-        orderA === "open"
+        ["advance","open","north","south"]
+        .includes(orderA)
     ) {
 
         detailsA.push(
-            "Task force repositioned on the tactical plot."
+            "Task force position changed on the tactical plot."
         );
 
-        resultsA.push({
+        battleA.push({
             type: "success",
             text:
-            "Task force position changed."
+            "Task force maneuver completed."
         });
 
     }
 
 
     if (
-        orderB === "north" ||
-        orderB === "south" ||
-        orderB === "advance" ||
-        orderB === "open"
+        ["advance","open","north","south"]
+        .includes(orderB)
     ) {
 
         detailsB.push(
-            "Task force repositioned on the tactical plot."
+            "Task force position changed on the tactical plot."
         );
 
-        resultsB.push({
+        battleB.push({
             type: "success",
             text:
-            "Task force position changed."
+            "Task force maneuver completed."
         });
 
     }
 
 
     /* =====================================================
-       SURFACE ATTACK — A
+       RECON
+    ===================================================== */
+
+    if (orderA === "recon") {
+
+        scoreA += 5;
+
+        detailsA.push(
+            "Reconnaissance gathered intelligence on the opposing force."
+        );
+
+        battleA.push({
+            type: "success",
+            text:
+            "Reconnaissance aircraft located and assessed the opposing task force."
+        });
+
+
+        game.fleet.A.aircraft =
+            Math.max(
+                0,
+                game.fleet.A.aircraft - 1
+            );
+
+
+        battleA.push({
+            type: "loss",
+            text:
+            "1 reconnaissance aircraft failed to return."
+        });
+
+    }
+
+
+    if (orderB === "recon") {
+
+        scoreB += 5;
+
+        detailsB.push(
+            "Reconnaissance gathered intelligence on the opposing force."
+        );
+
+        battleB.push({
+            type: "success",
+            text:
+            "Reconnaissance aircraft located and assessed the opposing task force."
+        });
+
+
+        game.fleet.B.aircraft =
+            Math.max(
+                0,
+                game.fleet.B.aircraft - 1
+            );
+
+
+        battleB.push({
+            type: "loss",
+            text:
+            "1 reconnaissance aircraft failed to return."
+        });
+
+    }
+
+
+    /* =====================================================
+       SURFACE ATTACK A
     ===================================================== */
 
     if (orderA === "attack") {
 
-        let attackPower =
-            randomNumber(12, 24);
+        let power =
+            random(14,25);
 
 
         if (orderB === "open") {
 
-            attackPower -= 7;
+            power -= 7;
 
             detailsA.push(
-                "Enemy task force opened distance."
+                "The enemy increased distance, reducing the effectiveness of the attack."
             );
 
         }
@@ -2021,46 +2053,46 @@ function resolveRound() {
 
         if (orderB === "recon") {
 
-            attackPower -= 3;
+            power -= 3;
 
         }
 
 
-        attackPower =
+        power =
             Math.max(
                 5,
-                attackPower
+                power
             );
 
 
         const hit =
-            damageShip(
+            applyShipDamage(
                 "B",
-                attackPower
+                power
             );
 
 
         if (hit) {
 
             scoreA +=
-                Math.floor(
-                    attackPower / 2
+                Math.round(
+                    power / 2
                 );
 
 
-            const shipName =
-                shipNameFor(
-                    hit.target,
-                    "B"
+            const name =
+                shipName(
+                    "B",
+                    hit.target
                 );
 
 
             if (hit.destroyed) {
 
-                resultsA.push({
+                battleA.push({
                     type: "loss",
                     text:
-                    shipName +
+                    name +
                     " — DESTROYED"
                 });
 
@@ -2070,13 +2102,13 @@ function resolveRound() {
 
             } else {
 
-                resultsA.push({
+                battleA.push({
                     type: "damage",
                     text:
-                    shipName +
+                    name +
                     " — " +
                     (100 - hit.after) +
-                    "% damage"
+                    "% total damage"
                 });
 
                 detailsA.push(
@@ -2089,7 +2121,7 @@ function resolveRound() {
 
 
         const aircraftLoss =
-            randomNumber(1, 4);
+            random(1,4);
 
 
         game.fleet.A.aircraft =
@@ -2100,7 +2132,7 @@ function resolveRound() {
             );
 
 
-        resultsA.push({
+        battleA.push({
             type: "loss",
             text:
             aircraftLoss +
@@ -2114,21 +2146,21 @@ function resolveRound() {
 
 
     /* =====================================================
-       SURFACE ATTACK — B
+       SURFACE ATTACK B
     ===================================================== */
 
     if (orderB === "attack") {
 
-        let attackPower =
-            randomNumber(12, 24);
+        let power =
+            random(14,25);
 
 
         if (orderA === "open") {
 
-            attackPower -= 7;
+            power -= 7;
 
             detailsB.push(
-                "Enemy task force opened distance."
+                "The enemy increased distance, reducing the effectiveness of the attack."
             );
 
         }
@@ -2136,46 +2168,46 @@ function resolveRound() {
 
         if (orderA === "recon") {
 
-            attackPower -= 3;
+            power -= 3;
 
         }
 
 
-        attackPower =
+        power =
             Math.max(
                 5,
-                attackPower
+                power
             );
 
 
         const hit =
-            damageShip(
+            applyShipDamage(
                 "A",
-                attackPower
+                power
             );
 
 
         if (hit) {
 
             scoreB +=
-                Math.floor(
-                    attackPower / 2
+                Math.round(
+                    power / 2
                 );
 
 
-            const shipName =
-                shipNameFor(
-                    hit.target,
-                    "A"
+            const name =
+                shipName(
+                    "A",
+                    hit.target
                 );
 
 
             if (hit.destroyed) {
 
-                resultsB.push({
+                battleB.push({
                     type: "loss",
                     text:
-                    shipName +
+                    name +
                     " — DESTROYED"
                 });
 
@@ -2185,13 +2217,13 @@ function resolveRound() {
 
             } else {
 
-                resultsB.push({
+                battleB.push({
                     type: "damage",
                     text:
-                    shipName +
+                    name +
                     " — " +
                     (100 - hit.after) +
-                    "% damage"
+                    "% total damage"
                 });
 
                 detailsB.push(
@@ -2204,7 +2236,7 @@ function resolveRound() {
 
 
         const aircraftLoss =
-            randomNumber(1, 4);
+            random(1,4);
 
 
         game.fleet.B.aircraft =
@@ -2215,7 +2247,7 @@ function resolveRound() {
             );
 
 
-        resultsB.push({
+        battleB.push({
             type: "loss",
             text:
             aircraftLoss +
@@ -2229,36 +2261,6 @@ function resolveRound() {
 
 
     /* =====================================================
-       ADVANCE
-    ===================================================== */
-
-    if (orderA === "advance") {
-
-        scoreA += 3;
-
-        resultsA.push({
-            type: "success",
-            text:
-            "The task force advanced and increased offensive pressure."
-        });
-
-    }
-
-
-    if (orderB === "advance") {
-
-        scoreB += 3;
-
-        resultsB.push({
-            type: "success",
-            text:
-            "The task force advanced and increased offensive pressure."
-        });
-
-    }
-
-
-    /* =====================================================
        OPEN DISTANCE
     ===================================================== */
 
@@ -2266,10 +2268,14 @@ function resolveRound() {
 
         scoreA += 4;
 
-        resultsA.push({
+        detailsA.push(
+            "Opening distance reduced exposure to enemy attack."
+        );
+
+        battleA.push({
             type: "success",
             text:
-            "The task force opened distance and reduced exposure to enemy fire."
+            "Task force opened distance and reduced tactical exposure."
         });
 
     }
@@ -2279,10 +2285,14 @@ function resolveRound() {
 
         scoreB += 4;
 
-        resultsB.push({
+        detailsB.push(
+            "Opening distance reduced exposure to enemy attack."
+        );
+
+        battleB.push({
             type: "success",
             text:
-            "The task force opened distance and reduced exposure to enemy fire."
+            "Task force opened distance and reduced tactical exposure."
         });
 
     }
@@ -2299,11 +2309,9 @@ function resolveRound() {
 
         scoreA += 3;
 
-        resultsA.push({
-            type: "success",
-            text:
-            "Task force maneuver changed the engagement geometry."
-        });
+        detailsA.push(
+            "Maneuver changed the geometry of the engagement."
+        );
 
     }
 
@@ -2315,111 +2323,67 @@ function resolveRound() {
 
         scoreB += 3;
 
-        resultsB.push({
-            type: "success",
-            text:
-            "Task force maneuver changed the engagement geometry."
-        });
+        detailsB.push(
+            "Maneuver changed the geometry of the engagement."
+        );
 
     }
 
 
     /* =====================================================
-       AIRCRAFT LOSSES FROM COMBAT
+       COMBAT INTERACTION
     ===================================================== */
 
     if (
         orderA === "attack" &&
-        orderB !== "attack"
+        orderB === "attack"
     ) {
 
-        if (
-            orderB === "recon"
-        ) {
+        battleA.push({
+            type: "damage",
+            text:
+            "Both commanders committed surface forces. The engagement became a close tactical fight."
+        });
 
-            game.fleet.B.aircraft =
-                Math.max(
-                    0,
-                    game.fleet.B.aircraft - 2
-                );
+        battleB.push({
+            type: "damage",
+            text:
+            "Both commanders committed surface forces. The engagement became a close tactical fight."
+        });
 
-            resultsB.push({
-                type: "loss",
-                text:
-                "2 aircraft lost while supporting the task force."
-            });
+    }
 
-        }
+
+    if (
+        orderA === "attack" &&
+        orderB === "recon"
+    ) {
+
+        scoreB += 3;
+
+        detailsB.push(
+            "Reconnaissance provided warning before the surface engagement."
+        );
 
     }
 
 
     if (
         orderB === "attack" &&
-        orderA !== "attack"
+        orderA === "recon"
     ) {
 
-        if (
-            orderA === "recon"
-        ) {
+        scoreA += 3;
 
-            game.fleet.A.aircraft =
-                Math.max(
-                    0,
-                    game.fleet.A.aircraft - 2
-                );
-
-            resultsA.push({
-                type: "loss",
-                text:
-                "2 aircraft lost while supporting the task force."
-            });
-
-        }
+        detailsA.push(
+            "Reconnaissance provided warning before the surface engagement."
+        );
 
     }
 
 
     /* =====================================================
-       RECON AIRCRAFT RISK
-    ===================================================== */
-
-    if (orderA === "recon") {
-
-        game.fleet.A.aircraft =
-            Math.max(
-                0,
-                game.fleet.A.aircraft - 1
-            );
-
-        resultsA.push({
-            type: "loss",
-            text:
-            "1 reconnaissance aircraft failed to return."
-        });
-
-    }
-
-
-    if (orderB === "recon") {
-
-        game.fleet.B.aircraft =
-            Math.max(
-                0,
-                game.fleet.B.aircraft - 1
-            );
-
-        resultsB.push({
-            type: "loss",
-            text:
-            "1 reconnaissance aircraft failed to return."
-        });
-
-    }
-
-
-    /* =====================================================
-       COMMANDER SCORE
+       FINAL SCORE
     ===================================================== */
 
     scoreA =
@@ -2443,7 +2407,7 @@ function resolveRound() {
 
         winner = "A";
 
-        game.score.A += scoreA;
+        game.campaignScore.A += scoreA;
 
     }
 
@@ -2451,50 +2415,38 @@ function resolveRound() {
 
         winner = "B";
 
-        game.score.B += scoreB;
+        game.campaignScore.B += scoreB;
 
     }
 
     else {
 
-        game.score.A += scoreA;
-        game.score.B += scoreB;
+        game.campaignScore.A += scoreA;
+        game.campaignScore.B += scoreB;
 
     }
 
 
-    /* =====================================================
-       STORE ROUND RESULTS
-    ===================================================== */
-
     game.results = {
 
-        scoreA: scoreA,
+        scoreA,
+        scoreB,
 
-        scoreB: scoreB,
+        winner,
 
-        winner: winner,
+        orderA,
+        orderB,
 
-        orderA: orderA,
+        detailsA,
+        detailsB,
 
-        orderB: orderB,
-
-        detailsA: detailsA,
-
-        detailsB: detailsB,
-
-        resultsA: resultsA,
-
-        resultsB: resultsB
+        battleA,
+        battleB
 
     };
 
 
-    /* =====================================================
-       SHOW THE ACTUAL BATTLE REPORT
-    ===================================================== */
-
-    showRoundReport();
+    showReport();
 
 }
 
@@ -2510,44 +2462,34 @@ function moveFleet(side, order) {
 
     if (order === "advance") {
 
-        if (side === "A") {
-
+        if (side === "A")
             f.x += 7;
-
-        } else {
-
+        else
             f.x -= 7;
-
-        }
 
     }
 
 
     if (order === "open") {
 
-        if (side === "A") {
-
+        if (side === "A")
             f.x -= 5;
-
-        } else {
-
+        else
             f.x += 5;
-
-        }
 
     }
 
 
     if (order === "north") {
 
-        f.y -= 9;
+        f.y -= 10;
 
     }
 
 
     if (order === "south") {
 
-        f.y += 9;
+        f.y += 10;
 
     }
 
@@ -2556,7 +2498,7 @@ function moveFleet(side, order) {
         Math.max(
             5,
             Math.min(
-                88,
+                87,
                 f.x
             )
         );
@@ -2575,133 +2517,91 @@ function moveFleet(side, order) {
 
 
 /* =========================================================
-   SHIP NAMES
-========================================================= */
-
-function shipNameFor(type, side) {
-
-    const prefix =
-        side === "A"
-        ? "Task Force A"
-        : "Task Force B";
-
-
-    const names = {
-
-        carrier:
-            prefix + " Aircraft Carrier",
-
-        cvl:
-            prefix + " Light Carrier",
-
-        bb:
-            prefix + " Fast Battleship",
-
-        ca:
-            prefix + " Heavy Cruiser",
-
-        dd:
-            prefix + " Destroyer"
-
-    };
-
-
-    return names[type];
-
-}
-
-
-/* =========================================================
    REPORT MAP
 ========================================================= */
 
 function updateReportMap() {
 
-    copyShipState("A");
-    copyShipState("B");
+    copyMapSide("A");
+    copyMapSide("B");
 
 }
 
 
-function copyShipState(side) {
+function copyMapSide(side) {
 
-    const f = game.fleet[side];
-
-    const sourcePrefix =
-        side;
-
-    const reportPrefix =
-        "r" + side;
+    const f =
+        game.fleet[side];
 
 
-    const types = [
-        "CV",
-        "CVL",
-        "BB",
-        "CA",
-        "DD"
-    ];
+    const types = {
+
+        CV: "carrier",
+        CVL: "cvl",
+        BB: "bb",
+        CA: "ca",
+        DD: "dd"
+
+    };
 
 
-    types.forEach(type => {
+    Object.keys(types).forEach(short => {
 
         const source =
             document.getElementById(
-                sourcePrefix + type
+                side + short
             );
 
-        const report =
+        const target =
             document.getElementById(
-                reportPrefix + type
+                "r" + side + short
             );
 
 
-        if (!source || !report) return;
+        if (!source || !target)
+            return;
 
 
-        report.style.left =
+        target.style.left =
             source.style.left;
 
-        report.style.top =
+        target.style.top =
             source.style.top;
 
 
-        const keyMap = {
-
-            CV: "carrier",
-            CVL: "cvl",
-            BB: "bb",
-            CA: "ca",
-            DD: "dd"
-
-        };
+        const value =
+            f[types[short]];
 
 
-        const key =
-            keyMap[type];
+        if (value <= 0) {
 
-
-        if (f[key] <= 0) {
-
-            report.classList.add("destroyed");
+            target.classList.add(
+                "shipDestroyed"
+            );
 
         } else {
 
-            report.classList.remove("destroyed");
+            target.classList.remove(
+                "shipDestroyed"
+            );
 
         }
 
 
         if (
-            f[key] > 0 &&
-            f[key] < 60
+            value > 0 &&
+            value < 60
         ) {
 
-            report.classList.add("damaged");
+            target.classList.add(
+                "shipDamaged"
+            );
 
         } else {
 
-            report.classList.remove("damaged");
+            target.classList.remove(
+                "shipDamaged"
+            );
 
         }
 
@@ -2711,42 +2611,45 @@ function copyShipState(side) {
 
 
 /* =========================================================
-   DISPLAY RESULTS
+   RENDER DAMAGE
 ========================================================= */
 
-function renderResults(list) {
+function renderBattleResults(list) {
 
-    if (!list || list.length === 0) {
+    if (!list.length) {
 
         return `
-            <div class="success">
-                No major losses reported.
+            <div class="damageItem success">
+                No significant combat losses recorded.
             </div>
         `;
 
     }
 
 
-    return list.map(item => {
+    return list
+        .map(item => {
 
-        return `
-            <div class="${item.type}">
-                ${item.text}
-            </div>
-        `;
+            return `
+                <div class="damageItem ${item.type}">
+                    ${item.text}
+                </div>
+            `;
 
-    }).join("");
+        })
+        .join("");
 
 }
 
 
 /* =========================================================
-   ROUND REPORT
+   SHOW REPORT
 ========================================================= */
 
-function showRoundReport() {
+function showReport() {
 
-    const r = game.results;
+    const r =
+        game.results;
 
 
     document
@@ -2756,51 +2659,55 @@ function showRoundReport() {
 
 
     document
-        .getElementById("reportNameA")
+        .getElementById("resultNameA")
         .textContent =
         game.commanderA;
 
 
     document
-        .getElementById("reportNameB")
+        .getElementById("resultNameB")
         .textContent =
         game.commanderB;
 
 
     document
-        .getElementById("orderA")
+        .getElementById("resultOrderA")
         .textContent =
         "ORDER: " +
-        orderData[r.orderA].title;
+        orders[r.orderA].title;
 
 
     document
-        .getElementById("orderB")
+        .getElementById("resultOrderB")
         .textContent =
         "ORDER: " +
-        orderData[r.orderB].title;
+        orders[r.orderB].title;
 
 
     document
-        .getElementById("scoreA")
+        .getElementById("resultScoreA")
         .textContent =
         r.scoreA;
 
 
     document
-        .getElementById("scoreB")
+        .getElementById("resultScoreB")
         .textContent =
         r.scoreB;
 
 
     document
-        .getElementById("scoreCardA")
-        .classList.remove("winner");
+        .getElementById("resultCardA")
+        .classList.remove(
+            "winnerCard"
+        );
 
 
     document
-        .getElementById("scoreCardB")
-        .classList.remove("winner");
+        .getElementById("resultCardB")
+        .classList.remove(
+            "winnerCard"
+        );
 
 
     if (r.winner === "A") {
@@ -2813,8 +2720,10 @@ function showRoundReport() {
 
 
         document
-            .getElementById("scoreCardA")
-            .classList.add("winner");
+            .getElementById("resultCardA")
+            .classList.add(
+                "winnerCard"
+            );
 
     }
 
@@ -2828,8 +2737,10 @@ function showRoundReport() {
 
 
         document
-            .getElementById("scoreCardB")
-            .classList.add("winner");
+            .getElementById("resultCardB")
+            .classList.add(
+                "winnerCard"
+            );
 
     }
 
@@ -2843,12 +2754,16 @@ function showRoundReport() {
     }
 
 
+    /* =====================================================
+       COMMANDER DETAILS
+    ===================================================== */
+
     document
         .getElementById("detailsA")
         .innerHTML =
         r.detailsA
         .map(text =>
-            `<div class="score-detail">✓ ${text}</div>`
+            `<div class="detail">✓ ${text}</div>`
         )
         .join("");
 
@@ -2858,25 +2773,47 @@ function showRoundReport() {
         .innerHTML =
         r.detailsB
         .map(text =>
-            `<div class="score-detail">✓ ${text}</div>`
+            `<div class="detail">✓ ${text}</div>`
         )
         .join("");
 
 
+    /* =====================================================
+       DAMAGE
+    ===================================================== */
+
     document
-        .getElementById("resultsA")
-        .innerHTML =
-        renderResults(r.resultsA);
+        .getElementById("damageTitleA")
+        .textContent =
+        game.commanderA +
+        " — BATTLE RESULTS";
 
 
     document
-        .getElementById("resultsB")
+        .getElementById("damageTitleB")
+        .textContent =
+        game.commanderB +
+        " — BATTLE RESULTS";
+
+
+    document
+        .getElementById("battleResultsA")
         .innerHTML =
-        renderResults(r.resultsB);
+        renderBattleResults(
+            r.battleA
+        );
+
+
+    document
+        .getElementById("battleResultsB")
+        .innerHTML =
+        renderBattleResults(
+            r.battleB
+        );
 
 
     /* =====================================================
-       CURRENT FLEET CONDITION
+       CURRENT FLEET
     ===================================================== */
 
     document
@@ -2885,63 +2822,73 @@ function showRoundReport() {
 
             <strong>
                 ${game.commanderA}
-            </strong>
+            </strong><br>
 
-            — Carrier:
-            ${game.fleet.A.carrier}%
+            CV:
+            ${status(game.fleet.A.carrier)}
+            &nbsp; | &nbsp;
 
-            — Light Carrier:
-            ${game.fleet.A.cvl}%
+            CVL:
+            ${status(game.fleet.A.cvl)}
+            &nbsp; | &nbsp;
 
-            — Battleship:
-            ${game.fleet.A.bb}%
+            BB:
+            ${status(game.fleet.A.bb)}
+            &nbsp; | &nbsp;
 
-            — Heavy Cruiser:
-            ${game.fleet.A.ca}%
+            CA:
+            ${status(game.fleet.A.ca)}
+            &nbsp; | &nbsp;
 
-            — Destroyer:
-            ${game.fleet.A.dd}%
+            DD:
+            ${status(game.fleet.A.dd)}
+            &nbsp; | &nbsp;
 
-            — Aircraft:
+            Aircraft:
             ${game.fleet.A.aircraft}
 
             <br><br>
 
             <strong>
                 ${game.commanderB}
-            </strong>
+            </strong><br>
 
-            — Carrier:
-            ${game.fleet.B.carrier}%
+            CV:
+            ${status(game.fleet.B.carrier)}
+            &nbsp; | &nbsp;
 
-            — Light Carrier:
-            ${game.fleet.B.cvl}%
+            CVL:
+            ${status(game.fleet.B.cvl)}
+            &nbsp; | &nbsp;
 
-            — Battleship:
-            ${game.fleet.B.bb}%
+            BB:
+            ${status(game.fleet.B.bb)}
+            &nbsp; | &nbsp;
 
-            — Heavy Cruiser:
-            ${game.fleet.B.ca}%
+            CA:
+            ${status(game.fleet.B.ca)}
+            &nbsp; | &nbsp;
 
-            — Destroyer:
-            ${game.fleet.B.dd}%
+            DD:
+            ${status(game.fleet.B.dd)}
+            &nbsp; | &nbsp;
 
-            — Aircraft:
+            Aircraft:
             ${game.fleet.B.aircraft}
 
         `;
 
 
-    /* =====================================================
-       UPDATE REPORT MAP
-    ===================================================== */
+    /*
+       IMPORTANT:
+       Position the original ships first,
+       THEN copy those positions to the report map.
+    */
+
+    positionBattleMap();
 
     updateReportMap();
 
-
-    /* =====================================================
-       CONTINUE BUTTON
-    ===================================================== */
 
     if (game.round >= 15) {
 
@@ -2967,7 +2914,7 @@ function showRoundReport() {
 
 
 /* =========================================================
-   CONTINUE GAME
+   NEXT ROUND
 ========================================================= */
 
 function continueGame() {
@@ -3005,14 +2952,20 @@ function showFinal() {
     let winner;
 
 
-    if (game.score.A > game.score.B) {
+    if (
+        game.campaignScore.A >
+        game.campaignScore.B
+    ) {
 
         winner =
             game.commanderA;
 
     }
 
-    else if (game.score.B > game.score.A) {
+    else if (
+        game.campaignScore.B >
+        game.campaignScore.A
+    ) {
 
         winner =
             game.commanderB;
@@ -3035,40 +2988,31 @@ function showFinal() {
 
     document
         .getElementById("finalScoreA")
-        .textContent =
-        game.commanderA +
-        ": " +
-        game.score.A +
-        " campaign points";
+        .innerHTML =
+        `<h2>
+            ${game.commanderA}:
+            ${game.campaignScore.A}
+            campaign points
+        </h2>`;
 
 
     document
         .getElementById("finalScoreB")
+        .innerHTML =
+        `<h2>
+            ${game.commanderB}:
+            ${game.campaignScore.B}
+            campaign points
+        </h2>`;
+
+
+    document
+        .getElementById("finalMessage")
         .textContent =
-        game.commanderB +
-        ": " +
-        game.score.B +
-        " campaign points";
-
-
-    if (winner === "TACTICAL DRAW") {
-
-        document
-            .getElementById("finalMessage")
-            .textContent =
-            "After fifteen rounds, neither commander established a decisive tactical advantage.";
-
-    }
-
-    else {
-
-        document
-            .getElementById("finalMessage")
-            .textContent =
-            winner +
-            " demonstrated the stronger overall command performance across the campaign.";
-
-    }
+        winner === "TACTICAL DRAW"
+        ? "Neither commander established decisive overall control."
+        : winner +
+          " demonstrated the stronger overall command performance.";
 
 
     showScreen("final");
